@@ -428,15 +428,53 @@
             display: block;
             margin-top: -8px;
         }
+
+        .about-btn {
+            width: calc(100% - 40px);
+            margin: 20px 20px 30px 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .about-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>JUGGFELLA STORE</h1>
-        <p>Выбери малычешку:</p>
+        <h1>Hypreme / Хайприм</h1>
+        <p>Выбери свой табак:</p>
     </div>
 
     <div class="catalog" id="catalog"></div>
+
+    <button class="about-btn" onclick="openAbout()">О нас</button>
+
+    <div class="modal" id="aboutModal" onclick="closeAbout()">
+        <div class="modal-close" onclick="closeAbout()"></div>
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-card-content">
+                <div class="modal-card-name">Hypreme</div>
+                <div class="modal-card-description" id="aboutText">
+                     <br>
+                    Бренд табака для кальяна из г. Новосибирска. На рынке с 2017 года. <br><br>
+                    За годы работы компания прошла путь от крафтовой мануфактуры до современного полностью лицензированного производства. Сейчас мы работаем с ведущими фабриками-поставщиками табачного листа и продуктов из него, а также с профильными проверенными производителями ароматизаторов. <br><br>
+                    Свяжитесь с нами для заказа!
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div class="modal" id="modal" onclick="closeModal()">
         <div class="modal-close" onclick="closeModal()"></div>
@@ -444,7 +482,6 @@
             <img class="modal-card-image" id="modalImage" src="" alt="" onclick="openFullImage()">
             <div class="modal-card-content">
                 <div class="modal-card-name" id="modalName"></div>
-                <div class="modal-card-price" id="modalPrice"></div>
                 <div class="modal-card-description" id="modalDescription"></div>
                 <button class="modal-contact-btn" id="modalContactBtn">Написать</button>
             </div>
@@ -475,8 +512,8 @@
                 services: [
                     {
                         id: 101,
-                        name: "Анна",
-                        description: "Классика МБРЧИК АНАЛ КОПРО",
+                        name: "Абрикос",
+                        description: "Абрикос - бархатистая классика в самом сочном исполнении. Густой, почти джемовый профиль спелого плода со сливочным послевкусием. Вкус, который разливается мягким фруктовым нектаром и оставляет ощущение бесконечного лета",
                         price: " от 5000₽/час",
                         username: "anna_service",
                         image: "images/redline/red-1.webp",
@@ -484,8 +521,8 @@
                     },
                     {
                         id: 102,
-                        name: "Товар 2",
-                        description: "Описание товара 2",
+                        name: "Банан в шоколаде",
+                        description: "Десертный банан с бархатистой сладостью, политый сиропом из темного шоколада для приятного контраста во вкусе.",
                         price: "5000₽/час",
                         username: "user2",
                         image: "images/redline/red-2.webp",
@@ -493,8 +530,8 @@
                     },
                     {
                         id: 103,
-                        name: "Товар 3",
-                        description: "Описание товара 3",
+                        name: "Персиковый чай",
+                        description: "Прохладительный напиток на основе черного чая с добавлением кусочков свежего персика.",
                         price: "5000₽/час",
                         username: "user3",
                         image: "images/redline/red-3.webp",
@@ -502,8 +539,8 @@
                     },
                     {
                         id: 104,
-                        name: "Товар 4",
-                        description: "Описание товара 4",
+                        name: "Кола",
+                        description: "Сбалансированный в меру сладкий вкус колы, знакомый тебе по мармеладкам Haribo.",
                         price: "5000₽/час",
                         username: "user4",
                         image: "images/redline/red-4.webp",
@@ -511,8 +548,8 @@
                     },
                     {
                         id: 105,
-                        name: "Товар 5",
-                        description: "Описание товара 5",
+                        name: "Малина",
+                        description: "Просто хорошая малина, которую мы постарались сделать максимально похожей на натуральную.",
                         price: "5000₽/час",
                         username: "user5",
                         image: "images/redline/red-5.webp",
@@ -520,8 +557,8 @@
                     },
                     {
                         id: 106,
-                        name: "Товар 6",
-                        description: "Описание товара 6",
+                        name: "Манго шейк",
+                        description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
                         price: "5000₽/час",
                         username: "user6",
                         image: "images/redline/red-6.webp",
@@ -529,8 +566,8 @@
                     },
                     {
                         id: 107,
-                        name: "Товар 7",
-                        description: "Описание товара 7",
+                        name: "Индийский перец",
+                        description: "Многогранный пряный вкус с нотами ванили и четырех видов специй.",
                         price: "5000₽/час",
                         username: "user7",
                         image: "images/redline/red-7.webp",
@@ -538,8 +575,8 @@
                     },
                     {
                         id: 108,
-                        name: "Товар 8",
-                        description: "Описание товара 8",
+                        name: "Ледяное яблоко",
+                        description: "Отсылка к «двойному яблоку», кисло-холодящие освежающие ноты зеленых яблок.",
                         price: "5000₽/час",
                         username: "user8",
                         image: "images/redline/red-8.webp",
@@ -547,8 +584,8 @@
                     },
                     {
                         id: 109,
-                        name: "Товар 9",
-                        description: "Описание товара 9",
+                        name: "Мороженное",
+                        description: "Вкус мороженого.",
                         price: "5000₽/час",
                         username: "user9",
                         image: "images/redline/red-9.webp",
@@ -556,8 +593,8 @@
                     },
                     {
                         id: 110,
-                        name: "Товар 10",
-                        description: "Описание товара 10",
+                        name: "Суперперец",
+                        description: "Special for JohnCalliano",
                         price: "5000₽/час",
                         username: "user10",
                         image: "images/redline/red-10.webp",
@@ -565,8 +602,8 @@
                     },
                     {
                         id: 111,
-                        name: "Товар 11",
-                        description: "Описание товара 11",
+                        name: "Зефир с орехами",
+                        description: "Выраженные сливочные ноты воздушного зефира, дополненные ароматом фундука.",
                         price: "5000₽/час",
                         username: "user11",
                         image: "images/redline/red-11.webp",
@@ -574,8 +611,8 @@
                     },
                     {
                         id: 112,
-                        name: "Товар 12",
-                        description: "Описание товара 12",
+                        name: "Коктейль Маргарита",
+                        description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
                         price: "5000₽/час",
                         username: "user12",
                         image: "images/redline/red-12.webp",
@@ -583,8 +620,8 @@
                     },
                     {
                         id: 113,
-                        name: "Товар 13",
-                        description: "Описание товара 13",
+                        name: "Киви",
+                        description: "Насыщенный вкус натурального киви с будоражащей рецепторы кислинкой на выдохе.",
                         price: "5000₽/час",
                         username: "user13",
                         image: "images/redline/red-13.webp",
@@ -592,8 +629,8 @@
                     },
                     {
                         id: 114,
-                        name: "Товар 14",
-                        description: "Описание товара 14",
+                        name: "Клубника",
+                        description: "Сладкий и завораживающий вкус спелой ягоды, созревшей под нежным июньским солнышком. Влюбляет в себя с первых затяжек.",
                         price: "5000₽/час",
                         username: "user14",
                         image: "images/redline/red-14.webp",
@@ -601,8 +638,8 @@
                     },
                     {
                         id: 115,
-                        name: "Товар 15",
-                        description: "Описание товара 15",
+                        name: "Голубика",
+                        description: "Аромат натуральной голубики со всей полнотой ягодного вкуса на вдохе и выдохе.",
                         price: "5000₽/час",
                         username: "user15",
                         image: "images/redline/red-15.webp",
@@ -610,8 +647,8 @@
                     },
                     {
                         id: 116,
-                        name: "Товар 16",
-                        description: "Описание товара 16",
+                        name: "Ягодный микс",
+                        description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
                         price: "5000₽/час",
                         username: "user16",
                         image: "images/redline/red-16.webp",
@@ -619,8 +656,8 @@
                     },
                     {
                         id: 117,
-                        name: "Товар 17",
-                        description: "Описание товара 17",
+                        name: "Тархун",
+                        description: "Тот самый лимонад со вкусом сладкого эстрагона – травянисто, освежающе.",
                         price: "5000₽/час",
                         username: "user17",
                         image: "images/redline/red-17.webp",
@@ -628,8 +665,8 @@
                     },
                     {
                         id: 118,
-                        name: "Товар 18",
-                        description: "Описание товара 18",
+                        name: "Оливка",
+                        description: "Самый необычный вкус - консервированная оливка, с изумительным подкопченым послевкусием. Для гурманов.",
                         price: "5000₽/час",
                         username: "user18",
                         image: "images/redline/red-18.webp",
@@ -637,8 +674,8 @@
                     },
                     {
                         id: 119,
-                        name: "Товар 19",
-                        description: "Описание товара 19",
+                        name: "Чай с молоком",
+                        description: "Классический черный чай с молоком",
                         price: "5000₽/час",
                         username: "user19",
                         image: "images/redline/red-19.webp",
@@ -646,8 +683,8 @@
                     },
                     {
                         id: 120,
-                        name: "Товар 20",
-                        description: "Описание товара 20",
+                        name: "Лед",
+                        description: "Идеальный бустер для любителей миксов с выраженным охлаждающим эффектом.",
                         price: "5000₽/час",
                         username: "user20",
                         image: "images/redline/red-20.webp",
@@ -655,8 +692,8 @@
                     },
                     {
                         id: 121,
-                        name: "Товар 21",
-                        description: "Описание товара 21",
+                        name: "Гранатовый чай",
+                        description: "Крепкий зеленый чай с кусочками терпкого граната, выразительный и яркий вкус.",
                         price: "5000₽/час",
                         username: "user21",
                         image: "images/redline/red-21.webp",
@@ -664,8 +701,8 @@
                     },
                     {
                         id: 122,
-                        name: "Товар 22",
-                        description: "Описание товара 22",
+                        name: "Арбуз",
+                        description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
                         price: "5000₽/час",
                         username: "user22",
                         image: "images/redline/red-22.webp",
@@ -673,8 +710,8 @@
                     },
                     {
                         id: 123,
-                        name: "Товар 23",
-                        description: "Описание товара 23",
+                        name: "Персик",
+                        description: "Сладкий и слегка терпкий микс двух не похожих друг на друга сортов персика",
                         price: "5000₽/час",
                         username: "user23",
                         image: "images/redline/red-23.webp",
@@ -682,8 +719,8 @@
                     },
                     {
                         id: 124,
-                        name: "Товар 24",
-                        description: "Описание товара 24",
+                        name: "Зеленый виноград",
+                        description: "Молодой зеленый виноград с легким оттенком тростниковой мяты.",
                         price: "5000₽/час",
                         username: "user24",
                         image: "images/redline/red-24.webp",
@@ -691,8 +728,8 @@
                     },
                     {
                         id: 125,
-                        name: "Товар 25",
-                        description: "Описание товара 25",
+                        name: "Цветочный мед",
+                        description: "Свежий густой сладкий мед, только что собранный с цветущих весенних лугов.",
                         price: "5000₽/час",
                         username: "user25",
                         image: "images/redline/red-25.webp",
@@ -700,8 +737,8 @@
                     },
                     {
                         id: 126,
-                        name: "Товар 26",
-                        description: "Описание товара 26",
+                        name: "Мята",
+                        description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
                         price: "5000₽/час",
                         username: "user26",
                         image: "images/redline/red-26.webp",
@@ -709,8 +746,8 @@
                     },
                     {
                         id: 127,
-                        name: "Товар 27",
-                        description: "Описание товара 27",
+                        name: "Дачная смородина",
+                        description: "Роскошный аромат зеленых листьев смородинного куста и спелой налитой ягоды.",
                         price: "5000₽/час",
                         username: "user27",
                         image: "images/redline/red-27.webp",
@@ -718,8 +755,8 @@
                     },
                     {
                         id: 128,
-                        name: "Товар 28",
-                        description: "Описание товара 28",
+                        name: "Пряный чай",
+                        description: "Крепкий черный чай с ассорти из турецких пряностей, необычный и притягательный вкус.",
                         price: "5000₽/час",
                         username: "user28",
                         image: "images/redline/red-28.webp",
@@ -727,8 +764,8 @@
                     },
                     {
                         id: 129,
-                        name: "Товар 29",
-                        description: "Описание товара 29",
+                        name: "Дыня с корицей",
+                        description: "Сладкая спелая дыня и пряные обволакивающие ноты корицы на выдохе – превосходный дуэт.",
                         price: "5000₽/час",
                         username: "user29",
                         image: "images/redline/red-29.webp",
@@ -736,8 +773,8 @@
                     },
                     {
                         id: 130,
-                        name: "Товар 30",
-                        description: "Описание товара 30",
+                        name: "Ягодный джем",
+                        description: "Очень вкусный ягодный десерт из ассорти лесных и садовых ягод.",
                         price: "5000₽/час",
                         username: "user30",
                         image: "images/redline/red-30.webp",
@@ -745,8 +782,8 @@
                     },
                     {
                         id: 131,
-                        name: "Товар 31",
-                        description: "Описание товара 31",
+                        name: "Домашний пирог",
+                        description: "Сладкая сдобная выпечка со сливочным ароматом, напоминающим начинку из сгущенки.",
                         price: "5000₽/час",
                         username: "user31",
                         image: "images/redline/red-31.webp",
@@ -754,8 +791,8 @@
                     },
                     {
                         id: 132,
-                        name: "Товар 32",
-                        description: "Описание товара 32",
+                        name: "Груша",
+                        description: "Вкус натуральной сладкой груши.",
                         price: "5000₽/час",
                         username: "user32",
                         image: "images/redline/red-32.webp",
@@ -763,8 +800,8 @@
                     },
                     {
                         id: 133,
-                        name: "Товар 33",
-                        description: "Описание товара 33",
+                        name: "Фруктовый микс",
+                        description: "Нестандартное тропическое сочетание с ведущими нотами спелого ананаса, послевкусием кокосовой мякоти и свежего абрикосового желе.",
                         price: "5000₽/час",
                         username: "user33",
                         image: "images/redline/red-33.webp",
@@ -772,8 +809,8 @@
                     },
                     {
                         id: 134,
-                        name: "Товар 34",
-                        description: "Описание товара 34",
+                        name: "Ананас",
+                        description: "Хороший, вкусный, кисло-сладкий ананас.",
                         price: "5000₽/час",
                         username: "user34",
                         image: "images/redline/red-34.webp",
@@ -781,8 +818,8 @@
                     },
                     {
                         id: 135,
-                        name: "Товар 35",
-                        description: "Описание товара 35",
+                        name: "Фейхоа",
+                        description: "Яркий фейхоа с характерными сладко-травянистым тропическим вкусом",
                         price: "5000₽/час",
                         username: "user35",
                         image: "images/redline/red-35.webp",
@@ -790,8 +827,8 @@
                     },
                     {
                         id: 136,
-                        name: "Товар 36",
-                        description: "Описание товара 36",
+                        name: "Гуава",
+                        description: "Густой, сладкий и травянистый вкус натуральной гуавы, отлично дополняющий фруктовые и коктейльные миксы.",
                         price: "5000₽/час",
                         username: "user36",
                         image: "images/redline/red-36.webp",
@@ -799,8 +836,8 @@
                     },
                     {
                         id: 137,
-                        name: "Товар 37",
-                        description: "Описание товара 37",
+                        name: "Манго",
+                        description: "Яркое травянистое манго, очень близкое по вкусу к настоящему тайскому манго.",
                         price: "5000₽/час",
                         username: "user37",
                         image: "images/redline/red-37.webp",
@@ -815,8 +852,8 @@
                 services: [
                     {
                         id: 201,
-                        name: "Товар 1",
-                        description: "Описание товара 1",
+                        name: "Черный чай",
+                        description: "Насыщенный и глубокий вкус классического чая с тонкой терпкостью и легкой цитрусовой нотой бергамота в линейке Black Line (повышенной крепости). Здесь гармонично сочетается мягкая сладость, благородная горчинка и приятная свежесть, что делает вкус универсальным как для соло-забивок, так и для миксов с фруктами и ягодами.",
                         price: "5000₽/час",
                         username: "sixhsisj",
                         image: "images/blackline/black-1.webp",
@@ -824,8 +861,8 @@
                     },
                     {
                         id: 202,
-                        name: "Товар 2",
-                        description: "Описание товара 2",
+                        name: "Лимонная конфета",
+                        description: "Классические лимонные леденцы, сладкий конфетный цитрусовый вкус.",
                         price: "5000₽/час",
                         username: "user202",
                         image: "images/blackline/black-2.webp",
@@ -833,8 +870,8 @@
                     },
                     {
                         id: 203,
-                        name: "Товар 3",
-                        description: "Описание товара 3",
+                        name: "Маргарита",
+                        description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
                         price: "5000₽/час",
                         username: "user203",
                         image: "images/blackline/black-3.webp",
@@ -842,8 +879,8 @@
                     },
                     {
                         id: 204,
-                        name: "Товар 4",
-                        description: "Описание товара 4",
+                        name: "Груша",
+                        description: "Вкус сладкой натуральной груши.",
                         price: "5000₽/час",
                         username: "user204",
                         image: "images/blackline/black-4.webp",
@@ -851,8 +888,8 @@
                     },
                     {
                         id: 205,
-                        name: "Товар 5",
-                        description: "Описание товара 5",
+                        name: "Клубничный лимонад",
+                        description: "Газированный напиток с клубничным сиропом и цитрусовыми лимонадными нотами на послевкусии",
                         price: "5000₽/час",
                         username: "user205",
                         image: "images/blackline/black-5.webp",
@@ -860,8 +897,8 @@
                     },
                     {
                         id: 206,
-                        name: "Товар 6",
-                        description: "Описание товара 6",
+                        name: "Кислая малина",
+                        description: "Мы все ждем лета. Как оно прекрасно, дивно. \nНе за горами его зной, веселье, смех. \nА если свежести захочется - есть Кислая малина, \nНовый вкус Hypreme для каждого и всех!",
                         price: "5000₽/час",
                         username: "user206",
                         image: "images/blackline/black-6.webp",
@@ -869,8 +906,8 @@
                     },
                     {
                         id: 207,
-                        name: "Товар 7",
-                        description: "Описание товара 7",
+                        name: "Манго шейк",
+                        description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
                         price: "5000₽/час",
                         username: "user207",
                         image: "images/blackline/black-7.webp",
@@ -878,8 +915,8 @@
                     },
                     {
                         id: 208,
-                        name: "Товар 8",
-                        description: "Описание товара 8",
+                        name: "Лимонад",
+                        description: "Базовый цитрусовый лимонад, уверенная классика и ничего лишнего.",
                         price: "5000₽/час",
                         username: "user208",
                         image: "images/blackline/black-8.webp",
@@ -887,8 +924,8 @@
                     },
                     {
                         id: 209,
-                        name: "Товар 9",
-                        description: "Описание товара 9",
+                        name: "Черничный шейк",
+                        description: "Нежный коктейль на основе молочных сливок с добавлением цельных ягод натуральной черники с характерной приятной вяжущей ноткой.",
                         price: "5000₽/час",
                         username: "user209",
                         image: "images/blackline/black-9.webp",
@@ -896,8 +933,8 @@
                     },
                     {
                         id: 210,
-                        name: "Товар 10",
-                        description: "Описание товара 10",
+                        name: "Малиновая гранита",
+                        description: "Холодный итальянский десерт, наподобие сорбета, из свежих ягод малины.",
                         price: "5000₽/час",
                         username: "user210",
                         image: "images/blackline/black-10.webp",
@@ -905,8 +942,8 @@
                     },
                     {
                         id: 211,
-                        name: "Товар 11",
-                        description: "Описание товара 11",
+                        name: "Кислая маракуйя",
+                        description: "Не такая, как все… Яркая кислая маракуйя с насыщенным натуральным тропическим вкусом.",
                         price: "5000₽/час",
                         username: "user211",
                         image: "images/blackline/black-11.webp",
@@ -914,8 +951,8 @@
                     },
                     {
                         id: 212,
-                        name: "Товар 12",
-                        description: "Описание товара 12",
+                        name: "Апельсин",
+                        description: "Вкус апельсина",
                         price: "5000₽/час",
                         username: "user212",
                         image: "images/blackline/black-12.webp",
@@ -923,8 +960,8 @@
                     },
                     {
                         id: 213,
-                        name: "Товар 13",
-                        description: "Описание товара 13",
+                        name: "Лимонное суфле",
+                        description: "Воздушная десертная выпечка с добавлением ароматной лимонной цедры.",
                         price: "5000₽/час",
                         username: "user213",
                         image: "images/blackline/black-13.webp",
@@ -932,8 +969,8 @@
                     },
                     {
                         id: 214,
-                        name: "Товар 14",
-                        description: "Описание товара 14",
+                        name: "Кактус",
+                        description: "Растительный вкус, сладкий и освежающий, с долгим травянистым послевкусием – так мы представляем себе кактус.",
                         price: "5000₽/час",
                         username: "user214",
                         image: "images/blackline/black-14.webp",
@@ -941,8 +978,8 @@
                     },
                     {
                         id: 215,
-                        name: "Товар 15",
-                        description: "Описание товара 15",
+                        name: "Крыжовник",
+                        description: "Яркий и сочный аромат крыжовника с мягкой кислинкой.",
                         price: "5000₽/час",
                         username: "user215",
                         image: "images/blackline/black-15.webp",
@@ -950,8 +987,8 @@
                     },
                     {
                         id: 216,
-                        name: "Товар 16",
-                        description: "Описание товара 16",
+                        name: "Дынный чизкейк",
+                        description: "Легкий вкусный тортик, украшенный сверху дынными дольками – безупречный фруктово-десертный тандем.",
                         price: "5000₽/час",
                         username: "user216",
                         image: "images/blackline/black-16.webp",
@@ -959,8 +996,8 @@
                     },
                     {
                         id: 217,
-                        name: "Товар 17",
-                        description: "Описание товара 17",
+                        name: "Арбуз",
+                        description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
                         price: "5000₽/час",
                         username: "user217",
                         image: "images/blackline/black-17.webp",
@@ -968,8 +1005,8 @@
                     },
                     {
                         id: 218,
-                        name: "Товар 18",
-                        description: "Описание товара 18",
+                        name: "Ягодный микс",
+                        description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
                         price: "5000₽/час",
                         username: "user218",
                         image: "images/blackline/black-18.webp",
@@ -977,8 +1014,8 @@
                     },
                     {
                         id: 219,
-                        name: "Товар 19",
-                        description: "Описание товара 19",
+                        name: "Голубика",
+                        description: "Вкус голубики",
                         price: "5000₽/час",
                         username: "user219",
                         image: "images/blackline/black-19.webp",
@@ -986,8 +1023,8 @@
                     },
                     {
                         id: 220,
-                        name: "Товар 20",
-                        description: "Описание товара 20",
+                        name: "Красный виноград",
+                        description: "Сладкий, терпкий, насыщенный вкус спелого красного винограда с отдаленной кислинкой на послевкусии.",
                         price: "5000₽/час",
                         username: "user220",
                         image: "images/blackline/black-20.webp",
@@ -995,31 +1032,13 @@
                     },
                     {
                         id: 221,
-                        name: "Товар 21",
-                        description: "Описание товара 21",
+                        name: "Мята",
+                        description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
                         price: "5000₽/час",
                         username: "user221",
                         image: "images/blackline/black-21.webp",
                         imagePosition: "center 35%"
                     },
-                    {
-                        id: 222,
-                        name: "Товар 22",
-                        description: "Описание товара 22",
-                        price: "5000₽/час",
-                        username: "user222",
-                        image: "images/blackline/black-22.webp",
-                        imagePosition: "center 35%"
-                    },
-                    {
-                        id: 223,
-                        name: "Товар 23",
-                        description: "Описание товара 23",
-                        price: "5000₽/час",
-                        username: "user223",
-                        image: "images/blackline/black-23.webp",
-                        imagePosition: "center 35%"
-                    }
                 ]
             },
             {
@@ -1171,8 +1190,8 @@
                 services: [
                     {
                         id: 401,
-                        name: "Сонечка Одинцова",
-                        description: "Рассматриваются любые пожелания",
+                        name: "Vulin",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 16-летней выдержки",
                         price: "25₽/час",
                         username: "Sonikislit",
                         image: "images/specialline/special-1.webp",
@@ -1180,8 +1199,8 @@
                     },
                     {
                         id: 402,
-                        name: "Таня",
-                        description: "Фитнес тренер",
+                        name: "Cardi",
+                        description: "Новый вкус в коллекции special. Холодная ферментация на алкоголе ноты: кубинский ром, дым, пряности, дуб, сладкие специи.",
                         price: "5500₽/час",
                         username: "elfiykaaaa",
                         image: "images/specialline/special-2.webp",
@@ -1189,8 +1208,8 @@
                     },
                     {
                         id: 403,
-                        name: "Товар 3",
-                        description: "Описание товара 3",
+                        name: "Froig",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 10-летней выдержки.",
                         price: "5000₽/час",
                         username: "user403",
                         image: "images/specialline/special-3.webp",
@@ -1198,8 +1217,8 @@
                     },
                     {
                         id: 404,
-                        name: "Товар 4",
-                        description: "Описание товара 4",
+                        name: "Jaku",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – японском джине.",
                         price: "5000₽/час",
                         username: "user404",
                         image: "images/specialline/special-4.webp",
@@ -1207,8 +1226,8 @@
                     },
                     {
                         id: 405,
-                        name: "Товар 5",
-                        description: "Описание товара 5",
+                        name: "Hustla",
+                        description: "Безароматический бленд крепостью выше-средней.",
                         price: "5000₽/час",
                         username: "user405",
                         image: "images/specialline/special-5.webp",
@@ -1216,8 +1235,8 @@
                     },
                     {
                         id: 406,
-                        name: "Товар 6",
-                        description: "Описание товара 6",
+                        name: "John Wick",
+                        description: "Крепкая безаромка с нотками чернослива.",
                         price: "5000₽/час",
                         username: "user406",
                         image: "images/specialline/special-6.webp",
@@ -1225,8 +1244,8 @@
                     },
                     {
                         id: 407,
-                        name: "Товар 7",
-                        description: "Описание товара 7",
+                        name: "Баба Яга",
+                        description: "Дескрипторы: терпкие болотные травы, землистые коренья и древесная кора, дополненные густым ароматом печного дыма и влажной почвы.",
                         price: "5000₽/час",
                         username: "user407",
                         image: "images/specialline/special-7.webp",
@@ -1234,8 +1253,8 @@
                     },
                     {
                         id: 408,
-                        name: "Товар 8",
-                        description: "Описание товара 8",
+                        name: "Pimp",
+                        description: "Безароматический бленд средней крепости.",
                         price: "5000₽/час",
                         username: "user408",
                         image: "images/specialline/special-8.webp",
@@ -1294,7 +1313,6 @@
                         <div class="card-content">
                             <div class="card-name">${service.name}</div>
                             <div class="card-description">${service.description}</div>
-                            <div class="card-price">${service.price}</div>
                             <button class="contact-btn" onclick="event.stopPropagation(); openChat('${service.username}')">
                                 Написать
                             </button>
@@ -1340,8 +1358,7 @@
             modalImage.src = service.image;
             modalImage.style.objectPosition = service.imagePosition || 'center center';
             document.getElementById('modalName').textContent = service.name;
-            document.getElementById('modalPrice').textContent = service.price;
-            document.getElementById('modalDescription').textContent = service.description;
+            document.getElementById('modalDescription').innerHTML = (service.description || '').replace(/\n/g, '<br>');
             document.getElementById('modalContactBtn').onclick = () => openChat(service.username);
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -1364,8 +1381,19 @@
             document.body.style.overflow = '';
         }
 
+        function openAbout() {
+            document.getElementById('aboutModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeAbout() {
+            document.getElementById('aboutModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
         handleSwipe(document.getElementById('modal'), closeModal);
         handleSwipe(document.getElementById('fullImageModal'), closeFullImage);
+        handleSwipe(document.getElementById('aboutModal'), closeAbout);
 
         renderCatalog();
     </script>
