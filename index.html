@@ -323,6 +323,24 @@
             tg.openTelegramLink(`https://t.me/${username}`);
         }
 
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        function handleSwipe(element, closeFunction) {
+            element.addEventListener('touchstart', (e) => {
+                touchStartY = e.touches[0].clientY;
+            });
+
+            element.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].clientY;
+                const swipeDistance = touchStartY - touchEndY;
+
+                if (Math.abs(swipeDistance) > 50) {
+                    closeFunction();
+                }
+            });
+        }
+
         function openModal(service) {
             const modalImage = document.getElementById('modalImage');
             modalImage.src = service.image;
@@ -347,6 +365,9 @@
         function closeFullImage() {
             document.getElementById('fullImageModal').classList.remove('active');
         }
+
+        handleSwipe(document.getElementById('modal'), closeModal);
+        handleSwipe(document.getElementById('fullImageModal'), closeFullImage);
 
         renderCatalog();
     </script>
