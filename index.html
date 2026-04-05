@@ -52,6 +52,130 @@
         .catalog {
             display: grid;
             gap: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .catalog.grid-mode {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .category {
+            background: #1a1a1a;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+        }
+
+        .catalog.grid-mode .category {
+            padding: 0;
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .catalog.grid-mode .category-header {
+            flex-direction: column;
+            gap: 0;
+            height: 100%;
+            padding: 0;
+        }
+
+        .catalog.grid-mode .category-image {
+            width: 100%;
+            height: 100%;
+            border-radius: 0;
+            object-fit: cover;
+        }
+
+        .catalog.grid-mode .category-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            padding: 20px 12px 12px 12px;
+        }
+
+        .catalog.grid-mode .category-name {
+            font-size: 16px;
+            text-align: center;
+        }
+
+        .catalog.grid-mode .category-count {
+            display: none;
+        }
+
+        .catalog.grid-mode .category-arrow {
+            display: none;
+        }
+
+        .category:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .category-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .category-info {
+            flex: 1;
+        }
+
+        .category-name {
+            font-size: 20px;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .category-count {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .category-arrow {
+            font-size: 20px;
+            color: #666;
+            transition: transform 0.3s ease;
+        }
+
+        .category.active .category-arrow {
+            transform: rotate(180deg);
+        }
+
+        .category-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            margin-top: 0;
+        }
+
+        .category.active .category-content {
+            max-height: 2000px;
+            margin-top: 16px;
+        }
+
+        .catalog {
+            display: grid;
+            gap: 16px;
         }
 
         .card {
@@ -328,73 +452,864 @@
         // "center bottom" - показывает низ
         // "center 30%", "center 40%" и т.д. - точная позиция в процентах
 
-        const services = [
+        const categories = [
             {
                 id: 1,
-                name: "Анна",
-                description: "Классика МБРЧИК АНАЛ КОПРО",
-                price: " от 5000₽/час",
-                username: "anna_service",
-                image: "https://lux-model-agency.ru/wp-content/uploads/2024/12/Marselya-foto-1.jpg",
-                imagePosition: "center top"
+                name: "Red Line",
+                image: "https://via.placeholder.com/60/ff0000/ffffff?text=R",
+                services: [
+                    {
+                        id: 101,
+                        name: "Анна",
+                        description: "Классика МБРЧИК АНАЛ КОПРО",
+                        price: " от 5000₽/час",
+                        username: "anna_service",
+                        image: "https://lux-model-agency.ru/wp-content/uploads/2024/12/Marselya-foto-1.jpg",
+                        imagePosition: "center top"
+                    },
+                    {
+                        id: 102,
+                        name: "Товар 2",
+                        description: "Описание товара 2",
+                        price: "5000₽/час",
+                        username: "user2",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 103,
+                        name: "Товар 3",
+                        description: "Описание товара 3",
+                        price: "5000₽/час",
+                        username: "user3",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 104,
+                        name: "Товар 4",
+                        description: "Описание товара 4",
+                        price: "5000₽/час",
+                        username: "user4",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 105,
+                        name: "Товар 5",
+                        description: "Описание товара 5",
+                        price: "5000₽/час",
+                        username: "user5",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 106,
+                        name: "Товар 6",
+                        description: "Описание товара 6",
+                        price: "5000₽/час",
+                        username: "user6",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 107,
+                        name: "Товар 7",
+                        description: "Описание товара 7",
+                        price: "5000₽/час",
+                        username: "user7",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 108,
+                        name: "Товар 8",
+                        description: "Описание товара 8",
+                        price: "5000₽/час",
+                        username: "user8",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 109,
+                        name: "Товар 9",
+                        description: "Описание товара 9",
+                        price: "5000₽/час",
+                        username: "user9",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 110,
+                        name: "Товар 10",
+                        description: "Описание товара 10",
+                        price: "5000₽/час",
+                        username: "user10",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 111,
+                        name: "Товар 11",
+                        description: "Описание товара 11",
+                        price: "5000₽/час",
+                        username: "user11",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 112,
+                        name: "Товар 12",
+                        description: "Описание товара 12",
+                        price: "5000₽/час",
+                        username: "user12",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 113,
+                        name: "Товар 13",
+                        description: "Описание товара 13",
+                        price: "5000₽/час",
+                        username: "user13",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 114,
+                        name: "Товар 14",
+                        description: "Описание товара 14",
+                        price: "5000₽/час",
+                        username: "user14",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 115,
+                        name: "Товар 15",
+                        description: "Описание товара 15",
+                        price: "5000₽/час",
+                        username: "user15",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 116,
+                        name: "Товар 16",
+                        description: "Описание товара 16",
+                        price: "5000₽/час",
+                        username: "user16",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 117,
+                        name: "Товар 17",
+                        description: "Описание товара 17",
+                        price: "5000₽/час",
+                        username: "user17",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 118,
+                        name: "Товар 18",
+                        description: "Описание товара 18",
+                        price: "5000₽/час",
+                        username: "user18",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 119,
+                        name: "Товар 19",
+                        description: "Описание товара 19",
+                        price: "5000₽/час",
+                        username: "user19",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 120,
+                        name: "Товар 20",
+                        description: "Описание товара 20",
+                        price: "5000₽/час",
+                        username: "user20",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 121,
+                        name: "Товар 21",
+                        description: "Описание товара 21",
+                        price: "5000₽/час",
+                        username: "user21",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 122,
+                        name: "Товар 22",
+                        description: "Описание товара 22",
+                        price: "5000₽/час",
+                        username: "user22",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 123,
+                        name: "Товар 23",
+                        description: "Описание товара 23",
+                        price: "5000₽/час",
+                        username: "user23",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 124,
+                        name: "Товар 24",
+                        description: "Описание товара 24",
+                        price: "5000₽/час",
+                        username: "user24",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 125,
+                        name: "Товар 25",
+                        description: "Описание товара 25",
+                        price: "5000₽/час",
+                        username: "user25",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 126,
+                        name: "Товар 26",
+                        description: "Описание товара 26",
+                        price: "5000₽/час",
+                        username: "user26",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 127,
+                        name: "Товар 27",
+                        description: "Описание товара 27",
+                        price: "5000₽/час",
+                        username: "user27",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 128,
+                        name: "Товар 28",
+                        description: "Описание товара 28",
+                        price: "5000₽/час",
+                        username: "user28",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 129,
+                        name: "Товар 29",
+                        description: "Описание товара 29",
+                        price: "5000₽/час",
+                        username: "user29",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 130,
+                        name: "Товар 30",
+                        description: "Описание товара 30",
+                        price: "5000₽/час",
+                        username: "user30",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 131,
+                        name: "Товар 31",
+                        description: "Описание товара 31",
+                        price: "5000₽/час",
+                        username: "user31",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 132,
+                        name: "Товар 32",
+                        description: "Описание товара 32",
+                        price: "5000₽/час",
+                        username: "user32",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 133,
+                        name: "Товар 33",
+                        description: "Описание товара 33",
+                        price: "5000₽/час",
+                        username: "user33",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 134,
+                        name: "Товар 34",
+                        description: "Описание товара 34",
+                        price: "5000₽/час",
+                        username: "user34",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 135,
+                        name: "Товар 35",
+                        description: "Описание товара 35",
+                        price: "5000₽/час",
+                        username: "user35",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 136,
+                        name: "Товар 36",
+                        description: "Описание товара 36",
+                        price: "5000₽/час",
+                        username: "user36",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 137,
+                        name: "Товар 37",
+                        description: "Описание товара 37",
+                        price: "5000₽/час",
+                        username: "user37",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    }
+                ]
             },
             {
                 id: 2,
-                name: "Элла",
-                description: "КЛАССИКА, ВОЗМОЖНОСТЬ ДОБАВИТЬ КУКОЛДА ЗА ВТОРОЙ КИНДЕР",
-                price: "ЗА КИНДЕР ЯИЧКО",
-                username: "sixhsisj",
-                image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/656043755_18057460172703428_216261920160586876_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ig_cache_key=MzQzMjM5MjEzNTM2NDAzOTExMg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzIifQ%3D%3D&_nc_ohc=RyRmsHPiiHMQ7kNvwEnIZ2R&_nc_oc=AdoVBfHbLmwG3vCVH2dzVk1MjJsd6PSE_HhY0r_ijUhUZGpTVDXcEZfXqedWfvkkf618X1J8H8p0Bp6xz13jk8MT&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=Y8gXUV-gjvbsGYfxlMHWFA&_nc_ss=7a32e&oh=00_Af2Csncj9MM85c2LJk0tZIpVishvRuXVeR-WAWO3eDrrqg&oe=69D88B84",
-                imagePosition: "center bottom"
+                name: "Black Line",
+                image: "https://via.placeholder.com/60/000000/ffffff?text=B",
+                services: [
+                    {
+                        id: 201,
+                        name: "Элла",
+                        description: "КЛАССИКА, ВОЗМОЖНОСТЬ ДОБАВИТЬ КУКОЛДА ЗА ВТОРОЙ КИНДЕР",
+                        price: "ЗА КИНДЕР ЯИЧКО",
+                        username: "sixhsisj",
+                        image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/656043755_18057460172703428_216261920160586876_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=109&ig_cache_key=MzQzMjM5MjEzNTM2NDAzOTExMg%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTgwMC5zZHIuQzIifQ%3D%3D&_nc_ohc=RyRmsHPiiHMQ7kNvwEnIZ2R&_nc_oc=AdoVBfHbLmwG3vCVH2dzVk1MjJsd6PSE_HhY0r_ijUhUZGpTVDXcEZfXqedWfvkkf618X1J8H8p0Bp6xz13jk8MT&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=Y8gXUV-gjvbsGYfxlMHWFA&_nc_ss=7a32e&oh=00_Af2Csncj9MM85c2LJk0tZIpVishvRuXVeR-WAWO3eDrrqg&oe=69D88B84",
+                        imagePosition: "center bottom"
+                    },
+                    {
+                        id: 202,
+                        name: "Товар 2",
+                        description: "Описание товара 2",
+                        price: "5000₽/час",
+                        username: "user202",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 203,
+                        name: "Товар 3",
+                        description: "Описание товара 3",
+                        price: "5000₽/час",
+                        username: "user203",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 204,
+                        name: "Товар 4",
+                        description: "Описание товара 4",
+                        price: "5000₽/час",
+                        username: "user204",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 205,
+                        name: "Товар 5",
+                        description: "Описание товара 5",
+                        price: "5000₽/час",
+                        username: "user205",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 206,
+                        name: "Товар 6",
+                        description: "Описание товара 6",
+                        price: "5000₽/час",
+                        username: "user206",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 207,
+                        name: "Товар 7",
+                        description: "Описание товара 7",
+                        price: "5000₽/час",
+                        username: "user207",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 208,
+                        name: "Товар 8",
+                        description: "Описание товара 8",
+                        price: "5000₽/час",
+                        username: "user208",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 209,
+                        name: "Товар 9",
+                        description: "Описание товара 9",
+                        price: "5000₽/час",
+                        username: "user209",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 210,
+                        name: "Товар 10",
+                        description: "Описание товара 10",
+                        price: "5000₽/час",
+                        username: "user210",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 211,
+                        name: "Товар 11",
+                        description: "Описание товара 11",
+                        price: "5000₽/час",
+                        username: "user211",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 212,
+                        name: "Товар 12",
+                        description: "Описание товара 12",
+                        price: "5000₽/час",
+                        username: "user212",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 213,
+                        name: "Товар 13",
+                        description: "Описание товара 13",
+                        price: "5000₽/час",
+                        username: "user213",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 214,
+                        name: "Товар 14",
+                        description: "Описание товара 14",
+                        price: "5000₽/час",
+                        username: "user214",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 215,
+                        name: "Товар 15",
+                        description: "Описание товара 15",
+                        price: "5000₽/час",
+                        username: "user215",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 216,
+                        name: "Товар 16",
+                        description: "Описание товара 16",
+                        price: "5000₽/час",
+                        username: "user216",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 217,
+                        name: "Товар 17",
+                        description: "Описание товара 17",
+                        price: "5000₽/час",
+                        username: "user217",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 218,
+                        name: "Товар 18",
+                        description: "Описание товара 18",
+                        price: "5000₽/час",
+                        username: "user218",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 219,
+                        name: "Товар 19",
+                        description: "Описание товара 19",
+                        price: "5000₽/час",
+                        username: "user219",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 220,
+                        name: "Товар 20",
+                        description: "Описание товара 20",
+                        price: "5000₽/час",
+                        username: "user220",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 221,
+                        name: "Товар 21",
+                        description: "Описание товара 21",
+                        price: "5000₽/час",
+                        username: "user221",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 222,
+                        name: "Товар 22",
+                        description: "Описание товара 22",
+                        price: "5000₽/час",
+                        username: "user222",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 223,
+                        name: "Товар 23",
+                        description: "Описание товара 23",
+                        price: "5000₽/час",
+                        username: "user223",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    }
+                ]
             },
             {
                 id: 3,
-                name: "Лерусик",
-                description: "Душа: поиграть в нарды, покурить сигареты",
-                price: "150 крон/час",
-                username: "vbogachukk",
-                image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/659220330_18572664724013766_5019236223248637397_n.jpg?stp=dst-jpegr_e35_tt6&_nc_cat=103&ig_cache_key=Mzg2ODgzMDE4MzE1MTEyMzQ2Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxNC5oZHIuQzIifQ%3D%3D&_nc_ohc=KUAUGo6ZJxsQ7kNvwHG4cv1&_nc_oc=Ado6WKfX4wvOJzeX8LQRS7_IGe5ksbKG3wQnhbjDIUVw_Eq1ghsEd1_UTxEqObNwKFpx2rER4EzxIv35AovZIrWm&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&se=-1&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=PgcfvlXH9JHGbLcn5X1B7A&_nc_ss=7a32e&oh=00_Af1XiLO53j0qaZuOG5Osq4KuHQrtDJWsblJCCLJ6PlRb0w&oe=69D8AD12",
-                imagePosition: "center bottom"
+                name: "Mix Line",
+                image: "https://via.placeholder.com/60/888888/ffffff?text=M",
+                services: [
+                    {
+                        id: 301,
+                        name: "Лерусик",
+                        description: "Душа: поиграть в нарды, покурить сигареты",
+                        price: "150 крон/час",
+                        username: "vbogachukk",
+                        image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/659220330_18572664724013766_5019236223248637397_n.jpg?stp=dst-jpegr_e35_tt6&_nc_cat=103&ig_cache_key=Mzg2ODgzMDE4MzE1MTEyMzQ2Mw%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTkxNC5oZHIuQzIifQ%3D%3D&_nc_ohc=KUAUGo6ZJxsQ7kNvwHG4cv1&_nc_oc=Ado6WKfX4wvOJzeX8LQRS7_IGe5ksbKG3wQnhbjDIUVw_Eq1ghsEd1_UTxEqObNwKFpx2rER4EzxIv35AovZIrWm&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&se=-1&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=PgcfvlXH9JHGbLcn5X1B7A&_nc_ss=7a32e&oh=00_Af1XiLO53j0qaZuOG5Osq4KuHQrtDJWsblJCCLJ6PlRb0w&oe=69D8AD12",
+                        imagePosition: "center bottom"
+                    },
+                    {
+                        id: 302,
+                        name: "Товар 2",
+                        description: "Описание товара 2",
+                        price: "5000₽/час",
+                        username: "user302",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 303,
+                        name: "Товар 3",
+                        description: "Описание товара 3",
+                        price: "5000₽/час",
+                        username: "user303",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 304,
+                        name: "Товар 4",
+                        description: "Описание товара 4",
+                        price: "5000₽/час",
+                        username: "user304",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 305,
+                        name: "Товар 5",
+                        description: "Описание товара 5",
+                        price: "5000₽/час",
+                        username: "user305",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 306,
+                        name: "Товар 6",
+                        description: "Описание товара 6",
+                        price: "5000₽/час",
+                        username: "user306",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 307,
+                        name: "Товар 7",
+                        description: "Описание товара 7",
+                        price: "5000₽/час",
+                        username: "user307",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 308,
+                        name: "Товар 8",
+                        description: "Описание товара 8",
+                        price: "5000₽/час",
+                        username: "user308",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 309,
+                        name: "Товар 9",
+                        description: "Описание товара 9",
+                        price: "5000₽/час",
+                        username: "user309",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 310,
+                        name: "Товар 10",
+                        description: "Описание товара 10",
+                        price: "5000₽/час",
+                        username: "user310",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 311,
+                        name: "Товар 11",
+                        description: "Описание товара 11",
+                        price: "5000₽/час",
+                        username: "user311",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 312,
+                        name: "Товар 12",
+                        description: "Описание товара 12",
+                        price: "5000₽/час",
+                        username: "user312",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 313,
+                        name: "Товар 13",
+                        description: "Описание товара 13",
+                        price: "5000₽/час",
+                        username: "user313",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 314,
+                        name: "Товар 14",
+                        description: "Описание товара 14",
+                        price: "5000₽/час",
+                        username: "user314",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 315,
+                        name: "Товар 15",
+                        description: "Описание товара 15",
+                        price: "5000₽/час",
+                        username: "user315",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 316,
+                        name: "Товар 16",
+                        description: "Описание товара 16",
+                        price: "5000₽/час",
+                        username: "user316",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 317,
+                        name: "Товар 17",
+                        description: "Описание товара 17",
+                        price: "5000₽/час",
+                        username: "user317",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    }
+                ]
             },
             {
                 id: 4,
-                name: "Сонечка Одинцова",
-                description: "Рассматриваются любые пожелания",
-                price: "25₽/час",
-                username: "Sonikislit",
-                image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/656265836_18213225586334245_6762368678182110216_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=MzQ1NDIwMDgyODY5MzQxMzY2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzIifQ%3D%3D&_nc_ohc=90G68mpzqDEQ7kNvwHpORlA&_nc_oc=AdrZ75-PCq4TResSDe6Cj0cfP3JQxTEDT3ZBuKsSUPXPJ6Jv8f4N8aHo2lYC57q6D94CsiyvpZJF7jCqz5vMaSkp&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=7ovekaOmunferGHRlriX3w&_nc_ss=7a32e&oh=00_Af0FCvmDFtpnozQRBTKlFbglD9uV7EaZrUPgepS775uUwg&oe=69D881E9",
-                imagePosition: "center center"
-            },
-            {
-                id: 5,
-                name: "Таня",
-                description: "Фитнес тренер",
-                price: "5500₽/час",
-                username: "elfiykaaaa",
-                image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/657724988_18094382915035793_5130316074797766308_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=MzExMDI5NzY4MTM1MjEzOTQ1NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5Ni5zZHIuQzIifQ%3D%3D&_nc_ohc=fbmQmC3UgTQQ7kNvwEewIgn&_nc_oc=AdqJScQbjh-Zdq4OU29OvGR5KUT4CnjKE_K08F2MaZSwB1vj8tuaYm1IZR76XV15g-NWA0FtVMxHt87_I8VqgGLX&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=oSVO9d6PeQ4QwBH4zDjLvQ&_nc_ss=7a32e&oh=00_Af25A3QZFdYapNauISJMbUwNUjA4p3StGpiOXSKyQEWY5g&oe=69D88200",
-                imagePosition: "center top"
+                name: "Special",
+                image: "https://via.placeholder.com/60/gold/000000?text=S",
+                services: [
+                    {
+                        id: 401,
+                        name: "Сонечка Одинцова",
+                        description: "Рассматриваются любые пожелания",
+                        price: "25₽/час",
+                        username: "Sonikislit",
+                        image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/656265836_18213225586334245_6762368678182110216_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=110&ig_cache_key=MzQ1NDIwMDgyODY5MzQxMzY2MQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5NS5zZHIuQzIifQ%3D%3D&_nc_ohc=90G68mpzqDEQ7kNvwHpORlA&_nc_oc=AdrZ75-PCq4TResSDe6Cj0cfP3JQxTEDT3ZBuKsSUPXPJ6Jv8f4N8aHo2lYC57q6D94CsiyvpZJF7jCqz5vMaSkp&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=7ovekaOmunferGHRlriX3w&_nc_ss=7a32e&oh=00_Af0FCvmDFtpnozQRBTKlFbglD9uV7EaZrUPgepS775uUwg&oe=69D881E9",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 402,
+                        name: "Таня",
+                        description: "Фитнес тренер",
+                        price: "5500₽/час",
+                        username: "elfiykaaaa",
+                        image: "https://scontent-ams2-1.cdninstagram.com/v/t51.82787-15/657724988_18094382915035793_5130316074797766308_n.jpg?stp=dst-jpg_e35_tt6&_nc_cat=100&ig_cache_key=MzExMDI5NzY4MTM1MjEzOTQ1NA%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6InhwaWRzLjE0NDB4MTc5Ni5zZHIuQzIifQ%3D%3D&_nc_ohc=fbmQmC3UgTQQ7kNvwEewIgn&_nc_oc=AdqJScQbjh-Zdq4OU29OvGR5KUT4CnjKE_K08F2MaZSwB1vj8tuaYm1IZR76XV15g-NWA0FtVMxHt87_I8VqgGLX&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=scontent-ams2-1.cdninstagram.com&_nc_gid=oSVO9d6PeQ4QwBH4zDjLvQ&_nc_ss=7a32e&oh=00_Af25A3QZFdYapNauISJMbUwNUjA4p3StGpiOXSKyQEWY5g&oe=69D88200",
+                        imagePosition: "center top"
+                    },
+                    {
+                        id: 403,
+                        name: "Товар 3",
+                        description: "Описание товара 3",
+                        price: "5000₽/час",
+                        username: "user403",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 404,
+                        name: "Товар 4",
+                        description: "Описание товара 4",
+                        price: "5000₽/час",
+                        username: "user404",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 405,
+                        name: "Товар 5",
+                        description: "Описание товара 5",
+                        price: "5000₽/час",
+                        username: "user405",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 406,
+                        name: "Товар 6",
+                        description: "Описание товара 6",
+                        price: "5000₽/час",
+                        username: "user406",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 407,
+                        name: "Товар 7",
+                        description: "Описание товара 7",
+                        price: "5000₽/час",
+                        username: "user407",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    },
+                    {
+                        id: 408,
+                        name: "Товар 8",
+                        description: "Описание товара 8",
+                        price: "5000₽/час",
+                        username: "user408",
+                        image: "https://via.placeholder.com/100",
+                        imagePosition: "center center"
+                    }
+                ]
             }
         ];
 
+        function toggleCategory(categoryId) {
+            const categoryElement = document.getElementById(`category-${categoryId}`);
+            const catalog = document.getElementById('catalog');
+            const wasActive = categoryElement.classList.contains('active');
+
+            categoryElement.classList.toggle('active');
+
+            // Проверяем, есть ли хотя бы одна открытая категория
+            const hasActiveCategory = document.querySelector('.category.active');
+
+            if (hasActiveCategory) {
+                catalog.classList.remove('grid-mode');
+            } else {
+                catalog.classList.add('grid-mode');
+            }
+        }
+
         function renderCatalog() {
             const catalog = document.getElementById('catalog');
+            catalog.classList.add('grid-mode'); // Начинаем с режима плиток
 
-            services.forEach(service => {
-                const card = document.createElement('div');
-                card.className = 'card';
-                card.onclick = () => openModal(service);
-                card.innerHTML = `
-                    <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
-                    <div class="card-content">
-                        <div class="card-name">${service.name}</div>
-                        <div class="card-description">${service.description}</div>
-                        <div class="card-price">${service.price}</div>
-                        <button class="contact-btn" onclick="event.stopPropagation(); openChat('${service.username}')">
-                            Написать
-                        </button>
+            categories.forEach(category => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'category';
+                categoryDiv.id = `category-${category.id}`;
+
+                const categoryHeader = document.createElement('div');
+                categoryHeader.className = 'category-header';
+                categoryHeader.onclick = () => toggleCategory(category.id);
+                categoryHeader.innerHTML = `
+                    <img src="${category.image}" class="category-image" alt="${category.name}">
+                    <div class="category-info">
+                        <div class="category-name">${category.name}</div>
+                        <div class="category-count">${category.services.length} ${category.services.length === 1 ? 'услуга' : 'услуг'}</div>
                     </div>
+                    <div class="category-arrow">▼</div>
                 `;
-                catalog.appendChild(card);
+
+                const categoryContent = document.createElement('div');
+                categoryContent.className = 'category-content';
+
+                category.services.forEach(service => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.onclick = () => openModal(service);
+                    card.innerHTML = `
+                        <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+                        <div class="card-content">
+                            <div class="card-name">${service.name}</div>
+                            <div class="card-description">${service.description}</div>
+                            <div class="card-price">${service.price}</div>
+                            <button class="contact-btn" onclick="event.stopPropagation(); openChat('${service.username}')">
+                                Написать
+                            </button>
+                        </div>
+                    `;
+                    categoryContent.appendChild(card);
+                });
+
+                categoryDiv.appendChild(categoryHeader);
+                categoryDiv.appendChild(categoryContent);
+                catalog.appendChild(categoryDiv);
             });
         }
 
