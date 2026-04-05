@@ -1272,21 +1272,10 @@
             // Проверяем, есть ли хотя бы одна открытая категория
             const hasActiveCategory = document.querySelector('.category.active');
 
-            // Плавный переход между режимами
-            if (hasActiveCategory && catalog.classList.contains('grid-mode')) {
-                // Переход из плиток в список
-                catalog.style.opacity = '0';
-                setTimeout(() => {
-                    catalog.classList.remove('grid-mode');
-                    catalog.style.opacity = '1';
-                }, 150);
-            } else if (!hasActiveCategory && !catalog.classList.contains('grid-mode')) {
-                // Переход из списка в плитки
-                catalog.style.opacity = '0';
-                setTimeout(() => {
-                    catalog.classList.add('grid-mode');
-                    catalog.style.opacity = '1';
-                }, 150);
+            if (hasActiveCategory) {
+                catalog.classList.remove('grid-mode');
+            } else {
+                catalog.classList.add('grid-mode');
             }
         }
 
