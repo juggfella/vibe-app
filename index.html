@@ -350,20 +350,24 @@
             document.getElementById('modalDescription').textContent = service.description;
             document.getElementById('modalContactBtn').onclick = () => openChat(service.username);
             document.getElementById('modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeModal() {
             document.getElementById('modal').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         function openFullImage() {
             const modalImage = document.getElementById('modalImage');
             document.getElementById('fullImage').src = modalImage.src;
             document.getElementById('fullImageModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
         }
 
         function closeFullImage() {
             document.getElementById('fullImageModal').classList.remove('active');
+            document.body.style.overflow = '';
         }
 
         handleSwipe(document.getElementById('modal'), closeModal);
