@@ -2650,7 +2650,10 @@
 
         function sendToTelegram(orderText) {
             // Отправляем на наш бэкенд
-            const url = '/api/send-order';
+            const url = `${window.location.origin}/api/send-order`;
+
+            console.log('Sending order to:', url);
+            console.log('Order text:', orderText);
 
             fetch(url, {
                 method: 'POST',
