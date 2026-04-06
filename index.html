@@ -1610,6 +1610,15 @@
                 newModalElement.querySelector('.modal-card').onclick = (e) => e.stopPropagation();
                 newModalElement.querySelector('#modalImage').onclick = openFullImage;
 
+                // Предотвращаем скролл фона при касании модального окна
+                newModalElement.addEventListener('touchmove', (e) => {
+                    const modalCard = newModalElement.querySelector('.modal-card');
+                    // Разрешаем скролл только внутри modal-card
+                    if (!modalCard.contains(e.target)) {
+                        e.preventDefault();
+                    }
+                }, { passive: false });
+
                 handleSwipe(newModalElement, closeModal, hasScroll);
             }, 100);
         }
