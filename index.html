@@ -2651,46 +2651,16 @@
         function sendToTelegram(orderText) {
             console.log('=== Sending order ===');
             console.log('Order text length:', orderText.length);
-            console.log('Platform:', tg.platform);
 
-            const url = '/api/send-order';
-            const data = JSON.stringify({ orderText: orderText });
-
-            // Пробуем sendBeacon (работает на iOS)
-            if (navigator.sendBeacon) {
-                console.log('Using sendBeacon');
-                const blob = new Blob([data], { type: 'application/json' });
-                const sent = navigator.sendBeacon(url, blob);
-                console.log('sendBeacon result:', sent);
-
-                if (sent) {
-                    setTimeout(() => {
-                        alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
-                        cart = {};
-                        updateCartBadge();
-                        renderCart();
-                        closeCart();
-                    }, 500);
-                    return;
-                }
-            }
-
-            // Fallback на fetch
-            console.log('Using fetch');
-            fetch(url, {
+            fetch('/api/send-order', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: data,
-                keepalive: true
+                body: JSON.stringify({ orderText: orderText })
             })
-            .then(response => {
-                console.log('Response received:', response.status);
-                return response.json();
-            })
+            .then(response => response.json())
             .then(data => {
-                console.log('Response data:', data);
                 if (data.success) {
                     alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
                     cart = {};
@@ -2758,39 +2728,7 @@
 
             message += `\n<b>Итого: ${totalPrice} ₽</b>`;
 
-            // Проверяем, запущено ли в Telegram WebApp
-            const isTelegramWebApp = tg.initData && tg.initData.length > 0;
-
-            if (isTelegramWebApp) {
-                console.log('In Telegram WebApp, using MainButton with API fallback');
-
-                // Сохраняем message для обработчика
-                window.pendingOrderMessage = message;
-
-                // Настраиваем MainButton
-                tg.MainButton.setText('Подтвердить заказ');
-                tg.MainButton.show();
-                tg.MainButton.enable();
-
-                // Удаляем старый обработчик если есть
-                tg.MainButton.offClick();
-
-                // Устанавливаем новый обработчик
-                tg.MainButton.onClick(function() {
-                    console.log('MainButton clicked');
-                    tg.MainButton.showProgress();
-
-                    // Отправляем через API вместо sendData
-                    sendToTelegram(window.pendingOrderMessage);
-
-                    // Скрываем кнопку
-                    tg.MainButton.hide();
-                });
-
-                return;
-            }
-
-            // Для веб-версии отправляем через API
+            // Отправляем заказ
             sendToTelegram(message);
         }
 
