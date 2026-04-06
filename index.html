@@ -325,10 +325,10 @@
         }
 
         .cart-counter-value {
-            font-size: 14px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: #fff;
-            min-width: 20px;
+            min-width: 25px;
             text-align: center;
         }
 
@@ -589,10 +589,10 @@
         }
 
         .cart-item-quantity {
-            font-size: 16px;
-            font-weight: 600;
+            font-size: 18px;
+            font-weight: 700;
             color: #fff;
-            min-width: 30px;
+            min-width: 35px;
             text-align: center;
         }
 
@@ -1493,27 +1493,47 @@
         let touchEndY = 0;
 
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
-            // Если есть прокручиваемый контент, не добавляем свайп
-            if (hasScrollableContent) {
-                return;
-            }
+            let startY = 0;
+            let currentY = 0;
+            let isScrolling = false;
+
+            const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
-                touchStartY = e.touches[0].clientY;
-            }, { passive: false });
+                startY = e.touches[0].clientY;
+                currentY = startY;
+                isScrolling = false;
+            }, { passive: true });
 
             element.addEventListener('touchmove', (e) => {
-                e.preventDefault();
-            }, { passive: false });
+                currentY = e.touches[0].clientY;
+
+                // Если есть прокручиваемый контент, проверяем позицию скролла
+                if (hasScrollableContent && modalCard) {
+                    const scrollTop = modalCard.scrollTop;
+                    const swipeDown = currentY > startY;
+
+                    // Разрешаем закрытие только если скролл в самом верху и свайп вниз
+                    if (scrollTop === 0 && swipeDown) {
+                        isScrolling = false;
+                    } else if (scrollTop > 0) {
+                        isScrolling = true;
+                    }
+                }
+            }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
-                touchEndY = e.changedTouches[0].clientY;
-                const swipeDistance = touchStartY - touchEndY;
+                const swipeDistance = currentY - startY;
 
-                if (Math.abs(swipeDistance) > 50) {
-                    closeFunction();
+                // Закрываем только если:
+                // 1. Нет прокручиваемого контента, или
+                // 2. Есть контент, но скролл в верху и свайп вниз больше 50px
+                if (!hasScrollableContent || (!isScrolling && swipeDistance > 50)) {
+                    if (Math.abs(swipeDistance) > 50) {
+                        closeFunction();
+                    }
                 }
-            }, { passive: false });
+            }, { passive: true });
         }
 
         function openModal(service) {
@@ -1737,7 +1757,14 @@
                                         <button class="cart-item-btn" onclick="event.stopPropagation(); removeFromCart(${item.id}); return false;">−</button>
                                         <div class="cart-item-quantity">${item.quantity}</div>
                                         <button class="cart-item-btn" onclick="event.stopPropagation(); addToCart(${item.id}); return false;">+</button>
-                                        <button class="cart-item-delete" onclick="event.stopPropagation(); deleteFromCart(${item.id}); return false;">🗑️</button>
+                                        <button class="cart-item-delete" onclick="event.stopPropagation(); deleteFromCart(${item.id}); return false;">
+                                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="3 6 5 6 21 6"></polyline>
+                                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                                            </svg>
+                                        </button>
                                     </div>
                                 </div>
                             </div>
