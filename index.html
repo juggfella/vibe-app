@@ -2654,6 +2654,11 @@
 
             console.log('Sending order to:', url);
             console.log('Order text:', orderText);
+            console.log('Platform:', tg.platform);
+
+            // Создаем контроллер для таймаута
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 секунд
 
             fetch(url, {
                 method: 'POST',
@@ -2662,9 +2667,11 @@
                 },
                 body: JSON.stringify({
                     orderText: orderText
-                })
+                }),
+                signal: controller.signal
             })
             .then(response => {
+                clearTimeout(timeoutId);
                 console.log('Response status:', response.status);
                 if (!response.ok) {
                     return response.text().then(text => {
@@ -2690,8 +2697,17 @@
                 }
             })
             .catch(error => {
+                clearTimeout(timeoutId);
                 console.error('Ошибка:', error);
-                alert(`Ошибка отправки заказа: ${error.message}. Попробуйте еще раз.`);
+
+                let errorMessage = 'Ошибка отправки заказа';
+                if (error.name === 'AbortError') {
+                    errorMessage = 'Превышено время ожидания. Проверьте интернет-соединение';
+                } else if (error.message) {
+                    errorMessage = `Ошибка: ${error.message}`;
+                }
+
+                alert(`${errorMessage}. Попробуйте еще раз.`);
             });
         }
 
