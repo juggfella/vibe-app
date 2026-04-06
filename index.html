@@ -2649,66 +2649,68 @@
         }
 
         function sendToTelegram(orderText) {
-            // Отправляем на наш бэкенд
             const url = `${window.location.origin}/api/send-order`;
 
             console.log('Sending order to:', url);
             console.log('Order text:', orderText);
             console.log('Platform:', tg.platform);
 
-            // Создаем контроллер для таймаута
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 секунд
+            // Используем XMLHttpRequest для лучшей совместимости с iOS
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.timeout = 30000; // 30 секунд
 
-            fetch(url, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    orderText: orderText
-                }),
-                signal: controller.signal
-            })
-            .then(response => {
-                clearTimeout(timeoutId);
-                console.log('Response status:', response.status);
-                if (!response.ok) {
-                    return response.text().then(text => {
-                        console.error('Response error:', text);
-                        throw new Error(`HTTP ${response.status}: ${text}`);
-                    });
-                }
-                return response.json();
-            })
-            .then(data => {
-                console.log('Response data:', data);
-                if (data.success) {
-                    console.log('Заказ отправлен в телегу!');
-                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
-                    // Очищаем корзину после успешной отправки
-                    cart = {};
-                    updateCartBadge();
-                    renderCart();
-                    closeCart();
+            xhr.onload = function() {
+                console.log('Response status:', xhr.status);
+                console.log('Response text:', xhr.responseText);
+
+                if (xhr.status >= 200 && xhr.status < 300) {
+                    try {
+                        const data = JSON.parse(xhr.responseText);
+                        console.log('Response data:', data);
+
+                        if (data.success) {
+                            console.log('Заказ отправлен в телегу!');
+                            alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+                            // Очищаем корзину после успешной отправки
+                            cart = {};
+                            updateCartBadge();
+                            renderCart();
+                            closeCart();
+                        } else {
+                            console.error('Ошибка отправки:', data);
+                            alert(`Ошибка отправки заказа: ${data.error || 'Неизвестная ошибка'}. Попробуйте еще раз.`);
+                        }
+                    } catch (e) {
+                        console.error('Parse error:', e);
+                        alert('Ошибка обработки ответа сервера');
+                    }
                 } else {
-                    console.error('Ошибка отправки:', data);
-                    alert(`Ошибка отправки заказа: ${data.error || 'Неизвестная ошибка'}. Попробуйте еще раз.`);
+                    console.error('HTTP error:', xhr.status, xhr.responseText);
+                    alert(`Ошибка отправки заказа: HTTP ${xhr.status}. Попробуйте еще раз.`);
                 }
-            })
-            .catch(error => {
-                clearTimeout(timeoutId);
-                console.error('Ошибка:', error);
+            };
 
-                let errorMessage = 'Ошибка отправки заказа';
-                if (error.name === 'AbortError') {
-                    errorMessage = 'Превышено время ожидания. Проверьте интернет-соединение';
-                } else if (error.message) {
-                    errorMessage = `Ошибка: ${error.message}`;
-                }
+            xhr.onerror = function() {
+                console.error('Network error');
+                alert('Ошибка сети. Проверьте интернет-соединение и попробуйте еще раз.');
+            };
 
-                alert(`${errorMessage}. Попробуйте еще раз.`);
-            });
+            xhr.ontimeout = function() {
+                console.error('Timeout error');
+                alert('Превышено время ожидания. Проверьте интернет-соединение и попробуйте еще раз.');
+            };
+
+            try {
+                const payload = JSON.stringify({ orderText: orderText });
+                console.log('Sending payload:', payload);
+                xhr.send(payload);
+            } catch (e) {
+                console.error('Send error:', e);
+                alert('Ошибка отправки запроса: ' + e.message);
+            }
+        }
         }
 
         function checkoutCart() {
