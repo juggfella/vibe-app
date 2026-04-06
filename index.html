@@ -302,6 +302,65 @@
             transform: translateY(-2px);
         }
 
+        .product-price {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            margin-top: 6px;
+            margin-bottom: 6px;
+        }
+
+        .weight-selector {
+            display: flex;
+            gap: 6px;
+            margin-top: 6px;
+            margin-bottom: 8px;
+        }
+
+        .weight-option {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            padding: 4px 10px;
+            font-size: 11px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .weight-option:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .weight-option.active {
+            background: linear-gradient(135deg, #fff, #ccc);
+            color: #000;
+            border-color: #fff;
+        }
+
+        .weight-option.in-cart {
+            border-color: rgba(255, 255, 255, 0.5);
+            position: relative;
+        }
+
+        .weight-option.in-cart::after {
+            content: '✓';
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: #4CAF50;
+            color: white;
+            font-size: 10px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1;
+        }
+
         .cart-counter {
             display: flex;
             align-items: center;
@@ -762,7 +821,12 @@
                         description: "Абрикос - бархатистая классика в самом сочном исполнении. Густой, почти джемовый профиль спелого плода со сливочным послевкусием. Вкус, который разливается мягким фруктовым нектаром и оставляет ощущение бесконечного лета",
                         username: "user1",
                         image: "images/redline/red-1.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 102,
@@ -770,7 +834,12 @@
                         description: "Десертный банан с бархатистой сладостью, политый сиропом из темного шоколада для приятного контраста во вкусе.",
                         username: "user2",
                         image: "images/redline/red-2.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 103,
@@ -778,7 +847,12 @@
                         description: "Прохладительный напиток на основе черного чая с добавлением кусочков свежего персика.",
                         username: "user3",
                         image: "images/redline/red-3.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 104,
@@ -786,7 +860,12 @@
                         description: "Сбалансированный в меру сладкий вкус колы, знакомый тебе по мармеладкам Haribo.",
                         username: "user4",
                         image: "images/redline/red-4.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 105,
@@ -794,7 +873,12 @@
                         description: "Просто хорошая малина, которую мы постарались сделать максимально похожей на натуральную.",
                         username: "user5",
                         image: "images/redline/red-5.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 106,
@@ -802,7 +886,12 @@
                         description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
                         username: "user6",
                         image: "images/redline/red-6.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 107,
@@ -810,7 +899,12 @@
                         description: "Многогранный пряный вкус с нотами ванили и четырех видов специй.",
                         username: "user7",
                         image: "images/redline/red-7.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 108,
@@ -818,7 +912,12 @@
                         description: "Отсылка к «двойному яблоку», кисло-холодящие освежающие ноты зеленых яблок.",
                         username: "user8",
                         image: "images/redline/red-8.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 109,
@@ -826,7 +925,12 @@
                         description: "Вкус мороженого.",
                         username: "user9",
                         image: "images/redline/red-9.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 110,
@@ -834,7 +938,12 @@
                         description: "Special for JohnCalliano",
                         username: "user10",
                         image: "images/redline/red-10.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 111,
@@ -842,7 +951,12 @@
                         description: "Выраженные сливочные ноты воздушного зефира, дополненные ароматом фундука.",
                         username: "user11",
                         image: "images/redline/red-11.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 112,
@@ -850,7 +964,12 @@
                         description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
                         username: "user12",
                         image: "images/redline/red-12.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 113,
@@ -858,7 +977,12 @@
                         description: "Насыщенный вкус натурального киви с будоражащей рецепторы кислинкой на выдохе.",
                         username: "user13",
                         image: "images/redline/red-13.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 114,
@@ -866,7 +990,12 @@
                         description: "Сладкий и завораживающий вкус спелой ягоды, созревшей под нежным июньским солнышком. Влюбляет в себя с первых затяжек.",
                         username: "user14",
                         image: "images/redline/red-14.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 115,
@@ -874,7 +1003,12 @@
                         description: "Аромат натуральной голубики со всей полнотой ягодного вкуса на вдохе и выдохе.",
                         username: "user15",
                         image: "images/redline/red-15.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 116,
@@ -882,7 +1016,12 @@
                         description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
                         username: "user16",
                         image: "images/redline/red-16.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 117,
@@ -890,7 +1029,12 @@
                         description: "Тот самый лимонад со вкусом сладкого эстрагона – травянисто, освежающе.",
                         username: "user17",
                         image: "images/redline/red-17.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 118,
@@ -898,7 +1042,12 @@
                         description: "Самый необычный вкус - консервированная оливка, с изумительным подкопченым послевкусием. Для гурманов.",
                         username: "user18",
                         image: "images/redline/red-18.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 119,
@@ -906,7 +1055,12 @@
                         description: "Классический черный чай с молоком",
                         username: "user19",
                         image: "images/redline/red-19.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 120,
@@ -914,7 +1068,12 @@
                         description: "Идеальный бустер для любителей миксов с выраженным охлаждающим эффектом.",
                         username: "user20",
                         image: "images/redline/red-20.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 121,
@@ -922,7 +1081,12 @@
                         description: "Крепкий зеленый чай с кусочками терпкого граната, выразительный и яркий вкус.",
                         username: "user21",
                         image: "images/redline/red-21.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 122,
@@ -930,7 +1094,12 @@
                         description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
                         username: "user22",
                         image: "images/redline/red-22.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 123,
@@ -938,7 +1107,12 @@
                         description: "Сладкий и слегка терпкий микс двух не похожих друг на друга сортов персика",
                         username: "user23",
                         image: "images/redline/red-23.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 124,
@@ -946,7 +1120,12 @@
                         description: "Молодой зеленый виноград с легким оттенком тростниковой мяты.",
                         username: "user24",
                         image: "images/redline/red-24.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 125,
@@ -954,7 +1133,12 @@
                         description: "Свежий густой сладкий мед, только что собранный с цветущих весенних лугов.",
                         username: "user25",
                         image: "images/redline/red-25.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 126,
@@ -962,7 +1146,12 @@
                         description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
                         username: "user26",
                         image: "images/redline/red-26.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 127,
@@ -970,7 +1159,12 @@
                         description: "Роскошный аромат зеленых листьев смородинного куста и спелой налитой ягоды.",
                         username: "user27",
                         image: "images/redline/red-27.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 128,
@@ -978,7 +1172,12 @@
                         description: "Крепкий черный чай с ассорти из турецких пряностей, необычный и притягательный вкус.",
                         username: "user28",
                         image: "images/redline/red-28.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 129,
@@ -986,7 +1185,12 @@
                         description: "Сладкая спелая дыня и пряные обволакивающие ноты корицы на выдохе – превосходный дуэт.",
                         username: "user29",
                         image: "images/redline/red-29.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 130,
@@ -994,7 +1198,12 @@
                         description: "Очень вкусный ягодный десерт из ассорти лесных и садовых ягод.",
                         username: "user30",
                         image: "images/redline/red-30.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 131,
@@ -1002,7 +1211,12 @@
                         description: "Сладкая сдобная выпечка со сливочным ароматом, напоминающим начинку из сгущенки.",
                         username: "user31",
                         image: "images/redline/red-31.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 132,
@@ -1010,7 +1224,12 @@
                         description: "Вкус натуральной сладкой груши.",
                         username: "user32",
                         image: "images/redline/red-32.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 133,
@@ -1018,7 +1237,12 @@
                         description: "Нестандартное тропическое сочетание с ведущими нотами спелого ананаса, послевкусием кокосовой мякоти и свежего абрикосового желе.",
                         username: "user33",
                         image: "images/redline/red-33.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 134,
@@ -1026,7 +1250,12 @@
                         description: "Хороший, вкусный, кисло-сладкий ананас.",
                         username: "user34",
                         image: "images/redline/red-34.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 135,
@@ -1034,7 +1263,12 @@
                         description: "Яркий фейхоа с характерными сладко-травянистым тропическим вкусом",
                         username: "user35",
                         image: "images/redline/red-35.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 136,
@@ -1042,7 +1276,12 @@
                         description: "Густой, сладкий и травянистый вкус натуральной гуавы, отлично дополняющий фруктовые и коктейльные миксы.",
                         username: "user36",
                         image: "images/redline/red-36.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 137,
@@ -1050,7 +1289,12 @@
                         description: "Яркое травянистое манго, очень близкое по вкусу к настоящему тайскому манго.",
                         username: "user37",
                         image: "images/redline/red-37.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     }
                 ]
             },
@@ -1483,13 +1727,36 @@
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.onclick = () => openModal(service);
+
+                    // Инициализируем выбранную граммовку
+                    if (service.weights && !selectedWeights[service.id]) {
+                        selectedWeights[service.id] = service.weights[0].grams;
+                    }
+
+                    const defaultWeight = service.weights ? service.weights[0] : null;
+
                     card.innerHTML = `
                         <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
-                        <div class="card-content">
+                        <div class="card-content" data-service-id="${service.id}">
                             <div class="card-name">${service.name}</div>
                             <div class="card-description">${service.description}</div>
+                            ${service.weights ? `
+                                <div class="product-price">${defaultWeight.price} ₽</div>
+                                <div class="weight-selector" onclick="event.stopPropagation()">
+                                    ${service.weights.map((w, idx) => {
+                                        const cartKey = getCartKey(service.id, w.grams);
+                                        const inCart = cart[cartKey] ? 'in-cart' : '';
+                                        return `
+                                        <div class="weight-option ${idx === 0 ? 'active' : ''} ${inCart}"
+                                             data-weight="${w.grams}"
+                                             onclick="selectWeight(${service.id}, ${w.grams})">
+                                            ${w.grams}г
+                                        </div>
+                                    `}).join('')}
+                                </div>
+                            ` : ''}
                             <div id="cart-control-${service.id}">
-                                <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
+                                <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id}${service.weights ? ', ' + defaultWeight.grams : ''})">
                                     Добавить в корзину
                                 </button>
                             </div>
@@ -1592,23 +1859,58 @@
             document.getElementById('modalName').textContent = service.name;
             document.getElementById('modalDescription').innerHTML = (service.description || '').replace(/\n/g, '<br>');
 
-            // Рендерим кнопку корзины
+            // Инициализируем выбранную граммовку если её нет
+            if (service.weights && !selectedWeights[service.id]) {
+                selectedWeights[service.id] = service.weights[0].grams;
+            }
+
+            const selectedWeight = service.weights ? (selectedWeights[service.id] || service.weights[0].grams) : null;
+            const cartKey = selectedWeight ? getCartKey(service.id, selectedWeight) : service.id;
+
+            // Рендерим выбор граммовки, цену и кнопку корзины
             const modalCartControl = document.getElementById('modalCartControl');
-            if (cart[service.id]) {
-                modalCartControl.innerHTML = `
+
+            let html = '<div data-service-id="' + service.id + '">';
+
+            if (service.weights) {
+                const priceData = service.weights.find(w => w.grams === selectedWeight);
+                html += `
+                    <div class="product-price" style="font-size: 20px; margin-bottom: 12px;">${priceData.price} ₽</div>
+                    <div class="weight-selector" style="justify-content: center; margin-bottom: 16px;">
+                        ${service.weights.map(w => {
+                            const wCartKey = getCartKey(service.id, w.grams);
+                            const inCart = cart[wCartKey] ? 'in-cart' : '';
+                            return `
+                            <div class="weight-option ${w.grams === selectedWeight ? 'active' : ''} ${inCart}"
+                                 data-weight="${w.grams}"
+                                 onclick="selectWeight(${service.id}, ${w.grams})">
+                                ${w.grams}г
+                            </div>
+                        `}).join('')}
+                    </div>
+                `;
+            }
+
+            html += '<div class="modal-button-container">';
+
+            if (cart[cartKey]) {
+                html += `
                     <div class="cart-counter">
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${service.id})">−</button>
-                        <div class="cart-counter-value">${cart[service.id].quantity}</div>
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${service.id})">+</button>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${service.id}, ${selectedWeight})">−</button>
+                        <div class="cart-counter-value">${cart[cartKey].quantity}</div>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${service.id}, ${selectedWeight})">+</button>
                     </div>
                 `;
             } else {
-                modalCartControl.innerHTML = `
-                    <button class="modal-contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
+                html += `
+                    <button class="modal-contact-btn" onclick="event.stopPropagation(); addToCart(${service.id}${selectedWeight ? ', ' + selectedWeight : ''})">
                         Добавить в корзину
                     </button>
                 `;
             }
+
+            html += '</div></div>';
+            modalCartControl.innerHTML = html;
 
             const modalElement = document.getElementById('modal');
             const modalCard = modalElement.querySelector('.modal-card');
@@ -1698,80 +2000,171 @@
         }
 
         let cart = {};
+        let selectedWeights = {}; // Хранит выбранную граммовку для каждого товара
 
-        function addToCart(serviceId) {
+        function getCartKey(serviceId, weight) {
+            return `${serviceId}_${weight}`;
+        }
+
+        function addToCart(serviceId, weight) {
             const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
             if (!service) return;
 
-            if (cart[serviceId]) {
-                cart[serviceId].quantity++;
+            // Если weight не передан, используем выбранную граммовку
+            if (!weight && service.weights) {
+                weight = selectedWeights[serviceId] || service.weights[0].grams;
+            }
+
+            const cartKey = weight ? getCartKey(serviceId, weight) : serviceId;
+            const priceData = service.weights ? service.weights.find(w => w.grams === weight) : null;
+
+            if (cart[cartKey]) {
+                cart[cartKey].quantity++;
             } else {
-                cart[serviceId] = { ...service, quantity: 1 };
+                cart[cartKey] = {
+                    ...service,
+                    quantity: 1,
+                    selectedWeight: weight,
+                    selectedPrice: priceData ? priceData.price : null
+                };
             }
             updateCartBadge();
-            updateCartControl(serviceId);
+            updateCartControl(serviceId, weight);
 
-            // Обновляем только количество в корзине, если она открыта
-            const cartItem = document.querySelector(`.cart-item-controls button[onclick*="addToCart(${serviceId})"]`);
-            if (cartItem) {
-                const quantityElement = cartItem.parentElement.querySelector('.cart-item-quantity');
-                if (quantityElement) {
-                    quantityElement.textContent = cart[serviceId].quantity;
-                }
+            // Обновляем индикаторы граммовок
+            if (service.weights) {
+                selectWeight(serviceId, selectedWeights[serviceId] || weight);
+            }
+
+            // Перерисовываем корзину если она открыта
+            if (document.getElementById('cartModal').classList.contains('active')) {
+                renderCart();
             }
         }
 
-        function removeFromCart(serviceId) {
-            if (cart[serviceId]) {
-                cart[serviceId].quantity--;
-                if (cart[serviceId].quantity <= 0) {
-                    delete cart[serviceId];
+        function removeFromCart(serviceId, weight) {
+            const cartKey = weight ? getCartKey(serviceId, weight) : serviceId;
+
+            if (cart[cartKey]) {
+                cart[cartKey].quantity--;
+                if (cart[cartKey].quantity <= 0) {
+                    delete cart[cartKey];
                 }
             }
             updateCartBadge();
-            updateCartControl(serviceId);
+            updateCartControl(serviceId, weight);
 
-            // Обновляем только конкретный элемент в корзине, если корзина открыта
-            const cartItem = document.querySelector(`.cart-item-controls button[onclick*="removeFromCart(${serviceId})"]`);
-            if (cartItem) {
-                const quantityElement = cartItem.parentElement.querySelector('.cart-item-quantity');
-                if (cart[serviceId]) {
-                    quantityElement.textContent = cart[serviceId].quantity;
+            // Обновляем индикаторы граммовок
+            const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+            if (service && service.weights) {
+                selectWeight(serviceId, selectedWeights[serviceId] || weight);
+            }
+
+            // Перерисовываем корзину если она открыта
+            if (document.getElementById('cartModal').classList.contains('active')) {
+                renderCart();
+            }
+        }
+
+        function selectWeight(serviceId, weight) {
+            selectedWeights[serviceId] = weight;
+
+            // Обновляем UI выбора граммовки
+            const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+            const weightButtons = document.querySelectorAll(`[data-service-id="${serviceId}"] .weight-option`);
+
+            weightButtons.forEach(btn => {
+                const btnWeight = parseInt(btn.dataset.weight);
+                const cartKey = getCartKey(serviceId, btnWeight);
+
+                // Активная граммовка
+                if (btnWeight === weight) {
+                    btn.classList.add('active');
                 } else {
-                    // Если товар удален полностью, перерисовываем корзину
-                    renderCart();
+                    btn.classList.remove('active');
                 }
+
+                // Граммовка в корзине
+                if (cart[cartKey]) {
+                    btn.classList.add('in-cart');
+                } else {
+                    btn.classList.remove('in-cart');
+                }
+            });
+
+            // Обновляем цену
+            if (service && service.weights) {
+                const priceData = service.weights.find(w => w.grams === weight);
+                const priceElements = document.querySelectorAll(`[data-service-id="${serviceId}"] .product-price`);
+                priceElements.forEach(el => {
+                    el.textContent = `${priceData.price} ₽`;
+                });
             }
+
+            // Обновляем кнопку корзины для новой граммовки
+            updateCartControl(serviceId, weight);
         }
 
-        function updateCartControl(serviceId) {
+        function updateCartControl(serviceId, weight) {
+            const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+            if (!service) return;
+
+            // Если weight не передан, используем выбранную граммовку
+            if (!weight && service.weights) {
+                weight = selectedWeights[serviceId] || service.weights[0].grams;
+            }
+
+            const cartKey = weight ? getCartKey(serviceId, weight) : serviceId;
             const controlElement = document.getElementById(`cart-control-${serviceId}`);
             const modalControlElement = document.getElementById('modalCartControl');
 
-            const renderControl = (element) => {
-                if (!element) return;
-
-                if (cart[serviceId]) {
-                    element.innerHTML = `
+            // Обновляем контрол в списке товаров
+            if (controlElement) {
+                if (cart[cartKey]) {
+                    controlElement.innerHTML = `
                         <div class="cart-counter">
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId})">−</button>
-                            <div class="cart-counter-value">${cart[serviceId].quantity}</div>
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">+</button>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight})">−</button>
+                            <div class="cart-counter-value">${cart[cartKey].quantity}</div>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">+</button>
                         </div>
                     `;
                 } else {
-                    const isModal = element.id === 'modalCartControl';
-                    const btnClass = isModal ? 'modal-contact-btn' : 'contact-btn';
-                    element.innerHTML = `
-                        <button class="${btnClass}" onclick="event.stopPropagation(); addToCart(${serviceId})">
+                    controlElement.innerHTML = `
+                        <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">
                             Добавить в корзину
                         </button>
                     `;
                 }
-            };
+            }
 
-            renderControl(controlElement);
-            renderControl(modalControlElement);
+            // Обновляем только кнопку в модальном окне, не трогая граммовки
+            if (modalControlElement && modalControlElement.querySelector('[data-service-id="' + serviceId + '"]')) {
+                const modalContainer = modalControlElement.querySelector('[data-service-id="' + serviceId + '"]');
+
+                // Находим или создаем контейнер для кнопки
+                let buttonContainer = modalContainer.querySelector('.modal-button-container');
+                if (!buttonContainer) {
+                    buttonContainer = document.createElement('div');
+                    buttonContainer.className = 'modal-button-container';
+                    modalContainer.appendChild(buttonContainer);
+                }
+
+                if (cart[cartKey]) {
+                    buttonContainer.innerHTML = `
+                        <div class="cart-counter">
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight})">−</button>
+                            <div class="cart-counter-value">${cart[cartKey].quantity}</div>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">+</button>
+                        </div>
+                    `;
+                } else {
+                    buttonContainer.innerHTML = `
+                        <button class="modal-contact-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">
+                            Добавить в корзину
+                        </button>
+                    `;
+                }
+            }
         }
 
         function updateCartBadge() {
@@ -1829,16 +2222,21 @@
                         <span class="cart-category-arrow" id="cart-arrow-${catId}" style="transform: ${openCartCategories[catId] ? 'rotate(180deg)' : 'rotate(0deg)'}">▼</span>
                     </div>
                     <div class="cart-category-content" id="cart-content-${catId}" style="display: ${openCartCategories[catId] ? 'block' : 'none'};">
-                        ${catData.items.map(item => `
+                        ${catData.items.map(item => {
+                            const weight = item.selectedWeight;
+                            const cartKey = weight ? getCartKey(item.id, weight) : item.id;
+                            const totalPrice = item.selectedPrice ? item.selectedPrice * item.quantity : null;
+                            return `
                             <div class="cart-item">
                                 <img src="${item.image}" class="cart-item-image" alt="${item.name}" style="object-position: ${item.imagePosition || 'center center'}; cursor: pointer;" onclick="openFullImageFromCart('${item.image}')">
                                 <div class="cart-item-info">
-                                    <div class="cart-item-name">${item.name}</div>
+                                    <div class="cart-item-name">${item.name}${weight ? ' (' + weight + 'г)' : ''}</div>
+                                    ${totalPrice ? '<div style="font-size: 13px; color: #aaa; margin-bottom: 4px;">' + totalPrice + ' ₽</div>' : ''}
                                     <div class="cart-item-controls">
-                                        <button class="cart-item-btn" onclick="event.stopPropagation(); removeFromCart(${item.id}); return false;">−</button>
+                                        <button class="cart-item-btn" onclick="event.stopPropagation(); removeFromCart(${item.id}, ${weight}); return false;">−</button>
                                         <div class="cart-item-quantity">${item.quantity}</div>
-                                        <button class="cart-item-btn" onclick="event.stopPropagation(); addToCart(${item.id}); return false;">+</button>
-                                        <button class="cart-item-delete" onclick="event.stopPropagation(); deleteFromCart(${item.id}); return false;">
+                                        <button class="cart-item-btn" onclick="event.stopPropagation(); addToCart(${item.id}, ${weight}); return false;">+</button>
+                                        <button class="cart-item-delete" onclick="event.stopPropagation(); deleteFromCart('${cartKey}'); return false;">
                                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                                 <polyline points="3 6 5 6 21 6"></polyline>
                                                 <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
@@ -1849,7 +2247,7 @@
                                     </div>
                                 </div>
                             </div>
-                        `).join('')}
+                        `}).join('')}
                     </div>
                 </div>
             `).join('');
@@ -1869,10 +2267,24 @@
             }
         }
 
-        function deleteFromCart(serviceId) {
-            delete cart[serviceId];
+        function deleteFromCart(cartKey) {
+            delete cart[cartKey];
             updateCartBadge();
-            updateCartControl(serviceId);
+
+            // Извлекаем serviceId и weight из cartKey
+            const parts = cartKey.split('_');
+            const serviceId = parseInt(parts[0]);
+            const weight = parts[1] ? parseInt(parts[1]) : null;
+
+            // Обновляем контролы и индикаторы
+            if (weight) {
+                updateCartControl(serviceId, weight);
+                const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+                if (service && service.weights) {
+                    selectWeight(serviceId, selectedWeights[serviceId] || weight);
+                }
+            }
+
             renderCart();
         }
 
