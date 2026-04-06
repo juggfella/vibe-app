@@ -686,19 +686,19 @@
         }
 
         .cart-item-btn {
-            width: 32px;
-            height: 32px;
+            width: 40px;
+            height: 40px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50%;
             color: #fff;
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
-            padding: 8px;
+            padding: 0;
             touch-action: manipulation;
         }
 
@@ -2108,6 +2108,11 @@
                 if (delta < -10) {
                     userScrolled = true;
                 }
+
+                // Если вернулись в самый верх скролла, сбрасываем флаг
+                if (modalCard && modalCard.scrollTop === 0) {
+                    userScrolled = false;
+                }
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
@@ -2206,9 +2211,9 @@
             if (cart[cartKey]) {
                 html += `
                     <div class="cart-counter">
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${service.id}, ${selectedWeight})">−</button>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${service.id}, ${selectedWeight}); return false;">−</button>
                         <div class="cart-counter-value">${cart[cartKey].quantity}</div>
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${service.id}, ${selectedWeight})">+</button>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${service.id}, ${selectedWeight}); return false;">+</button>
                     </div>
                 `;
             } else {
@@ -2448,9 +2453,9 @@
                 if (cart[cartKey]) {
                     controlElement.innerHTML = `
                         <div class="cart-counter">
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight})">−</button>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight}); return false;">−</button>
                             <div class="cart-counter-value">${cart[cartKey].quantity}</div>
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">+</button>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight}); return false;">+</button>
                         </div>
                     `;
                 } else {
@@ -2477,9 +2482,9 @@
                 if (cart[cartKey]) {
                     buttonContainer.innerHTML = `
                         <div class="cart-counter">
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight})">−</button>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId}, ${weight}); return false;">−</button>
                             <div class="cart-counter-value">${cart[cartKey].quantity}</div>
-                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight})">+</button>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId}, ${weight}); return false;">+</button>
                         </div>
                     `;
                 } else {
@@ -2567,7 +2572,7 @@
                             const totalPrice = item.selectedPrice ? item.selectedPrice * item.quantity : null;
                             return `
                             <div class="cart-item">
-                                <img src="${item.image}" class="cart-item-image" alt="${item.name}" style="object-position: ${item.imagePosition || 'center center'}; cursor: pointer;" onclick="openFullImageFromCart('${item.image}')">
+                                <img src="${item.image}" class="cart-item-image" alt="${item.name}" style="object-position: ${item.imagePosition || 'center center'}; cursor: pointer;" onclick="event.stopPropagation(); openFullImageFromCart(this.src)">
                                 <div class="cart-item-info">
                                     <div class="cart-item-name">${item.name}${weight ? ' (' + weight + 'г)' : ''}</div>
                                     ${totalPrice ? '<div style="font-size: 13px; color: #aaa; margin-bottom: 4px;">' + totalPrice + ' ₽</div>' : ''}
