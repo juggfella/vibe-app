@@ -2649,116 +2649,38 @@
         }
 
         function sendToTelegram(orderText) {
-            console.log('=== Starting order send ===');
-            console.log('Order text:', orderText);
-            console.log('Platform:', tg.platform);
-            console.log('Init data:', tg.initData);
+            console.log('=== Sending order ===');
+            console.log('Order text length:', orderText.length);
 
-            // Проверяем, запущено ли приложение в Telegram WebApp
-            const isTelegramWebApp = tg.initData && tg.initData.length > 0;
-
-            if (isTelegramWebApp) {
-                console.log('Using Telegram WebApp sendData method');
-
-                // Отправляем данные через Telegram WebApp API
-                // Бот получит эти данные в web_app_data
-                try {
-                    console.log('Calling tg.sendData with:', orderText.substring(0, 100) + '...');
-                    tg.sendData(orderText);
-
-                    console.log('sendData called successfully');
-
-                    // Показываем подтверждение
-                    alert('Заказ отправлен! Ожидайте подтверждения от бота.');
-
+            // Простой fetch запрос
+            fetch('/api/send-order', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderText: orderText })
+            })
+            .then(response => {
+                console.log('Response received:', response.status);
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
                     // Очищаем корзину
                     cart = {};
                     updateCartBadge();
                     renderCart();
                     closeCart();
-
-                    console.log('Data sent via Telegram WebApp');
-                } catch (e) {
-                    console.error('Telegram sendData error:', e);
-                    alert('Ошибка отправки через Telegram: ' + e.message);
-                }
-                return;
-            }
-
-            // Для веб-версии (не в Telegram) используем API
-            const url = '/api/send-order';
-
-            console.log('URL:', url);
-            console.log('Full URL:', window.location.origin + url);
-
-            // Используем XMLHttpRequest для лучшей совместимости с iOS
-            const xhr = new XMLHttpRequest();
-
-            console.log('Opening XHR connection...');
-            xhr.open('POST', url, true);
-
-            console.log('Setting headers...');
-            xhr.setRequestHeader('Content-Type', 'application/json');
-            xhr.timeout = 30000; // 30 секунд
-
-            xhr.onreadystatechange = function() {
-                console.log('ReadyState changed:', xhr.readyState, 'Status:', xhr.status);
-            };
-
-            xhr.onload = function() {
-                console.log('=== XHR onload ===');
-                console.log('Response status:', xhr.status);
-                console.log('Response text:', xhr.responseText);
-
-                if (xhr.status >= 200 && xhr.status < 300) {
-                    try {
-                        const data = JSON.parse(xhr.responseText);
-                        console.log('Response data:', data);
-
-                        if (data.success) {
-                            console.log('Заказ отправлен в телегу!');
-                            alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
-                            // Очищаем корзину после успешной отправки
-                            cart = {};
-                            updateCartBadge();
-                            renderCart();
-                            closeCart();
-                        } else {
-                            console.error('Ошибка отправки:', data);
-                            alert(`Ошибка отправки заказа: ${data.error || 'Неизвестная ошибка'}. Попробуйте еще раз.`);
-                        }
-                    } catch (e) {
-                        console.error('Parse error:', e);
-                        alert('Ошибка обработки ответа сервера');
-                    }
                 } else {
-                    console.error('HTTP error:', xhr.status, xhr.responseText);
-                    alert(`Ошибка отправки заказа: HTTP ${xhr.status}. Попробуйте еще раз.`);
+                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
                 }
-            };
-
-            xhr.onerror = function() {
-                console.error('=== XHR onerror ===');
-                console.error('Network error');
-                alert('Ошибка сети. Проверьте интернет-соединение и попробуйте еще раз.');
-            };
-
-            xhr.ontimeout = function() {
-                console.error('=== XHR ontimeout ===');
-                console.error('Timeout error');
-                alert('Превышено время ожидания. Проверьте интернет-соединение и попробуйте еще раз.');
-            };
-
-            try {
-                const payload = JSON.stringify({ orderText: orderText });
-                console.log('Sending payload:', payload);
-                console.log('Payload length:', payload.length);
-                xhr.send(payload);
-                console.log('XHR send called');
-            } catch (e) {
-                console.error('Send error:', e);
-                alert('Ошибка отправки запроса: ' + e.message);
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка отправки: ' + error.message);
+            });
         }
 
         function checkoutCart() {
@@ -2816,7 +2738,7 @@
             const isTelegramWebApp = tg.initData && tg.initData.length > 0;
 
             if (isTelegramWebApp) {
-                console.log('Using Telegram MainButton');
+                console.log('In Telegram WebApp, using MainButton with API fallback');
 
                 // Сохраняем message для обработчика
                 window.pendingOrderMessage = message;
@@ -2831,25 +2753,14 @@
 
                 // Устанавливаем новый обработчик
                 tg.MainButton.onClick(function() {
-                    console.log('MainButton clicked, sending data...');
-                    console.log('Message to send:', window.pendingOrderMessage);
+                    console.log('MainButton clicked');
+                    tg.MainButton.showProgress();
 
-                    try {
-                        tg.sendData(window.pendingOrderMessage);
-                        console.log('sendData called successfully');
+                    // Отправляем через API вместо sendData
+                    sendToTelegram(window.pendingOrderMessage);
 
-                        // Очищаем корзину
-                        cart = {};
-                        updateCartBadge();
-                        renderCart();
-                        closeCart();
-
-                        // Скрываем кнопку
-                        tg.MainButton.hide();
-                    } catch (e) {
-                        console.error('sendData error:', e);
-                        alert('Ошибка отправки: ' + e.message);
-                    }
+                    // Скрываем кнопку
+                    tg.MainButton.hide();
                 });
 
                 return;
