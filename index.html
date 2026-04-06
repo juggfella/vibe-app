@@ -2651,8 +2651,49 @@
         function sendToTelegram(orderText) {
             console.log('=== Sending order ===');
             console.log('Order text length:', orderText.length);
+            console.log('Platform:', tg.platform);
 
-            // Простой fetch запрос
+            // Для iOS в Telegram используем form submit вместо fetch
+            if (tg.platform === 'ios') {
+                console.log('Using form submit for iOS');
+
+                const form = document.createElement('form');
+                form.method = 'POST';
+                form.action = '/api/send-order';
+                form.style.display = 'none';
+
+                const input = document.createElement('input');
+                input.type = 'hidden';
+                input.name = 'orderText';
+                input.value = orderText;
+
+                form.appendChild(input);
+                document.body.appendChild(form);
+
+                // Создаем iframe для отправки без перезагрузки страницы
+                const iframe = document.createElement('iframe');
+                iframe.name = 'order-frame';
+                iframe.style.display = 'none';
+                document.body.appendChild(iframe);
+
+                form.target = 'order-frame';
+                form.submit();
+
+                // Ждем ответ
+                setTimeout(() => {
+                    alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
+                    cart = {};
+                    updateCartBadge();
+                    renderCart();
+                    closeCart();
+                    document.body.removeChild(form);
+                    document.body.removeChild(iframe);
+                }, 1000);
+
+                return;
+            }
+
+            // Для других платформ используем fetch
             fetch('/api/send-order', {
                 method: 'POST',
                 headers: {
@@ -2668,7 +2709,6 @@
                 console.log('Response data:', data);
                 if (data.success) {
                     alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
-                    // Очищаем корзину
                     cart = {};
                     updateCartBadge();
                     renderCart();

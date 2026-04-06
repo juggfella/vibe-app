@@ -1,6 +1,6 @@
 export default async function handler(req, res) {
     console.log('Request method:', req.method);
-    console.log('Request headers:', req.headers);
+    console.log('Content-Type:', req.headers['content-type']);
 
     // Разрешаем CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -20,7 +20,15 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { orderText } = req.body;
+        // Поддерживаем как JSON так и form data
+        let orderText;
+
+        if (req.headers['content-type']?.includes('application/json')) {
+            orderText = req.body?.orderText;
+        } else {
+            // Form data
+            orderText = req.body?.orderText || req.body;
+        }
 
         console.log('Received order request');
         console.log('Order text length:', orderText?.length);
