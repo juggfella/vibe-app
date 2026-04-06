@@ -26,6 +26,48 @@
             padding-bottom: 20px;
             border-bottom: 2px solid transparent;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) bottom / 100% 2px no-repeat;
+            position: relative;
+        }
+
+        .cart-icon {
+            position: absolute;
+            top: 0;
+            left: 20px;
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+            font-size: 20px;
+            filter: grayscale(100%) brightness(200%);
+        }
+
+        .cart-icon:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: bold;
         }
 
         .header h1 {
@@ -54,10 +96,12 @@
             gap: 12px;
             opacity: 1;
             transition: opacity 0.15s ease;
+            padding: 0 20px;
         }
 
         .catalog.grid-mode {
             grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
         }
 
         .category {
@@ -113,14 +157,23 @@
             bottom: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.7) 50%, transparent 100%);
-            padding: 30px 12px 12px 12px;
+            background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.85) 60%, transparent 100%);
+            padding: 50px 12px 15px 12px;
         }
 
         .catalog.grid-mode .category-name {
-            font-size: 15px;
+            font-size: 18px;
             text-align: center;
+            margin: 0 0 6px 0;
+            font-weight: 600;
+        }
+
+        .catalog.grid-mode .category-description {
+            font-size: 11px;
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
             margin: 0;
+            line-height: 1.3;
         }
 
         .catalog.grid-mode .category-count,
@@ -449,12 +502,78 @@
             border-color: rgba(255, 255, 255, 0.25);
             box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
         }
+
+        .cart-item {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 10px;
+        }
+
+        .cart-item-name {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .cart-item-btn {
+            width: 30px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cart-item-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .cart-item-quantity {
+            font-size: 16px;
+            font-weight: 600;
+            color: #fff;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .cart-empty {
+            text-align: center;
+            color: #666;
+            padding: 40px 20px;
+            font-size: 16px;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Hypreme / Хайприм</h1>
         <p>Выбери свой табак:</p>
+        <div class="cart-icon" onclick="openCart()">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 3h2l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="9" y1="16" x2="9" y2="20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <line x1="20" y1="16" x2="20" y2="20" stroke="white" stroke-width="2" stroke-linecap="round"/>
+                <circle cx="9" cy="21" r="1.5" fill="white"/>
+                <circle cx="20" cy="21" r="1.5" fill="white"/>
+            </svg>
+            <span class="cart-badge" id="cartBadge" style="display: none;">0</span>
+        </div>
     </div>
 
     <div class="catalog" id="catalog"></div>
@@ -472,6 +591,17 @@
                     За годы работы компания прошла путь от крафтовой мануфактуры до современного полностью лицензированного производства. Сейчас мы работаем с ведущими фабриками-поставщиками табачного листа и продуктов из него, а также с профильными проверенными производителями ароматизаторов. <br><br>
                     Свяжитесь с нами для заказа!
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="cartModal" onclick="closeCart()">
+        <div class="modal-close" onclick="closeCart()"></div>
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <div class="modal-card-content">
+                <div class="modal-card-name">Корзина</div>
+                <div id="cartItems" style="margin: 20px 0;"></div>
+                <button class="modal-contact-btn" id="cartCheckoutBtn" onclick="checkoutCart()">Оформить заказ</button>
             </div>
         </div>
     </div>
@@ -508,14 +638,14 @@
             {
                 id: 1,
                 name: "Red Line",
+                description: "Моновкусы, средняя крепость, для тех, кто знаком с кальяном, но курит не регулярно.",
                 image: "images/red-line.webp",
                 services: [
                     {
                         id: 101,
                         name: "Абрикос",
                         description: "Абрикос - бархатистая классика в самом сочном исполнении. Густой, почти джемовый профиль спелого плода со сливочным послевкусием. Вкус, который разливается мягким фруктовым нектаром и оставляет ощущение бесконечного лета",
-                        price: " от 5000₽/час",
-                        username: "anna_service",
+                        username: "user1",
                         image: "images/redline/red-1.webp",
                         imagePosition: "center 35%"
                     },
@@ -523,7 +653,6 @@
                         id: 102,
                         name: "Банан в шоколаде",
                         description: "Десертный банан с бархатистой сладостью, политый сиропом из темного шоколада для приятного контраста во вкусе.",
-                        price: "5000₽/час",
                         username: "user2",
                         image: "images/redline/red-2.webp",
                         imagePosition: "center 35%"
@@ -532,7 +661,6 @@
                         id: 103,
                         name: "Персиковый чай",
                         description: "Прохладительный напиток на основе черного чая с добавлением кусочков свежего персика.",
-                        price: "5000₽/час",
                         username: "user3",
                         image: "images/redline/red-3.webp",
                         imagePosition: "center 35%"
@@ -541,7 +669,6 @@
                         id: 104,
                         name: "Кола",
                         description: "Сбалансированный в меру сладкий вкус колы, знакомый тебе по мармеладкам Haribo.",
-                        price: "5000₽/час",
                         username: "user4",
                         image: "images/redline/red-4.webp",
                         imagePosition: "center 35%"
@@ -550,7 +677,6 @@
                         id: 105,
                         name: "Малина",
                         description: "Просто хорошая малина, которую мы постарались сделать максимально похожей на натуральную.",
-                        price: "5000₽/час",
                         username: "user5",
                         image: "images/redline/red-5.webp",
                         imagePosition: "center 35%"
@@ -559,7 +685,6 @@
                         id: 106,
                         name: "Манго шейк",
                         description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
-                        price: "5000₽/час",
                         username: "user6",
                         image: "images/redline/red-6.webp",
                         imagePosition: "center 35%"
@@ -568,7 +693,6 @@
                         id: 107,
                         name: "Индийский перец",
                         description: "Многогранный пряный вкус с нотами ванили и четырех видов специй.",
-                        price: "5000₽/час",
                         username: "user7",
                         image: "images/redline/red-7.webp",
                         imagePosition: "center 35%"
@@ -577,7 +701,6 @@
                         id: 108,
                         name: "Ледяное яблоко",
                         description: "Отсылка к «двойному яблоку», кисло-холодящие освежающие ноты зеленых яблок.",
-                        price: "5000₽/час",
                         username: "user8",
                         image: "images/redline/red-8.webp",
                         imagePosition: "center 35%"
@@ -586,7 +709,6 @@
                         id: 109,
                         name: "Мороженное",
                         description: "Вкус мороженого.",
-                        price: "5000₽/час",
                         username: "user9",
                         image: "images/redline/red-9.webp",
                         imagePosition: "center 35%"
@@ -595,7 +717,6 @@
                         id: 110,
                         name: "Суперперец",
                         description: "Special for JohnCalliano",
-                        price: "5000₽/час",
                         username: "user10",
                         image: "images/redline/red-10.webp",
                         imagePosition: "center 35%"
@@ -604,7 +725,6 @@
                         id: 111,
                         name: "Зефир с орехами",
                         description: "Выраженные сливочные ноты воздушного зефира, дополненные ароматом фундука.",
-                        price: "5000₽/час",
                         username: "user11",
                         image: "images/redline/red-11.webp",
                         imagePosition: "center 35%"
@@ -613,7 +733,6 @@
                         id: 112,
                         name: "Коктейль Маргарита",
                         description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
-                        price: "5000₽/час",
                         username: "user12",
                         image: "images/redline/red-12.webp",
                         imagePosition: "center 35%"
@@ -622,7 +741,6 @@
                         id: 113,
                         name: "Киви",
                         description: "Насыщенный вкус натурального киви с будоражащей рецепторы кислинкой на выдохе.",
-                        price: "5000₽/час",
                         username: "user13",
                         image: "images/redline/red-13.webp",
                         imagePosition: "center 35%"
@@ -631,7 +749,6 @@
                         id: 114,
                         name: "Клубника",
                         description: "Сладкий и завораживающий вкус спелой ягоды, созревшей под нежным июньским солнышком. Влюбляет в себя с первых затяжек.",
-                        price: "5000₽/час",
                         username: "user14",
                         image: "images/redline/red-14.webp",
                         imagePosition: "center 35%"
@@ -640,7 +757,6 @@
                         id: 115,
                         name: "Голубика",
                         description: "Аромат натуральной голубики со всей полнотой ягодного вкуса на вдохе и выдохе.",
-                        price: "5000₽/час",
                         username: "user15",
                         image: "images/redline/red-15.webp",
                         imagePosition: "center 35%"
@@ -649,7 +765,6 @@
                         id: 116,
                         name: "Ягодный микс",
                         description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
-                        price: "5000₽/час",
                         username: "user16",
                         image: "images/redline/red-16.webp",
                         imagePosition: "center 35%"
@@ -658,7 +773,6 @@
                         id: 117,
                         name: "Тархун",
                         description: "Тот самый лимонад со вкусом сладкого эстрагона – травянисто, освежающе.",
-                        price: "5000₽/час",
                         username: "user17",
                         image: "images/redline/red-17.webp",
                         imagePosition: "center 35%"
@@ -667,7 +781,6 @@
                         id: 118,
                         name: "Оливка",
                         description: "Самый необычный вкус - консервированная оливка, с изумительным подкопченым послевкусием. Для гурманов.",
-                        price: "5000₽/час",
                         username: "user18",
                         image: "images/redline/red-18.webp",
                         imagePosition: "center 35%"
@@ -676,7 +789,6 @@
                         id: 119,
                         name: "Чай с молоком",
                         description: "Классический черный чай с молоком",
-                        price: "5000₽/час",
                         username: "user19",
                         image: "images/redline/red-19.webp",
                         imagePosition: "center 35%"
@@ -685,7 +797,6 @@
                         id: 120,
                         name: "Лед",
                         description: "Идеальный бустер для любителей миксов с выраженным охлаждающим эффектом.",
-                        price: "5000₽/час",
                         username: "user20",
                         image: "images/redline/red-20.webp",
                         imagePosition: "center 35%"
@@ -694,7 +805,6 @@
                         id: 121,
                         name: "Гранатовый чай",
                         description: "Крепкий зеленый чай с кусочками терпкого граната, выразительный и яркий вкус.",
-                        price: "5000₽/час",
                         username: "user21",
                         image: "images/redline/red-21.webp",
                         imagePosition: "center 35%"
@@ -703,7 +813,6 @@
                         id: 122,
                         name: "Арбуз",
                         description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
-                        price: "5000₽/час",
                         username: "user22",
                         image: "images/redline/red-22.webp",
                         imagePosition: "center 35%"
@@ -712,7 +821,6 @@
                         id: 123,
                         name: "Персик",
                         description: "Сладкий и слегка терпкий микс двух не похожих друг на друга сортов персика",
-                        price: "5000₽/час",
                         username: "user23",
                         image: "images/redline/red-23.webp",
                         imagePosition: "center 35%"
@@ -721,7 +829,6 @@
                         id: 124,
                         name: "Зеленый виноград",
                         description: "Молодой зеленый виноград с легким оттенком тростниковой мяты.",
-                        price: "5000₽/час",
                         username: "user24",
                         image: "images/redline/red-24.webp",
                         imagePosition: "center 35%"
@@ -730,7 +837,6 @@
                         id: 125,
                         name: "Цветочный мед",
                         description: "Свежий густой сладкий мед, только что собранный с цветущих весенних лугов.",
-                        price: "5000₽/час",
                         username: "user25",
                         image: "images/redline/red-25.webp",
                         imagePosition: "center 35%"
@@ -739,7 +845,6 @@
                         id: 126,
                         name: "Мята",
                         description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
-                        price: "5000₽/час",
                         username: "user26",
                         image: "images/redline/red-26.webp",
                         imagePosition: "center 35%"
@@ -748,7 +853,6 @@
                         id: 127,
                         name: "Дачная смородина",
                         description: "Роскошный аромат зеленых листьев смородинного куста и спелой налитой ягоды.",
-                        price: "5000₽/час",
                         username: "user27",
                         image: "images/redline/red-27.webp",
                         imagePosition: "center 35%"
@@ -757,7 +861,6 @@
                         id: 128,
                         name: "Пряный чай",
                         description: "Крепкий черный чай с ассорти из турецких пряностей, необычный и притягательный вкус.",
-                        price: "5000₽/час",
                         username: "user28",
                         image: "images/redline/red-28.webp",
                         imagePosition: "center 35%"
@@ -766,7 +869,6 @@
                         id: 129,
                         name: "Дыня с корицей",
                         description: "Сладкая спелая дыня и пряные обволакивающие ноты корицы на выдохе – превосходный дуэт.",
-                        price: "5000₽/час",
                         username: "user29",
                         image: "images/redline/red-29.webp",
                         imagePosition: "center 35%"
@@ -775,7 +877,6 @@
                         id: 130,
                         name: "Ягодный джем",
                         description: "Очень вкусный ягодный десерт из ассорти лесных и садовых ягод.",
-                        price: "5000₽/час",
                         username: "user30",
                         image: "images/redline/red-30.webp",
                         imagePosition: "center 35%"
@@ -784,7 +885,6 @@
                         id: 131,
                         name: "Домашний пирог",
                         description: "Сладкая сдобная выпечка со сливочным ароматом, напоминающим начинку из сгущенки.",
-                        price: "5000₽/час",
                         username: "user31",
                         image: "images/redline/red-31.webp",
                         imagePosition: "center 35%"
@@ -793,7 +893,6 @@
                         id: 132,
                         name: "Груша",
                         description: "Вкус натуральной сладкой груши.",
-                        price: "5000₽/час",
                         username: "user32",
                         image: "images/redline/red-32.webp",
                         imagePosition: "center 35%"
@@ -802,7 +901,6 @@
                         id: 133,
                         name: "Фруктовый микс",
                         description: "Нестандартное тропическое сочетание с ведущими нотами спелого ананаса, послевкусием кокосовой мякоти и свежего абрикосового желе.",
-                        price: "5000₽/час",
                         username: "user33",
                         image: "images/redline/red-33.webp",
                         imagePosition: "center 35%"
@@ -811,7 +909,6 @@
                         id: 134,
                         name: "Ананас",
                         description: "Хороший, вкусный, кисло-сладкий ананас.",
-                        price: "5000₽/час",
                         username: "user34",
                         image: "images/redline/red-34.webp",
                         imagePosition: "center 35%"
@@ -820,7 +917,6 @@
                         id: 135,
                         name: "Фейхоа",
                         description: "Яркий фейхоа с характерными сладко-травянистым тропическим вкусом",
-                        price: "5000₽/час",
                         username: "user35",
                         image: "images/redline/red-35.webp",
                         imagePosition: "center 35%"
@@ -829,7 +925,6 @@
                         id: 136,
                         name: "Гуава",
                         description: "Густой, сладкий и травянистый вкус натуральной гуавы, отлично дополняющий фруктовые и коктейльные миксы.",
-                        price: "5000₽/час",
                         username: "user36",
                         image: "images/redline/red-36.webp",
                         imagePosition: "center 35%"
@@ -838,7 +933,6 @@
                         id: 137,
                         name: "Манго",
                         description: "Яркое травянистое манго, очень близкое по вкусу к настоящему тайскому манго.",
-                        price: "5000₽/час",
                         username: "user37",
                         image: "images/redline/red-37.webp",
                         imagePosition: "center 35%"
@@ -848,14 +942,14 @@
             {
                 id: 2,
                 name: "Black Line",
+                description: "Моновкусы, крепость выше средней, для более опытных курильщиков.",
                 image: "images/black-line.webp",
                 services: [
                     {
                         id: 201,
                         name: "Черный чай",
                         description: "Насыщенный и глубокий вкус классического чая с тонкой терпкостью и легкой цитрусовой нотой бергамота в линейке Black Line (повышенной крепости). Здесь гармонично сочетается мягкая сладость, благородная горчинка и приятная свежесть, что делает вкус универсальным как для соло-забивок, так и для миксов с фруктами и ягодами.",
-                        price: "5000₽/час",
-                        username: "sixhsisj",
+                        username: "user201",
                         image: "images/blackline/black-1.webp",
                         imagePosition: "center 35%"
                     },
@@ -863,7 +957,6 @@
                         id: 202,
                         name: "Лимонная конфета",
                         description: "Классические лимонные леденцы, сладкий конфетный цитрусовый вкус.",
-                        price: "5000₽/час",
                         username: "user202",
                         image: "images/blackline/black-2.webp",
                         imagePosition: "center 35%"
@@ -872,7 +965,6 @@
                         id: 203,
                         name: "Маргарита",
                         description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
-                        price: "5000₽/час",
                         username: "user203",
                         image: "images/blackline/black-3.webp",
                         imagePosition: "center 35%"
@@ -881,7 +973,6 @@
                         id: 204,
                         name: "Груша",
                         description: "Вкус сладкой натуральной груши.",
-                        price: "5000₽/час",
                         username: "user204",
                         image: "images/blackline/black-4.webp",
                         imagePosition: "center 35%"
@@ -890,7 +981,6 @@
                         id: 205,
                         name: "Клубничный лимонад",
                         description: "Газированный напиток с клубничным сиропом и цитрусовыми лимонадными нотами на послевкусии",
-                        price: "5000₽/час",
                         username: "user205",
                         image: "images/blackline/black-5.webp",
                         imagePosition: "center 35%"
@@ -899,7 +989,6 @@
                         id: 206,
                         name: "Кислая малина",
                         description: "Мы все ждем лета. Как оно прекрасно, дивно. \nНе за горами его зной, веселье, смех. \nА если свежести захочется - есть Кислая малина, \nНовый вкус Hypreme для каждого и всех!",
-                        price: "5000₽/час",
                         username: "user206",
                         image: "images/blackline/black-6.webp",
                         imagePosition: "center 35%"
@@ -908,7 +997,6 @@
                         id: 207,
                         name: "Манго шейк",
                         description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
-                        price: "5000₽/час",
                         username: "user207",
                         image: "images/blackline/black-7.webp",
                         imagePosition: "center 35%"
@@ -917,7 +1005,6 @@
                         id: 208,
                         name: "Лимонад",
                         description: "Базовый цитрусовый лимонад, уверенная классика и ничего лишнего.",
-                        price: "5000₽/час",
                         username: "user208",
                         image: "images/blackline/black-8.webp",
                         imagePosition: "center 35%"
@@ -926,7 +1013,6 @@
                         id: 209,
                         name: "Черничный шейк",
                         description: "Нежный коктейль на основе молочных сливок с добавлением цельных ягод натуральной черники с характерной приятной вяжущей ноткой.",
-                        price: "5000₽/час",
                         username: "user209",
                         image: "images/blackline/black-9.webp",
                         imagePosition: "center 35%"
@@ -935,7 +1021,6 @@
                         id: 210,
                         name: "Малиновая гранита",
                         description: "Холодный итальянский десерт, наподобие сорбета, из свежих ягод малины.",
-                        price: "5000₽/час",
                         username: "user210",
                         image: "images/blackline/black-10.webp",
                         imagePosition: "center 35%"
@@ -944,7 +1029,6 @@
                         id: 211,
                         name: "Кислая маракуйя",
                         description: "Не такая, как все… Яркая кислая маракуйя с насыщенным натуральным тропическим вкусом.",
-                        price: "5000₽/час",
                         username: "user211",
                         image: "images/blackline/black-11.webp",
                         imagePosition: "center 35%"
@@ -953,7 +1037,6 @@
                         id: 212,
                         name: "Апельсин",
                         description: "Вкус апельсина",
-                        price: "5000₽/час",
                         username: "user212",
                         image: "images/blackline/black-12.webp",
                         imagePosition: "center 35%"
@@ -962,7 +1045,6 @@
                         id: 213,
                         name: "Лимонное суфле",
                         description: "Воздушная десертная выпечка с добавлением ароматной лимонной цедры.",
-                        price: "5000₽/час",
                         username: "user213",
                         image: "images/blackline/black-13.webp",
                         imagePosition: "center 35%"
@@ -971,7 +1053,6 @@
                         id: 214,
                         name: "Кактус",
                         description: "Растительный вкус, сладкий и освежающий, с долгим травянистым послевкусием – так мы представляем себе кактус.",
-                        price: "5000₽/час",
                         username: "user214",
                         image: "images/blackline/black-14.webp",
                         imagePosition: "center 35%"
@@ -980,7 +1061,6 @@
                         id: 215,
                         name: "Крыжовник",
                         description: "Яркий и сочный аромат крыжовника с мягкой кислинкой.",
-                        price: "5000₽/час",
                         username: "user215",
                         image: "images/blackline/black-15.webp",
                         imagePosition: "center 35%"
@@ -989,7 +1069,6 @@
                         id: 216,
                         name: "Дынный чизкейк",
                         description: "Легкий вкусный тортик, украшенный сверху дынными дольками – безупречный фруктово-десертный тандем.",
-                        price: "5000₽/час",
                         username: "user216",
                         image: "images/blackline/black-16.webp",
                         imagePosition: "center 35%"
@@ -998,7 +1077,6 @@
                         id: 217,
                         name: "Арбуз",
                         description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
-                        price: "5000₽/час",
                         username: "user217",
                         image: "images/blackline/black-17.webp",
                         imagePosition: "center 35%"
@@ -1007,7 +1085,6 @@
                         id: 218,
                         name: "Ягодный микс",
                         description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
-                        price: "5000₽/час",
                         username: "user218",
                         image: "images/blackline/black-18.webp",
                         imagePosition: "center 35%"
@@ -1016,7 +1093,6 @@
                         id: 219,
                         name: "Голубика",
                         description: "Вкус голубики",
-                        price: "5000₽/час",
                         username: "user219",
                         image: "images/blackline/black-19.webp",
                         imagePosition: "center 35%"
@@ -1025,7 +1101,6 @@
                         id: 220,
                         name: "Красный виноград",
                         description: "Сладкий, терпкий, насыщенный вкус спелого красного винограда с отдаленной кислинкой на послевкусии.",
-                        price: "5000₽/час",
                         username: "user220",
                         image: "images/blackline/black-20.webp",
                         imagePosition: "center 35%"
@@ -1034,7 +1109,6 @@
                         id: 221,
                         name: "Мята",
                         description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
-                        price: "5000₽/час",
                         username: "user221",
                         image: "images/blackline/black-21.webp",
                         imagePosition: "center 35%"
@@ -1044,14 +1118,14 @@
             {
                 id: 3,
                 name: "Mix Line",
+                description: "Готовые миксы, собранные на основе моновкусов линеек Red и Black, отличный вариант для быстрого, удобного, бюджетного покура.",
                 image: "images/mix-line.webp",
                 services: [
                     {
                         id: 301,
                         name: "Пломбир, арбуз, дыня",
                         description: "Нежный аромат сливочного пломбира переплетается с сочностью арбуза и сладостью дыни, создавая мягкий и свежий микс",
-                        price: "150 крон/час",
-                        username: "vbogachukk",
+                        username: "user301",
                         image: "images/mixline/mix-1.webp",
                         imagePosition: "center 40%"
                     },
@@ -1059,7 +1133,6 @@
                         id: 302,
                         name: "Груша, кактус, маргарита",
                         description: "Сочная груша, свежий вкус кактуса и оригинальный коктейль Маргарита создают интересный и необычный микс вкусов",
-                        price: "5000₽/час",
                         username: "user302",
                         image: "images/mixline/mix-2.webp",
                         imagePosition: "center 40%"
@@ -1068,7 +1141,6 @@
                         id: 303,
                         name: "Манго, маракуйя, личи ",
                         description: "Классический сладкий микс: манго, маракуйя, личи. ",
-                        price: "5000₽/час",
                         username: "user303",
                         image: "images/mixline/mix-3.webp",
                         imagePosition: "center 40%"
@@ -1077,7 +1149,6 @@
                         id: 304,
                         name: "Арбуз, манго, молочный коктейль",
                         description: "Вкус, отдаленно напоминающий «Мажитель». Сладкие фрукты собавлением молока и небольшой холодинкой мякоти арбуза.",
-                        price: "5000₽/час",
                         username: "user304",
                         image: "images/mixline/mix-4.webp",
                         imagePosition: "center 40%"
@@ -1086,7 +1157,6 @@
                         id: 305,
                         name: "Манго, зелёный виноград",
                         description: "Сладкое тропическое сочетание с ведущим манго, идеальное в качестве премикса и ненавязчивое в соло",
-                        price: "5000₽/час",
                         username: "user305",
                         image: "images/mixline/mix-5.webp",
                         imagePosition: "center 40%"
@@ -1095,7 +1165,6 @@
                         id: 306,
                         name: "Мёд, дыня, персиковый чай",
                         description: "Сбалансированный вкус чая с медом и нежными деликатными нотами дыни и персика. Сладкий.",
-                        price: "5000₽/час",
                         username: "user306",
                         image: "images/mixline/mix-6.webp",
                         imagePosition: "center 35%"
@@ -1104,7 +1173,6 @@
                         id: 307,
                         name: "Малина, сливки, кокосовое молоко",
                         description: "Малина, сливки, кокосовое молоко",
-                        price: "5000₽/час",
                         username: "user307",
                         image: "images/mixline/mix-7.webp",
                         imagePosition: "center 35%"
@@ -1113,7 +1181,6 @@
                         id: 308,
                         name: "Кола, ананас, смородина",
                         description: "Напиточный микс на основе колы с кислинкой ананаса и сластинкой смородины.",
-                        price: "5000₽/час",
                         username: "user308",
                         image: "images/mixline/mix-8.webp",
                         imagePosition: "center 35%"
@@ -1122,7 +1189,6 @@
                         id: 309,
                         name: "Яблоко, тархун, фейхоа",
                         description: "Яблоко, тархун, фейхоа",
-                        price: "5000₽/час",
                         username: "user309",
                         image: "images/mixline/mix-9.webp",
                         imagePosition: "center 35%"
@@ -1131,7 +1197,6 @@
                         id: 310,
                         name: "Мармелад, ягодный мусс",
                         description: "Сочетание сладкого мармелада с нежным ягодным муссом дарит взрыв вкуса: сладость встречается с лёгкой кислинкой, создавая мягкий и запоминающийся микс",
-                        price: "5000₽/час",
                         username: "user310",
                         image: "images/mixline/mix-10.webp",
                         imagePosition: "center 35%"
@@ -1140,7 +1205,6 @@
                         id: 311,
                         name: "Кола, апельсин, кашмир",
                         description: "Кола, апельсин, кашмир.",
-                        price: "5000₽/час",
                         username: "user311",
                         image: "images/mixline/mix-11.webp",
                         imagePosition: "center 35%"
@@ -1149,7 +1213,6 @@
                         id: 312,
                         name: "Газировка, цитрусы, ананас",
                         description: "Газировка, цитрусы, ананас",
-                        price: "5000₽/час",
                         username: "user312",
                         image: "images/mixline/mix-12.webp",
                         imagePosition: "center 35%"
@@ -1158,7 +1221,6 @@
                         id: 313,
                         name: "Банан, сливки, клубника",
                         description: "Микс с ароматом банана, сливок и клубники",
-                        price: "5000₽/час",
                         username: "user313",
                         image: "images/mixline/mix-13.webp",
                         imagePosition: "center 35%"
@@ -1167,7 +1229,6 @@
                         id: 314,
                         name: "Кислая вишня, малина, крыжовник",
                         description: "Яркая кислинка вишни сочетается с сочной малиной и терпким крыжовником, создавая насыщенный и освежающий микс с глубоким ароматом",
-                        price: "5000₽/час",
                         username: "user314",
                         image: "images/mixline/mix-14.webp",
                         imagePosition: "center 35%"
@@ -1176,7 +1237,6 @@
                         id: 315,
                         name: "Мята, смородина,зеленый виноград",
                         description: "Сладкие дачные ягоды с травянистой нотой, поддержанной зеленым виноградом и сладкой мятой.",
-                        price: "5000₽/час",
                         username: "user315",
                         image: "images/mixline/mix-15.webp",
                         imagePosition: "center 35%"
@@ -1186,14 +1246,14 @@
             {
                 id: 4,
                 name: "Special",
+                description: "Интересная безароматика и бустеры для тех, кто предпочитает что-то аутентичное и особенное.",
                 image: "images/special-line.webp",
                 services: [
                     {
                         id: 401,
                         name: "Vulin",
                         description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 16-летней выдержки",
-                        price: "25₽/час",
-                        username: "Sonikislit",
+                        username: "user401",
                         image: "images/specialline/special-1.webp",
                         imagePosition: "center 35%"
                     },
@@ -1201,8 +1261,7 @@
                         id: 402,
                         name: "Cardi",
                         description: "Новый вкус в коллекции special. Холодная ферментация на алкоголе ноты: кубинский ром, дым, пряности, дуб, сладкие специи.",
-                        price: "5500₽/час",
-                        username: "elfiykaaaa",
+                        username: "user402",
                         image: "images/specialline/special-2.webp",
                         imagePosition: "center 35%"
                     },
@@ -1210,7 +1269,6 @@
                         id: 403,
                         name: "Froig",
                         description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 10-летней выдержки.",
-                        price: "5000₽/час",
                         username: "user403",
                         image: "images/specialline/special-3.webp",
                         imagePosition: "center 35%"
@@ -1219,7 +1277,6 @@
                         id: 404,
                         name: "Jaku",
                         description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – японском джине.",
-                        price: "5000₽/час",
                         username: "user404",
                         image: "images/specialline/special-4.webp",
                         imagePosition: "center 35%"
@@ -1228,7 +1285,6 @@
                         id: 405,
                         name: "Hustla",
                         description: "Безароматический бленд крепостью выше-средней.",
-                        price: "5000₽/час",
                         username: "user405",
                         image: "images/specialline/special-5.webp",
                         imagePosition: "center 35%"
@@ -1237,7 +1293,6 @@
                         id: 406,
                         name: "John Wick",
                         description: "Крепкая безаромка с нотками чернослива.",
-                        price: "5000₽/час",
                         username: "user406",
                         image: "images/specialline/special-6.webp",
                         imagePosition: "center 35%"
@@ -1246,7 +1301,6 @@
                         id: 407,
                         name: "Баба Яга",
                         description: "Дескрипторы: терпкие болотные травы, землистые коренья и древесная кора, дополненные густым ароматом печного дыма и влажной почвы.",
-                        price: "5000₽/час",
                         username: "user407",
                         image: "images/specialline/special-7.webp",
                         imagePosition: "center 35%"
@@ -1255,7 +1309,6 @@
                         id: 408,
                         name: "Pimp",
                         description: "Безароматический бленд средней крепости.",
-                        price: "5000₽/час",
                         username: "user408",
                         image: "images/specialline/special-8.webp",
                         imagePosition: "center 35%"
@@ -1296,6 +1349,7 @@
                     <img src="${category.image}" class="category-image" alt="${category.name}">
                     <div class="category-info">
                         <div class="category-name">${category.name}</div>
+                        <div class="category-description">${category.description || ''}</div>
                         <div class="category-count">${category.services.length} ${category.services.length === 1 ? 'услуга' : 'услуг'}</div>
                     </div>
                     <div class="category-arrow">▼</div>
@@ -1313,8 +1367,8 @@
                         <div class="card-content">
                             <div class="card-name">${service.name}</div>
                             <div class="card-description">${service.description}</div>
-                            <button class="contact-btn" onclick="event.stopPropagation(); openChat('${service.username}')">
-                                Написать
+                            <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
+                                Добавить в корзину
                             </button>
                         </div>
                     `;
@@ -1391,9 +1445,87 @@
             document.body.style.overflow = '';
         }
 
+        let cart = {};
+
+        function addToCart(serviceId) {
+            const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+            if (!service) return;
+
+            if (cart[serviceId]) {
+                cart[serviceId].quantity++;
+            } else {
+                cart[serviceId] = { ...service, quantity: 1 };
+            }
+            updateCartBadge();
+        }
+
+        function removeFromCart(serviceId) {
+            if (cart[serviceId]) {
+                cart[serviceId].quantity--;
+                if (cart[serviceId].quantity <= 0) {
+                    delete cart[serviceId];
+                }
+            }
+            updateCartBadge();
+            renderCart();
+        }
+
+        function updateCartBadge() {
+            const totalItems = Object.values(cart).reduce((sum, item) => sum + item.quantity, 0);
+            const badge = document.getElementById('cartBadge');
+            if (totalItems > 0) {
+                badge.textContent = totalItems;
+                badge.style.display = 'flex';
+            } else {
+                badge.style.display = 'none';
+            }
+        }
+
+        function openCart() {
+            renderCart();
+            document.getElementById('cartModal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function renderCart() {
+            const cartItems = document.getElementById('cartItems');
+            const items = Object.values(cart);
+
+            if (items.length === 0) {
+                cartItems.innerHTML = '<div class="cart-empty">Корзина пуста</div>';
+                return;
+            }
+
+            cartItems.innerHTML = items.map(item => `
+                <div class="cart-item">
+                    <div class="cart-item-name">${item.name}</div>
+                    <div class="cart-item-controls">
+                        <button class="cart-item-btn" onclick="removeFromCart(${item.id})">−</button>
+                        <div class="cart-item-quantity">${item.quantity}</div>
+                        <button class="cart-item-btn" onclick="addToCart(${item.id})">+</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function checkoutCart() {
+            const items = Object.values(cart);
+            if (items.length === 0) return;
+
+            const message = items.map(item => `${item.name} x${item.quantity}`).join('\n');
+            const username = 'juggfella';
+            tg.openTelegramLink(`https://t.me/${username}?text=${encodeURIComponent('Заказ:\n' + message)}`);
+        }
+
         handleSwipe(document.getElementById('modal'), closeModal);
         handleSwipe(document.getElementById('fullImageModal'), closeFullImage);
         handleSwipe(document.getElementById('aboutModal'), closeAbout);
+        handleSwipe(document.getElementById('cartModal'), closeCart);
 
         renderCatalog();
     </script>
