@@ -1703,6 +1703,11 @@
             const catalog = document.getElementById('catalog');
 
             categories.forEach(category => {
+                // Инициализируем количество видимых товаров для категории
+                if (!categoryVisibleCount[category.id]) {
+                    categoryVisibleCount[category.id] = 10;
+                }
+
                 const categoryDiv = document.createElement('div');
                 categoryDiv.className = 'category';
                 categoryDiv.id = `category-${category.id}`;
@@ -1722,8 +1727,12 @@
 
                 const categoryContent = document.createElement('div');
                 categoryContent.className = 'category-content';
+                categoryContent.id = `category-content-${category.id}`;
 
-                category.services.forEach(service => {
+                // Показываем только первые N товаров
+                const visibleServices = category.services.slice(0, categoryVisibleCount[category.id]);
+
+                visibleServices.forEach(service => {
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.onclick = () => openModal(service);
@@ -1765,10 +1774,94 @@
                     categoryContent.appendChild(card);
                 });
 
+                // Добавляем кнопку "Показать еще" если есть еще товары
+                if (categoryVisibleCount[category.id] < category.services.length) {
+                    const showMoreBtn = document.createElement('button');
+                    showMoreBtn.className = 'contact-btn';
+                    showMoreBtn.style.cssText = 'width: 100%; margin-top: 10px;';
+                    showMoreBtn.textContent = 'Показать еще';
+                    showMoreBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        showMoreItems(category.id);
+                    };
+                    categoryContent.appendChild(showMoreBtn);
+                }
+
                 categoryDiv.appendChild(categoryHeader);
                 categoryDiv.appendChild(categoryContent);
                 catalog.appendChild(categoryDiv);
             });
+        }
+
+        function showMoreItems(categoryId) {
+            const category = categories.find(c => c.id === categoryId);
+            if (!category) return;
+
+            // Увеличиваем количество видимых товаров на 10
+            categoryVisibleCount[categoryId] = Math.min(
+                categoryVisibleCount[categoryId] + 10,
+                category.services.length
+            );
+
+            // Перерисовываем содержимое категории
+            const categoryContent = document.getElementById(`category-content-${categoryId}`);
+            categoryContent.innerHTML = '';
+
+            const visibleServices = category.services.slice(0, categoryVisibleCount[categoryId]);
+
+            visibleServices.forEach(service => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.onclick = () => openModal(service);
+
+                if (service.weights && !selectedWeights[service.id]) {
+                    selectedWeights[service.id] = service.weights[0].grams;
+                }
+
+                const defaultWeight = service.weights ? service.weights[0] : null;
+
+                card.innerHTML = `
+                    <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+                    <div class="card-content" data-service-id="${service.id}">
+                        <div class="card-name">${service.name}</div>
+                        <div class="card-description">${service.description}</div>
+                        ${service.weights ? `
+                            <div class="product-price">${defaultWeight.price} ₽</div>
+                            <div class="weight-selector" onclick="event.stopPropagation()">
+                                ${service.weights.map((w, idx) => {
+                                    const cartKey = getCartKey(service.id, w.grams);
+                                    const inCart = cart[cartKey] ? 'in-cart' : '';
+                                    return `
+                                    <div class="weight-option ${idx === 0 ? 'active' : ''} ${inCart}"
+                                         data-weight="${w.grams}"
+                                         onclick="selectWeight(${service.id}, ${w.grams})">
+                                        ${w.grams}г
+                                    </div>
+                                `}).join('')}
+                            </div>
+                        ` : ''}
+                        <div id="cart-control-${service.id}">
+                            <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id}${service.weights ? ', ' + defaultWeight.grams : ''})">
+                                Добавить в корзину
+                            </button>
+                        </div>
+                    </div>
+                `;
+                categoryContent.appendChild(card);
+            });
+
+            // Добавляем кнопку "Показать еще" если есть еще товары
+            if (categoryVisibleCount[categoryId] < category.services.length) {
+                const showMoreBtn = document.createElement('button');
+                showMoreBtn.className = 'contact-btn';
+                showMoreBtn.style.cssText = 'width: 100%; margin-top: 10px;';
+                showMoreBtn.textContent = 'Показать еще';
+                showMoreBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    showMoreItems(categoryId);
+                };
+                categoryContent.appendChild(showMoreBtn);
+            }
         }
 
         function openChat(username) {
@@ -2001,6 +2094,8 @@
 
         let cart = {};
         let selectedWeights = {}; // Хранит выбранную граммовку для каждого товара
+        let visibleItems = {}; // Хранит количество видимых товаров для каждой категории
+        let categoryVisibleCount = {}; // Хранит количество показанных товаров в каждой категории
 
         function getCartKey(serviceId, weight) {
             return `${serviceId}_${weight}`;
