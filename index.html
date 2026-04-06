@@ -2653,53 +2653,37 @@
             console.log('Order text length:', orderText.length);
             console.log('Platform:', tg.platform);
 
-            // Для iOS в Telegram используем form submit вместо fetch
-            if (tg.platform === 'ios') {
-                console.log('Using form submit for iOS');
+            const url = '/api/send-order';
+            const data = JSON.stringify({ orderText: orderText });
 
-                const form = document.createElement('form');
-                form.method = 'POST';
-                form.action = '/api/send-order';
-                form.style.display = 'none';
+            // Пробуем sendBeacon (работает на iOS)
+            if (navigator.sendBeacon) {
+                console.log('Using sendBeacon');
+                const blob = new Blob([data], { type: 'application/json' });
+                const sent = navigator.sendBeacon(url, blob);
+                console.log('sendBeacon result:', sent);
 
-                const input = document.createElement('input');
-                input.type = 'hidden';
-                input.name = 'orderText';
-                input.value = orderText;
-
-                form.appendChild(input);
-                document.body.appendChild(form);
-
-                // Создаем iframe для отправки без перезагрузки страницы
-                const iframe = document.createElement('iframe');
-                iframe.name = 'order-frame';
-                iframe.style.display = 'none';
-                document.body.appendChild(iframe);
-
-                form.target = 'order-frame';
-                form.submit();
-
-                // Ждем ответ
-                setTimeout(() => {
-                    alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
-                    cart = {};
-                    updateCartBadge();
-                    renderCart();
-                    closeCart();
-                    document.body.removeChild(form);
-                    document.body.removeChild(iframe);
-                }, 1000);
-
-                return;
+                if (sent) {
+                    setTimeout(() => {
+                        alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
+                        cart = {};
+                        updateCartBadge();
+                        renderCart();
+                        closeCart();
+                    }, 500);
+                    return;
+                }
             }
 
-            // Для других платформ используем fetch
-            fetch('/api/send-order', {
+            // Fallback на fetch
+            console.log('Using fetch');
+            fetch(url, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ orderText: orderText })
+                body: data,
+                keepalive: true
             })
             .then(response => {
                 console.log('Response received:', response.status);
