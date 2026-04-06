@@ -199,36 +199,23 @@
         }
 
         .category-content {
-            display: grid;
-            grid-template-rows: 0fr;
+            max-height: 0;
             overflow: hidden;
-            transition: grid-template-rows 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s 0.3s;
+            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s 0.3s;
             margin-top: 0;
-            will-change: grid-template-rows;
+            padding: 0;
+            display: grid;
+            gap: 12px;
+            will-change: max-height;
             transform: translateZ(0);
             -webkit-transform: translateZ(0);
         }
 
-        .category-content > div {
-            overflow: hidden;
-            padding: 0;
-            transition: padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            will-change: padding;
-            display: grid;
-            gap: 12px;
-            min-height: 0;
-            width: 100%;
-            box-sizing: border-box;
-        }
-
         .category.active .category-content {
-            grid-template-rows: 1fr;
+            max-height: 5000px;
             margin-top: 16px;
-            transition: grid-template-rows 0.35s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s;
-        }
-
-        .category.active .category-content > div {
             padding: 8px 0;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s;
         }
 
         .catalog {
@@ -1931,9 +1918,6 @@
                 categoryContent.className = 'category-content';
                 categoryContent.id = `category-content-${category.id}`;
 
-                // Создаем внутренний wrapper для grid-template-rows
-                const contentWrapper = document.createElement('div');
-
                 // Показываем только первые N товаров
                 const visibleServices = category.services.slice(0, categoryVisibleCount[category.id]);
 
@@ -1976,7 +1960,7 @@
                             </div>
                         </div>
                     `;
-                    contentWrapper.appendChild(card);
+                    categoryContent.appendChild(card);
                 });
 
                 // Добавляем кнопку "Показать еще" если есть еще товары
@@ -1988,10 +1972,9 @@
                         e.stopPropagation();
                         showMoreItems(category.id);
                     };
-                    contentWrapper.appendChild(showMoreBtn);
+                    categoryContent.appendChild(showMoreBtn);
                 }
 
-                categoryContent.appendChild(contentWrapper);
                 categoryDiv.appendChild(categoryHeader);
                 categoryDiv.appendChild(categoryContent);
                 catalog.appendChild(categoryDiv);
@@ -2011,9 +1994,6 @@
             // Перерисовываем содержимое категории
             const categoryContent = document.getElementById(`category-content-${categoryId}`);
             categoryContent.innerHTML = '';
-
-            // Создаем внутренний wrapper для grid-template-rows
-            const contentWrapper = document.createElement('div');
 
             const visibleServices = category.services.slice(0, categoryVisibleCount[categoryId]);
 
@@ -2055,7 +2035,7 @@
                         </div>
                     </div>
                 `;
-                contentWrapper.appendChild(card);
+                categoryContent.appendChild(card);
             });
 
             // Добавляем кнопку "Показать еще" если есть еще товары
@@ -2067,10 +2047,8 @@
                     e.stopPropagation();
                     showMoreItems(categoryId);
                 };
-                contentWrapper.appendChild(showMoreBtn);
+                categoryContent.appendChild(showMoreBtn);
             }
-
-            categoryContent.appendChild(contentWrapper);
         }
 
         function openChat(username) {
