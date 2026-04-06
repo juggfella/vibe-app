@@ -1494,51 +1494,55 @@
 
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
             let startY = 0;
-            let lastY = 0;
-            let startScrollTop = 0;
-            let lastScrollTop = 0;
-            let contentScrolled = false;
+            let userScrolled = false;
+            let lastSwipeWasDown = false;
+            let lastSwipeTime = 0;
 
             const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
                 startY = e.touches[0].clientY;
-                lastY = startY;
-                contentScrolled = false;
-
-                if (hasScrollableContent && modalCard) {
-                    startScrollTop = modalCard.scrollTop;
-                    lastScrollTop = startScrollTop;
-                }
             }, { passive: true });
 
             element.addEventListener('touchmove', (e) => {
                 const currentY = e.touches[0].clientY;
-                const deltaY = lastY - currentY;
+                const delta = currentY - startY;
 
-                if (hasScrollableContent && modalCard) {
-                    const currentScrollTop = modalCard.scrollTop;
-
-                    // Если scrollTop изменился, значит контент действительно скроллится
-                    if (currentScrollTop !== lastScrollTop) {
-                        contentScrolled = true;
-                    }
-
-                    lastScrollTop = currentScrollTop;
+                // Если свайпнул вверх, отмечаем что пользователь скроллил
+                if (delta < -10) {
+                    userScrolled = true;
                 }
-
-                lastY = currentY;
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
                 const endY = e.changedTouches[0].clientY;
                 const swipeDistance = endY - startY;
+                const now = Date.now();
 
-                const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
+                // Свайп вниз больше 80px
+                if (swipeDistance > 80) {
+                    if (!hasScrollableContent) {
+                        // Нет скролла - закрываем сразу
+                        closeFunction();
+                    } else if (!userScrolled) {
+                        // Есть скролл, но пользователь не скроллил - закрываем сразу
+                        closeFunction();
+                    } else {
+                        // Пользователь скроллил - нужно два свайпа подряд
+                        const atTop = modalCard && modalCard.scrollTop === 0;
 
-                // Закрываем только если контент не скроллился, начали в верху и свайп вниз больше 80px
-                if (!contentScrolled && atTop && swipeDistance > 80) {
-                    closeFunction();
+                        if (atTop && lastSwipeWasDown && (now - lastSwipeTime < 1000)) {
+                            // Второй свайп вниз в течение 1 секунды - закрываем
+                            closeFunction();
+                        } else if (atTop) {
+                            // Первый свайп вниз в верху - запоминаем
+                            lastSwipeWasDown = true;
+                            lastSwipeTime = now;
+                        }
+                    }
+                } else {
+                    // Не свайп вниз - сбрасываем счетчик
+                    lastSwipeWasDown = false;
                 }
             }, { passive: true });
         }
