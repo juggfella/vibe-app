@@ -64,7 +64,7 @@
             top: -5px;
             right: -5px;
             background: #ff4444;
-            color: white;
+            color: #000;
             border-radius: 50%;
             width: 20px;
             height: 20px;
@@ -333,6 +333,15 @@
             color: #fff;
             margin-top: 6px;
             margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 45px;
+        }
+
+        .product-price .total-price {
+            font-size: 16px;
+            color: #fff;
+            font-weight: 600;
         }
 
         .weight-selector {
@@ -2214,8 +2223,15 @@
             if (service && service.weights) {
                 const priceData = service.weights.find(w => w.grams === weight);
                 const priceElements = document.querySelectorAll(`[data-service-id="${serviceId}"] .product-price`);
+                const cartKey = getCartKey(serviceId, weight);
+                const totalPrice = cart[cartKey] ? priceData.price * cart[cartKey].quantity : null;
+
                 priceElements.forEach(el => {
-                    el.textContent = `${priceData.price} ₽`;
+                    if (totalPrice && cart[cartKey].quantity > 1) {
+                        el.innerHTML = `<span>${priceData.price} ₽</span> <span class="total-price">(${totalPrice} ₽)</span>`;
+                    } else {
+                        el.textContent = `${priceData.price} ₽`;
+                    }
                 });
             }
 
