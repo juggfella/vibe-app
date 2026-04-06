@@ -1494,49 +1494,52 @@
 
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
             let startY = 0;
+            let lastY = 0;
             let startScrollTop = 0;
-            let isScrolling = false;
-            let scrollTimeout = null;
+            let lastScrollTop = 0;
+            let contentScrolled = false;
 
             const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
                 startY = e.touches[0].clientY;
-                isScrolling = false;
+                lastY = startY;
+                contentScrolled = false;
 
                 if (hasScrollableContent && modalCard) {
                     startScrollTop = modalCard.scrollTop;
+                    lastScrollTop = startScrollTop;
                 }
             }, { passive: true });
 
-            modalCard?.addEventListener('scroll', () => {
-                // Отмечаем что идет скролл
-                isScrolling = true;
+            element.addEventListener('touchmove', (e) => {
+                const currentY = e.touches[0].clientY;
+                const deltaY = lastY - currentY;
 
-                // Сбрасываем таймер
-                if (scrollTimeout) {
-                    clearTimeout(scrollTimeout);
+                if (hasScrollableContent && modalCard) {
+                    const currentScrollTop = modalCard.scrollTop;
+
+                    // Если scrollTop изменился, значит контент действительно скроллится
+                    if (currentScrollTop !== lastScrollTop) {
+                        contentScrolled = true;
+                    }
+
+                    lastScrollTop = currentScrollTop;
                 }
 
-                // Через 150мс после последнего события scroll считаем что скролл закончился
-                scrollTimeout = setTimeout(() => {
-                    isScrolling = false;
-                }, 150);
+                lastY = currentY;
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
                 const endY = e.changedTouches[0].clientY;
                 const swipeDistance = endY - startY;
 
-                // Небольшая задержка чтобы дождаться начала инерционного скролла
-                setTimeout(() => {
-                    const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
+                const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
 
-                    // Закрываем только если не идет скролл, начали в верху и свайп вниз больше 80px
-                    if (!isScrolling && atTop && swipeDistance > 80) {
-                        closeFunction();
-                    }
-                }, 50);
+                // Закрываем только если контент не скроллился, начали в верху и свайп вниз больше 80px
+                if (!contentScrolled && atTop && swipeDistance > 80) {
+                    closeFunction();
+                }
             }, { passive: true });
         }
 
