@@ -1428,29 +1428,26 @@
 
         let touchStartY = 0;
         let touchEndY = 0;
-        let touchStartElement = null;
 
-        function handleSwipe(element, closeFunction) {
+        function handleSwipe(element, closeFunction, hasScrollableContent = false) {
+            // Если есть прокручиваемый контент, не добавляем свайп
+            if (hasScrollableContent) {
+                return;
+            }
+
             element.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
-                touchStartElement = e.target;
             }, { passive: false });
 
             element.addEventListener('touchmove', (e) => {
-                // Разрешаем прокрутку внутри контента модального окна
-                const scrollableContent = e.target.closest('.modal-card-content, .cart-category-content, #cartItems');
-                if (!scrollableContent) {
-                    e.preventDefault();
-                }
+                e.preventDefault();
             }, { passive: false });
 
             element.addEventListener('touchend', (e) => {
                 touchEndY = e.changedTouches[0].clientY;
                 const swipeDistance = touchStartY - touchEndY;
 
-                // Закрываем только если свайп начался не внутри прокручиваемого контента
-                const scrollableContent = touchStartElement?.closest('.modal-card-content, .cart-category-content, #cartItems');
-                if (!scrollableContent && Math.abs(swipeDistance) > 50) {
+                if (Math.abs(swipeDistance) > 50) {
                     closeFunction();
                 }
             }, { passive: false });
@@ -1465,6 +1462,25 @@
             document.getElementById('modalContactBtn').onclick = () => openChat(service.username);
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
+
+            // Проверяем, есть ли прокрутка в контенте
+            setTimeout(() => {
+                const modalContent = document.querySelector('#modal .modal-card-content');
+                const hasScroll = modalContent.scrollHeight > modalContent.clientHeight;
+
+                // Удаляем старые обработчики и добавляем новые с учетом прокрутки
+                const modalElement = document.getElementById('modal');
+                const newModalElement = modalElement.cloneNode(true);
+                modalElement.parentNode.replaceChild(newModalElement, modalElement);
+
+                newModalElement.onclick = closeModal;
+                newModalElement.querySelector('.modal-close').onclick = closeModal;
+                newModalElement.querySelector('.modal-card').onclick = (e) => e.stopPropagation();
+                newModalElement.querySelector('#modalImage').onclick = openFullImage;
+                newModalElement.querySelector('#modalContactBtn').onclick = () => openChat(service.username);
+
+                handleSwipe(newModalElement, closeModal, hasScroll);
+            }, 0);
         }
 
         function closeModal() {
@@ -1632,10 +1648,9 @@
             tg.openTelegramLink(`https://t.me/${username}?text=${encodeURIComponent('Заказ:\n' + message)}`);
         }
 
-        handleSwipe(document.getElementById('modal'), closeModal);
-        handleSwipe(document.getElementById('fullImageModal'), closeFullImage);
-        handleSwipe(document.getElementById('aboutModal'), closeAbout);
-        handleSwipe(document.getElementById('cartModal'), closeCart);
+        handleSwipe(document.getElementById('fullImageModal'), closeFullImage, false); // false = нет прокрутки
+        handleSwipe(document.getElementById('aboutModal'), closeAbout, false); // false = нет прокрутки, свайп работает
+        handleSwipe(document.getElementById('cartModal'), closeCart, true); // true = есть прокрутка
 
         renderCatalog();
     </script>
