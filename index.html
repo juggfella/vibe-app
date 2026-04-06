@@ -1524,17 +1524,36 @@
                 if (swipeDistance > 80) {
                     if (!hasScrollableContent) {
                         // Нет скролла - закрываем сразу
+                        e.preventDefault();
+                        e.stopPropagation();
                         closeFunction();
+                        // Блокируем дальнейшие события на короткое время
+                        document.body.style.pointerEvents = 'none';
+                        setTimeout(() => {
+                            document.body.style.pointerEvents = '';
+                        }, 300);
                     } else if (!userScrolled) {
                         // Есть скролл, но пользователь не скроллил - закрываем сразу
+                        e.preventDefault();
+                        e.stopPropagation();
                         closeFunction();
+                        document.body.style.pointerEvents = 'none';
+                        setTimeout(() => {
+                            document.body.style.pointerEvents = '';
+                        }, 300);
                     } else {
                         // Пользователь скроллил - нужно два свайпа подряд
                         const atTop = modalCard && modalCard.scrollTop === 0;
 
                         if (atTop && lastSwipeWasDown && (now - lastSwipeTime < 1000)) {
                             // Второй свайп вниз в течение 1 секунды - закрываем
+                            e.preventDefault();
+                            e.stopPropagation();
                             closeFunction();
+                            document.body.style.pointerEvents = 'none';
+                            setTimeout(() => {
+                                document.body.style.pointerEvents = '';
+                            }, 300);
                         } else if (atTop) {
                             // Первый свайп вниз в верху - запоминаем
                             lastSwipeWasDown = true;
@@ -1545,7 +1564,7 @@
                     // Не свайп вниз - сбрасываем счетчик
                     lastSwipeWasDown = false;
                 }
-            }, { passive: true });
+            }, { passive: false });
         }
 
         function openModal(service) {
