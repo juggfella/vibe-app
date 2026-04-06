@@ -427,6 +427,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            padding: 8px;
+            touch-action: manipulation;
         }
 
         .cart-counter-btn:hover {
@@ -696,6 +698,8 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            padding: 8px;
+            touch-action: manipulation;
         }
 
         .cart-item-btn:hover {
@@ -2273,8 +2277,11 @@
         }
 
         function closeModal() {
-            document.getElementById('modal').classList.remove('active');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         function openFullImage() {
@@ -2291,8 +2298,11 @@
         }
 
         function closeFullImage() {
-            document.getElementById('fullImageModal').classList.remove('active');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('fullImageModal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         function openAbout() {
@@ -2500,8 +2510,11 @@
         }
 
         function closeCart() {
-            document.getElementById('cartModal').classList.remove('active');
-            document.body.style.overflow = '';
+            const modal = document.getElementById('cartModal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                document.body.style.overflow = '';
+            }, 300);
         }
 
         let openCartCategories = {};
