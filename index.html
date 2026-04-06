@@ -1494,44 +1494,43 @@
 
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
             let startY = 0;
-            let currentY = 0;
-            let isScrolling = false;
+            let startScrollTop = 0;
+            let canClose = false;
 
             const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
                 startY = e.touches[0].clientY;
-                currentY = startY;
-                isScrolling = false;
+
+                if (hasScrollableContent && modalCard) {
+                    startScrollTop = modalCard.scrollTop;
+                    // Можем закрыть только если начали касание в самом верху
+                    canClose = startScrollTop === 0;
+                } else {
+                    canClose = true;
+                }
             }, { passive: true });
 
             element.addEventListener('touchmove', (e) => {
-                currentY = e.touches[0].clientY;
-
-                // Если есть прокручиваемый контент, проверяем позицию скролла
                 if (hasScrollableContent && modalCard) {
-                    const scrollTop = modalCard.scrollTop;
-                    const swipeDown = currentY > startY;
+                    const currentScrollTop = modalCard.scrollTop;
 
-                    // Разрешаем закрытие только если скролл в самом верху и свайп вниз
-                    if (scrollTop === 0 && swipeDown) {
-                        isScrolling = false;
-                    } else if (scrollTop > 0) {
-                        isScrolling = true;
+                    // Если начали скроллить, отменяем возможность закрытия
+                    if (currentScrollTop !== startScrollTop) {
+                        canClose = false;
                     }
                 }
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
-                const swipeDistance = currentY - startY;
+                const endY = e.changedTouches[0].clientY;
+                const swipeDistance = endY - startY;
 
                 // Закрываем только если:
-                // 1. Нет прокручиваемого контента, или
-                // 2. Есть контент, но скролл в верху и свайп вниз больше 50px
-                if (!hasScrollableContent || (!isScrolling && swipeDistance > 50)) {
-                    if (Math.abs(swipeDistance) > 50) {
-                        closeFunction();
-                    }
+                // 1. Разрешено закрытие (начали в верху и не скроллили)
+                // 2. Свайп вниз больше 80px
+                if (canClose && swipeDistance > 80) {
+                    closeFunction();
                 }
             }, { passive: true });
         }
