@@ -201,7 +201,6 @@
         .category-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.2s ease-out;
             margin-top: 0;
             padding: 0;
             display: grid;
@@ -209,10 +208,9 @@
         }
 
         .category.active .category-content {
-            max-height: 3000px;
+            max-height: none;
             margin-top: 12px;
             padding: 0;
-            transition: max-height 0.25s ease-out;
         }
 
         .catalog {
@@ -2028,6 +2026,7 @@
                 }
 
                 const defaultWeight = service.weights ? service.weights[0] : null;
+                const selectedWeight = selectedWeights[service.id] || (defaultWeight ? defaultWeight.grams : null);
 
                 card.innerHTML = `
                     <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
@@ -2037,11 +2036,12 @@
                         ${service.weights ? `
                             <div class="product-price">${defaultWeight.price} ₽</div>
                             <div class="weight-selector" onclick="event.stopPropagation()">
-                                ${service.weights.map((w, idx) => {
+                                ${service.weights.map((w) => {
                                     const cartKey = getCartKey(service.id, w.grams);
                                     const inCart = cart[cartKey] ? 'in-cart' : '';
+                                    const active = w.grams === selectedWeight ? 'active' : '';
                                     return `
-                                    <div class="weight-option ${idx === 0 ? 'active' : ''} ${inCart}"
+                                    <div class="weight-option ${active} ${inCart}"
                                          data-weight="${w.grams}"
                                          onclick="selectWeight(${service.id}, ${w.grams})">
                                         ${w.grams}г
@@ -2050,13 +2050,18 @@
                             </div>
                         ` : ''}
                         <div id="cart-control-${service.id}">
-                            <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id}${service.weights ? ', ' + defaultWeight.grams : ''})">
+                            <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id}${service.weights ? ', ' + selectedWeight : ''})">
                                 Добавить в корзину
                             </button>
                         </div>
                     </div>
                 `;
                 categoryContent.appendChild(card);
+
+                // Обновляем контрол корзины после добавления карточки
+                if (service.weights) {
+                    updateCartControl(service.id, selectedWeight);
+                }
             });
 
             // Добавляем кнопку "Показать еще" если есть еще товары
