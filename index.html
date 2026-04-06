@@ -1495,31 +1495,22 @@
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
             let startY = 0;
             let startScrollTop = 0;
-            let canClose = false;
+            let didScroll = false;
 
             const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
                 startY = e.touches[0].clientY;
+                didScroll = false;
 
                 if (hasScrollableContent && modalCard) {
                     startScrollTop = modalCard.scrollTop;
-                    // Можем закрыть только если начали касание в самом верху
-                    canClose = startScrollTop === 0;
-                } else {
-                    canClose = true;
                 }
             }, { passive: true });
 
-            element.addEventListener('touchmove', (e) => {
-                if (hasScrollableContent && modalCard) {
-                    const currentScrollTop = modalCard.scrollTop;
-
-                    // Если начали скроллить, отменяем возможность закрытия
-                    if (currentScrollTop !== startScrollTop) {
-                        canClose = false;
-                    }
-                }
+            modalCard?.addEventListener('scroll', () => {
+                // Если произошел скролл во время касания, отмечаем это
+                didScroll = true;
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
@@ -1527,9 +1518,12 @@
                 const swipeDistance = endY - startY;
 
                 // Закрываем только если:
-                // 1. Разрешено закрытие (начали в верху и не скроллили)
-                // 2. Свайп вниз больше 80px
-                if (canClose && swipeDistance > 80) {
+                // 1. Не было скролла во время касания
+                // 2. Начали в самом верху (или нет прокручиваемого контента)
+                // 3. Свайп вниз больше 80px
+                const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
+
+                if (!didScroll && atTop && swipeDistance > 80) {
                     closeFunction();
                 }
             }, { passive: true });
