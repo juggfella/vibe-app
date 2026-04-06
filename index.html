@@ -285,6 +285,41 @@
             transform: translateY(-2px);
         }
 
+        .cart-counter {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        .cart-counter-btn {
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .cart-counter-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .cart-counter-value {
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            min-width: 20px;
+            text-align: center;
+        }
+
         .modal {
             position: fixed;
             top: 0;
@@ -1310,9 +1345,11 @@
                         <div class="card-content">
                             <div class="card-name">${service.name}</div>
                             <div class="card-description">${service.description}</div>
-                            <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
-                                Добавить в корзину
-                            </button>
+                            <div id="cart-control-${service.id}">
+                                <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
+                                    Добавить в корзину
+                                </button>
+                            </div>
                         </div>
                     `;
                     categoryContent.appendChild(card);
@@ -1400,6 +1437,7 @@
                 cart[serviceId] = { ...service, quantity: 1 };
             }
             updateCartBadge();
+            updateCartControl(serviceId);
         }
 
         function removeFromCart(serviceId) {
@@ -1410,7 +1448,29 @@
                 }
             }
             updateCartBadge();
+            updateCartControl(serviceId);
             renderCart();
+        }
+
+        function updateCartControl(serviceId) {
+            const controlElement = document.getElementById(`cart-control-${serviceId}`);
+            if (!controlElement) return;
+
+            if (cart[serviceId]) {
+                controlElement.innerHTML = `
+                    <div class="cart-counter">
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId})">−</button>
+                        <div class="cart-counter-value">${cart[serviceId].quantity}</div>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">+</button>
+                    </div>
+                `;
+            } else {
+                controlElement.innerHTML = `
+                    <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">
+                        Добавить в корзину
+                    </button>
+                `;
+            }
         }
 
         function updateCartBadge() {
