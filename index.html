@@ -22,7 +22,7 @@
 
         .header {
             text-align: center;
-            margin-bottom: 32px;
+            margin-bottom: 16px;
             padding-bottom: 20px;
             border-bottom: 2px solid transparent;
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent) bottom / 100% 2px no-repeat;
@@ -257,7 +257,7 @@
             font-size: 13px;
             color: #777;
             margin-bottom: 10px;
-            line-height: 1.5;
+            line-height: 1.3;
             display: -webkit-box;
             -webkit-line-clamp: 2;
             -webkit-box-orient: vertical;
@@ -481,7 +481,7 @@
             font-size: 36px;
             line-height: 1;
             display: block;
-            margin-top: -8px;
+            margin-top: -6px;
         }
 
         .about-btn {
@@ -654,7 +654,7 @@
             <div class="modal-card-content">
                 <div class="modal-card-name" id="modalName"></div>
                 <div class="modal-card-description" id="modalDescription"></div>
-                <button class="modal-contact-btn" id="modalContactBtn">Написать</button>
+                <div id="modalCartControl"></div>
             </div>
         </div>
     </div>
@@ -1459,14 +1459,32 @@
             modalImage.style.objectPosition = service.imagePosition || 'center center';
             document.getElementById('modalName').textContent = service.name;
             document.getElementById('modalDescription').innerHTML = (service.description || '').replace(/\n/g, '<br>');
-            document.getElementById('modalContactBtn').onclick = () => openChat(service.username);
+
+            // Рендерим кнопку корзины
+            const modalCartControl = document.getElementById('modalCartControl');
+            if (cart[service.id]) {
+                modalCartControl.innerHTML = `
+                    <div class="cart-counter">
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${service.id})">−</button>
+                        <div class="cart-counter-value">${cart[service.id].quantity}</div>
+                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${service.id})">+</button>
+                    </div>
+                `;
+            } else {
+                modalCartControl.innerHTML = `
+                    <button class="modal-contact-btn" onclick="event.stopPropagation(); addToCart(${service.id})">
+                        Добавить в корзину
+                    </button>
+                `;
+            }
+
             document.getElementById('modal').classList.add('active');
             document.body.style.overflow = 'hidden';
 
             // Проверяем, есть ли прокрутка в контенте
             setTimeout(() => {
-                const modalContent = document.querySelector('#modal .modal-card-content');
-                const hasScroll = modalContent.scrollHeight > modalContent.clientHeight;
+                const modalCard = document.querySelector('#modal .modal-card');
+                const hasScroll = modalCard.scrollHeight > window.innerHeight * 0.9;
 
                 // Удаляем старые обработчики и добавляем новые с учетом прокрутки
                 const modalElement = document.getElementById('modal');
@@ -1477,10 +1495,9 @@
                 newModalElement.querySelector('.modal-close').onclick = closeModal;
                 newModalElement.querySelector('.modal-card').onclick = (e) => e.stopPropagation();
                 newModalElement.querySelector('#modalImage').onclick = openFullImage;
-                newModalElement.querySelector('#modalContactBtn').onclick = () => openChat(service.username);
 
                 handleSwipe(newModalElement, closeModal, hasScroll);
-            }, 0);
+            }, 100);
         }
 
         function closeModal() {
@@ -1539,23 +1556,32 @@
 
         function updateCartControl(serviceId) {
             const controlElement = document.getElementById(`cart-control-${serviceId}`);
-            if (!controlElement) return;
+            const modalControlElement = document.getElementById('modalCartControl');
 
-            if (cart[serviceId]) {
-                controlElement.innerHTML = `
-                    <div class="cart-counter">
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId})">−</button>
-                        <div class="cart-counter-value">${cart[serviceId].quantity}</div>
-                        <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">+</button>
-                    </div>
-                `;
-            } else {
-                controlElement.innerHTML = `
-                    <button class="contact-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">
-                        Добавить в корзину
-                    </button>
-                `;
-            }
+            const renderControl = (element) => {
+                if (!element) return;
+
+                if (cart[serviceId]) {
+                    element.innerHTML = `
+                        <div class="cart-counter">
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); removeFromCart(${serviceId})">−</button>
+                            <div class="cart-counter-value">${cart[serviceId].quantity}</div>
+                            <button class="cart-counter-btn" onclick="event.stopPropagation(); addToCart(${serviceId})">+</button>
+                        </div>
+                    `;
+                } else {
+                    const isModal = element.id === 'modalCartControl';
+                    const btnClass = isModal ? 'modal-contact-btn' : 'contact-btn';
+                    element.innerHTML = `
+                        <button class="${btnClass}" onclick="event.stopPropagation(); addToCart(${serviceId})">
+                            Добавить в корзину
+                        </button>
+                    `;
+                }
+            };
+
+            renderControl(controlElement);
+            renderControl(modalControlElement);
         }
 
         function updateCartBadge() {
