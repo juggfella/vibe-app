@@ -2652,7 +2652,53 @@
             console.log('=== Sending order ===');
             console.log('Order text length:', orderText.length);
 
-            // Небольшая задержка для iOS
+            // Проверяем платформу
+            const isIOS = tg.platform === 'ios';
+            console.log('Platform:', tg.platform, 'Is iOS:', isIOS);
+
+            if (isIOS) {
+                // Для iOS используем Telegram popup с кнопкой
+                const plainText = orderText.replace(/<[^>]*>/g, ''); // Убираем HTML
+
+                tg.showPopup({
+                    title: 'Отправить заказ?',
+                    message: 'Нажмите OK чтобы открыть чат с ботом и отправить заказ',
+                    buttons: [
+                        { id: 'send', type: 'default', text: 'Отправить' },
+                        { id: 'cancel', type: 'cancel' }
+                    ]
+                }, (buttonId) => {
+                    if (buttonId === 'send') {
+                        // Копируем в буфер
+                        const textArea = document.createElement('textarea');
+                        textArea.value = plainText;
+                        textArea.style.position = 'fixed';
+                        textArea.style.opacity = '0';
+                        document.body.appendChild(textArea);
+                        textArea.select();
+
+                        try {
+                            document.execCommand('copy');
+                            document.body.removeChild(textArea);
+
+                            // Закрываем WebApp - пользователь вернется в чат с ботом
+                            tg.close();
+
+                            // Очищаем корзину
+                            cart = {};
+                            updateCartBadge();
+                            renderCart();
+                        } catch (e) {
+                            console.error('Copy failed:', e);
+                            tg.showAlert('Не удалось скопировать заказ');
+                        }
+                    }
+                });
+
+                return;
+            }
+
+            // Для других платформ используем fetch
             setTimeout(() => {
                 fetch('/api/send-order', {
                     method: 'POST',
