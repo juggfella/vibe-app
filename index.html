@@ -2812,7 +2812,27 @@
 
             message += `\n<b>Итого: ${totalPrice} ₽</b>`;
 
-            // Отправляем в телегу
+            // Проверяем, запущено ли в Telegram WebApp
+            const isTelegramWebApp = tg.initData && tg.initData.length > 0;
+
+            if (isTelegramWebApp) {
+                console.log('Using Telegram MainButton');
+
+                // Настраиваем MainButton
+                tg.MainButton.setText('Подтвердить заказ');
+                tg.MainButton.show();
+                tg.MainButton.enable();
+
+                // Обработчик нажатия на MainButton
+                tg.MainButton.onClick(function() {
+                    console.log('MainButton clicked, sending data...');
+                    tg.sendData(message);
+                });
+
+                return;
+            }
+
+            // Для веб-версии отправляем через API
             sendToTelegram(message);
         }
 
