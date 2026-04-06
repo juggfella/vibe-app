@@ -31,7 +31,7 @@
 
         .cart-icon {
             position: absolute;
-            top: 10px;
+            top: 35px;
             left: 10px;
             width: 45px;
             height: 45px;
@@ -44,8 +44,13 @@
             cursor: pointer;
             transition: all 0.3s ease;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-            font-size: 20px;
             filter: grayscale(100%) brightness(200%);
+            padding: 0;
+        }
+
+        .cart-icon svg {
+            display: block;
+            margin-left: -3px;
         }
 
         .cart-icon:hover {
@@ -503,15 +508,15 @@
         .cart-item {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 10px;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 8px;
         }
 
         .cart-item-name {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             color: #fff;
         }
 
@@ -554,6 +559,42 @@
             color: #666;
             padding: 40px 20px;
             font-size: 16px;
+        }
+
+        .cart-category {
+            margin-bottom: 10px;
+        }
+
+        .cart-category-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            color: #fff;
+            transition: all 0.3s ease;
+        }
+
+        .cart-category-header:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .cart-category-arrow {
+            transition: transform 0.3s ease;
+            font-size: 12px;
+        }
+
+        .cart-category-content {
+            margin-top: 8px;
+            padding: 8px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 8px;
         }
     </style>
 </head>
@@ -1524,16 +1565,54 @@
                 return;
             }
 
-            cartItems.innerHTML = items.map(item => `
-                <div class="cart-item">
-                    <div class="cart-item-name">${item.name}</div>
-                    <div class="cart-item-controls">
-                        <button class="cart-item-btn" onclick="removeFromCart(${item.id})">−</button>
-                        <div class="cart-item-quantity">${item.quantity}</div>
-                        <button class="cart-item-btn" onclick="addToCart(${item.id})">+</button>
+            // Группируем товары по категориям
+            const groupedByCategory = {};
+            items.forEach(item => {
+                const category = categories.find(c => c.services.some(s => s.id === item.id));
+                if (category) {
+                    if (!groupedByCategory[category.id]) {
+                        groupedByCategory[category.id] = {
+                            name: category.name,
+                            items: []
+                        };
+                    }
+                    groupedByCategory[category.id].items.push(item);
+                }
+            });
+
+            cartItems.innerHTML = Object.entries(groupedByCategory).map(([catId, catData]) => `
+                <div class="cart-category">
+                    <div class="cart-category-header" onclick="toggleCartCategory(${catId})">
+                        <span>${catData.name}</span>
+                        <span class="cart-category-arrow" id="cart-arrow-${catId}">▼</span>
+                    </div>
+                    <div class="cart-category-content" id="cart-content-${catId}" style="display: none;">
+                        ${catData.items.map(item => `
+                            <div class="cart-item">
+                                <div class="cart-item-name">${item.name}</div>
+                                <div class="cart-item-controls">
+                                    <button class="cart-item-btn" onclick="removeFromCart(${item.id})">−</button>
+                                    <div class="cart-item-quantity">${item.quantity}</div>
+                                    <button class="cart-item-btn" onclick="addToCart(${item.id})">+</button>
+                                </div>
+                            </div>
+                        `).join('')}
                     </div>
                 </div>
             `).join('');
+        }
+
+        function toggleCartCategory(categoryId) {
+            const content = document.getElementById(`cart-content-${categoryId}`);
+            const arrow = document.getElementById(`cart-arrow-${categoryId}`);
+
+            if (content.style.display === 'none') {
+                content.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            }
         }
 
         function checkoutCart() {
