@@ -109,11 +109,16 @@
             border-radius: 16px;
             cursor: pointer;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5), 0 0 15px rgba(255, 255, 255, 0.08);
             overflow: hidden;
             opacity: 0;
             animation: fadeIn 0.3s ease forwards;
             padding: 20px;
+            transition: box-shadow 0.3s ease;
+        }
+
+        .category.active {
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
         }
 
         @keyframes fadeIn {
@@ -191,9 +196,10 @@
         .category.active .category-content {
             max-height: none;
             margin-top: 16px;
-            overflow-y: auto;
+            overflow: visible;
             display: grid;
             gap: 12px;
+            padding: 8px 0;
         }
 
         .catalog {
@@ -213,7 +219,6 @@
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            overflow: hidden;
         }
 
         .card:hover {
@@ -386,18 +391,20 @@
             border-radius: 20px;
             max-width: 400px;
             width: calc(100% - 40px);
-            transform: scale(0.8);
-            transition: transform 0.3s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
             padding: 24px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
             margin: 40px 20px 40px 20px;
             max-height: calc(100vh - 80px);
             overflow-y: auto;
+            opacity: 0;
+            transform: translateY(20px);
         }
 
         .modal.active .modal-card {
-            transform: scale(1);
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .modal-card-image {
@@ -510,7 +517,7 @@
             font-size: 36px;
             line-height: 1;
             display: block;
-            margin-top: -6px;
+            margin-top: -8px;
         }
 
         .about-btn {
@@ -1358,38 +1365,6 @@
                 image: "images/special-line.webp",
                 services: [
                     {
-                        id: 401,
-                        name: "Vulin",
-                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 16-летней выдержки",
-                        username: "user401",
-                        image: "images/specialline/special-1.webp",
-                        imagePosition: "center 35%"
-                    },
-                    {
-                        id: 402,
-                        name: "Cardi",
-                        description: "Новый вкус в коллекции special. Холодная ферментация на алкоголе ноты: кубинский ром, дым, пряности, дуб, сладкие специи.",
-                        username: "user402",
-                        image: "images/specialline/special-2.webp",
-                        imagePosition: "center 35%"
-                    },
-                    {
-                        id: 403,
-                        name: "Froig",
-                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 10-летней выдержки.",
-                        username: "user403",
-                        image: "images/specialline/special-3.webp",
-                        imagePosition: "center 35%"
-                    },
-                    {
-                        id: 404,
-                        name: "Jaku",
-                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – японском джине.",
-                        username: "user404",
-                        image: "images/specialline/special-4.webp",
-                        imagePosition: "center 35%"
-                    },
-                    {
                         id: 405,
                         name: "Hustla",
                         description: "Безароматический бленд крепостью выше-средней.",
@@ -1419,6 +1394,46 @@
                         description: "Безароматический бленд средней крепости.",
                         username: "user408",
                         image: "images/specialline/special-8.webp",
+                        imagePosition: "center 35%"
+                    }
+                ]
+            },
+            {
+                id: 5,
+                name: "Special Alco",
+                description: "Алкогольные вкусы",
+                image: "images/specialalco-line.webp",
+                services: [
+                    {
+                        id: 401,
+                        name: "Vulin",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 16-летней выдержки",
+                        username: "user401",
+                        image: "images/specialalcoline/specialalco-1.webp",
+                        imagePosition: "center 35%"
+                    },
+                    {
+                        id: 402,
+                        name: "Cardi",
+                        description: "Новый вкус в коллекции special. Холодная ферментация на алкоголе ноты: кубинский ром, дым, пряности, дуб, сладкие специи.",
+                        username: "user402",
+                        image: "images/specialalcoline/specialalco-2.webp",
+                        imagePosition: "center 35%"
+                    },
+                    {
+                        id: 403,
+                        name: "Froig",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 10-летней выдержки.",
+                        username: "user403",
+                        image: "images/specialalcoline/specialalco-3.webp",
+                        imagePosition: "center 35%"
+                    },
+                    {
+                        id: 404,
+                        name: "Jaku",
+                        description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – японском джине.",
+                        username: "user404",
+                        image: "images/specialalcoline/specialalco-4.webp",
                         imagePosition: "center 35%"
                     }
                 ]
@@ -1595,35 +1610,58 @@
                 `;
             }
 
-            document.getElementById('modal').classList.add('active');
-            document.body.style.overflow = 'hidden';
+            const modalElement = document.getElementById('modal');
+            const modalCard = modalElement.querySelector('.modal-card');
 
             // Проверяем, есть ли прокрутка в контенте
-            setTimeout(() => {
-                const modalCard = document.querySelector('#modal .modal-card');
-                const hasScroll = modalCard.scrollHeight > window.innerHeight * 0.9;
+            const hasScroll = modalCard.scrollHeight > window.innerHeight * 0.9;
 
-                // Удаляем старые обработчики и добавляем новые с учетом прокрутки
-                const modalElement = document.getElementById('modal');
-                const newModalElement = modalElement.cloneNode(true);
-                modalElement.parentNode.replaceChild(newModalElement, modalElement);
+            // Удаляем старые обработчики свайпа если есть
+            if (modalElement._swipeHandlers) {
+                modalElement._swipeHandlers.forEach(handler => {
+                    modalElement.removeEventListener(handler.event, handler.fn);
+                });
+            }
 
-                newModalElement.onclick = closeModal;
-                newModalElement.querySelector('.modal-close').onclick = closeModal;
-                newModalElement.querySelector('.modal-card').onclick = (e) => e.stopPropagation();
-                newModalElement.querySelector('#modalImage').onclick = openFullImage;
+            // Добавляем новые обработчики
+            modalElement._swipeHandlers = [];
+            setupModalHandlers(modalElement, hasScroll);
 
-                // Предотвращаем скролл фона при касании модального окна
-                newModalElement.addEventListener('touchmove', (e) => {
-                    const modalCard = newModalElement.querySelector('.modal-card');
-                    // Разрешаем скролл только внутри modal-card
-                    if (!modalCard.contains(e.target)) {
-                        e.preventDefault();
-                    }
-                }, { passive: false });
+            // Открываем модальное окно
+            document.body.style.overflow = 'hidden';
+            requestAnimationFrame(() => {
+                modalElement.classList.add('active');
+            });
+        }
 
-                handleSwipe(newModalElement, closeModal, hasScroll);
-            }, 100);
+        function setupModalHandlers(modalElement, hasScroll) {
+            const closeHandler = (e) => {
+                if (e.target === modalElement) closeModal();
+            };
+            const closeButtonHandler = () => closeModal();
+            const cardClickHandler = (e) => e.stopPropagation();
+            const imageClickHandler = () => openFullImage();
+
+            modalElement.addEventListener('click', closeHandler);
+            modalElement.querySelector('.modal-close').addEventListener('click', closeButtonHandler);
+            modalElement.querySelector('.modal-card').addEventListener('click', cardClickHandler);
+            modalElement.querySelector('#modalImage').addEventListener('click', imageClickHandler);
+
+            // Предотвращаем скролл фона
+            const touchMoveHandler = (e) => {
+                const modalCard = modalElement.querySelector('.modal-card');
+                if (!modalCard.contains(e.target)) {
+                    e.preventDefault();
+                }
+            };
+            modalElement.addEventListener('touchmove', touchMoveHandler, { passive: false });
+
+            modalElement._swipeHandlers = [
+                { event: 'click', fn: closeHandler },
+                { event: 'touchmove', fn: touchMoveHandler }
+            ];
+
+            handleSwipe(modalElement, closeModal, hasScroll);
         }
 
         function closeModal() {
