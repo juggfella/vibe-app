@@ -2818,15 +2818,38 @@
             if (isTelegramWebApp) {
                 console.log('Using Telegram MainButton');
 
+                // Сохраняем message для обработчика
+                window.pendingOrderMessage = message;
+
                 // Настраиваем MainButton
                 tg.MainButton.setText('Подтвердить заказ');
                 tg.MainButton.show();
                 tg.MainButton.enable();
 
-                // Обработчик нажатия на MainButton
+                // Удаляем старый обработчик если есть
+                tg.MainButton.offClick();
+
+                // Устанавливаем новый обработчик
                 tg.MainButton.onClick(function() {
                     console.log('MainButton clicked, sending data...');
-                    tg.sendData(message);
+                    console.log('Message to send:', window.pendingOrderMessage);
+
+                    try {
+                        tg.sendData(window.pendingOrderMessage);
+                        console.log('sendData called successfully');
+
+                        // Очищаем корзину
+                        cart = {};
+                        updateCartBadge();
+                        renderCart();
+                        closeCart();
+
+                        // Скрываем кнопку
+                        tg.MainButton.hide();
+                    } catch (e) {
+                        console.error('sendData error:', e);
+                        alert('Ошибка отправки: ' + e.message);
+                    }
                 });
 
                 return;
