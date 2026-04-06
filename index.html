@@ -114,7 +114,18 @@
             opacity: 0;
             animation: fadeIn 0.3s ease forwards;
             padding: 20px;
-            transition: box-shadow 0.3s ease;
+            transition: all 0.15s ease-in, all 0.4s ease-out;
+        }
+
+        .category:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .category:hover .category-image {
+            border-color: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15);
         }
 
         .category.active {
@@ -142,6 +153,7 @@
             align-items: center;
             gap: 16px;
             position: relative;
+            cursor: pointer;
         }
 
         .category-image {
@@ -225,6 +237,8 @@
             border-color: rgba(255, 255, 255, 0.3);
             box-shadow: 0 8px 30px rgba(255, 255, 255, 0.2), 0 0 40px rgba(255, 255, 255, 0.1);
             background: #1f1f1f;
+            z-index: 10;
+            position: relative;
         }
 
         .card:active {
@@ -292,13 +306,13 @@
             font-weight: 500;
             letter-spacing: 0.3px;
             transition: all 0.3s ease;
-            box-shadow: 0 2px 8px rgba(255, 255, 255, 0.15);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.08);
             max-width: 100%;
             word-wrap: break-word;
         }
 
         .contact-btn:hover {
-            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.4), 0 0 30px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.12);
             transform: translateY(-2px);
         }
 
@@ -335,11 +349,11 @@
             margin-bottom: 6px;
             display: flex;
             align-items: center;
-            gap: 45px;
+            gap: 8px;
         }
 
         .product-price .total-price {
-            font-size: 16px;
+            font-size: 14px;
             color: #fff;
             font-weight: 600;
         }
@@ -572,11 +586,11 @@
             cursor: pointer;
             letter-spacing: 1px;
             transition: all 0.3s ease;
-            box-shadow: 0 6px 30px rgba(255, 255, 255, 0.25);
+            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15);
         }
 
         .modal-contact-btn:hover {
-            box-shadow: 0 10px 50px rgba(255, 255, 255, 0.4), 0 0 40px rgba(255, 255, 255, 0.3);
+            box-shadow: 0 6px 25px rgba(255, 255, 255, 0.25), 0 0 20px rgba(255, 255, 255, 0.15);
             transform: translateY(-3px);
         }
 
@@ -746,6 +760,14 @@
             transition: all 0.3s ease;
         }
 
+        .cart-category-header > span:first-child {
+            flex: 1;
+        }
+
+        .cart-category-header > span:nth-child(2) {
+            margin-right: 8px;
+        }
+
         .cart-category-header:hover {
             background: rgba(255, 255, 255, 0.08);
             border-color: rgba(255, 255, 255, 0.15);
@@ -808,6 +830,7 @@
             <div class="modal-card-content">
                 <div class="modal-card-name">Корзина</div>
                 <div id="cartItems" style="margin: 20px 0;"></div>
+                <div id="cartTotal" style="font-size: 24px; font-weight: 700; color: #fff; text-align: center; margin: 20px 0;"></div>
                 <button class="modal-contact-btn" id="cartCheckoutBtn" onclick="checkoutCart()">Оформить заказ</button>
             </div>
         </div>
@@ -1208,7 +1231,6 @@
                         image: "images/redline/red-28.webp",
                         imagePosition: "center 35%",
                         weights: [
-                            { grams: 40, price: 240 },
                             { grams: 100, price: 590 },
                             { grams: 200, price: 1040 }
                         ]
@@ -1344,7 +1366,12 @@
                         description: "Насыщенный и глубокий вкус классического чая с тонкой терпкостью и легкой цитрусовой нотой бергамота в линейке Black Line (повышенной крепости). Здесь гармонично сочетается мягкая сладость, благородная горчинка и приятная свежесть, что делает вкус универсальным как для соло-забивок, так и для миксов с фруктами и ягодами.",
                         username: "user201",
                         image: "images/blackline/black-1.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 202,
@@ -1352,7 +1379,12 @@
                         description: "Классические лимонные леденцы, сладкий конфетный цитрусовый вкус.",
                         username: "user202",
                         image: "images/blackline/black-2.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 203,
@@ -1360,7 +1392,12 @@
                         description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
                         username: "user203",
                         image: "images/blackline/black-3.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 204,
@@ -1368,7 +1405,12 @@
                         description: "Вкус сладкой натуральной груши.",
                         username: "user204",
                         image: "images/blackline/black-4.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 205,
@@ -1376,7 +1418,12 @@
                         description: "Газированный напиток с клубничным сиропом и цитрусовыми лимонадными нотами на послевкусии",
                         username: "user205",
                         image: "images/blackline/black-5.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 206,
@@ -1384,7 +1431,12 @@
                         description: "Мы все ждем лета. Как оно прекрасно, дивно. \nНе за горами его зной, веселье, смех. \nА если свежести захочется - есть Кислая малина, \nНовый вкус Hypreme для каждого и всех!",
                         username: "user206",
                         image: "images/blackline/black-6.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 207,
@@ -1392,7 +1444,12 @@
                         description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
                         username: "user207",
                         image: "images/blackline/black-7.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 208,
@@ -1400,7 +1457,12 @@
                         description: "Базовый цитрусовый лимонад, уверенная классика и ничего лишнего.",
                         username: "user208",
                         image: "images/blackline/black-8.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 209,
@@ -1408,7 +1470,12 @@
                         description: "Нежный коктейль на основе молочных сливок с добавлением цельных ягод натуральной черники с характерной приятной вяжущей ноткой.",
                         username: "user209",
                         image: "images/blackline/black-9.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 210,
@@ -1416,7 +1483,12 @@
                         description: "Холодный итальянский десерт, наподобие сорбета, из свежих ягод малины.",
                         username: "user210",
                         image: "images/blackline/black-10.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 211,
@@ -1424,7 +1496,12 @@
                         description: "Не такая, как все… Яркая кислая маракуйя с насыщенным натуральным тропическим вкусом.",
                         username: "user211",
                         image: "images/blackline/black-11.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 212,
@@ -1432,7 +1509,12 @@
                         description: "Вкус апельсина",
                         username: "user212",
                         image: "images/blackline/black-12.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 213,
@@ -1440,7 +1522,12 @@
                         description: "Воздушная десертная выпечка с добавлением ароматной лимонной цедры.",
                         username: "user213",
                         image: "images/blackline/black-13.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 214,
@@ -1448,7 +1535,12 @@
                         description: "Растительный вкус, сладкий и освежающий, с долгим травянистым послевкусием – так мы представляем себе кактус.",
                         username: "user214",
                         image: "images/blackline/black-14.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 215,
@@ -1456,7 +1548,12 @@
                         description: "Яркий и сочный аромат крыжовника с мягкой кислинкой.",
                         username: "user215",
                         image: "images/blackline/black-15.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 216,
@@ -1464,7 +1561,12 @@
                         description: "Легкий вкусный тортик, украшенный сверху дынными дольками – безупречный фруктово-десертный тандем.",
                         username: "user216",
                         image: "images/blackline/black-16.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 217,
@@ -1472,7 +1574,12 @@
                         description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
                         username: "user217",
                         image: "images/blackline/black-17.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 218,
@@ -1480,7 +1587,12 @@
                         description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
                         username: "user218",
                         image: "images/blackline/black-18.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 219,
@@ -1488,7 +1600,12 @@
                         description: "Вкус голубики",
                         username: "user219",
                         image: "images/blackline/black-19.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 220,
@@ -1496,7 +1613,12 @@
                         description: "Сладкий, терпкий, насыщенный вкус спелого красного винограда с отдаленной кислинкой на послевкусии.",
                         username: "user220",
                         image: "images/blackline/black-20.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                     {
                         id: 221,
@@ -1504,7 +1626,12 @@
                         description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
                         username: "user221",
                         image: "images/blackline/black-21.webp",
-                        imagePosition: "center 35%"
+                        imagePosition: "center 35%",
+                        weights: [
+                            { grams: 40, price: 240 },
+                            { grams: 100, price: 590 },
+                            { grams: 200, price: 1040 }
+                        ]
                     },
                 ]
             },
@@ -2342,17 +2469,28 @@
                     if (!groupedByCategory[category.id]) {
                         groupedByCategory[category.id] = {
                             name: category.name,
-                            items: []
+                            items: [],
+                            totalPrice: 0
                         };
                     }
                     groupedByCategory[category.id].items.push(item);
+                    // Считаем суммарную стоимость категории
+                    if (item.selectedPrice) {
+                        groupedByCategory[category.id].totalPrice += item.selectedPrice * item.quantity;
+                    }
                 }
+            });
+
+            // Открываем все категории при рендере корзины
+            Object.keys(groupedByCategory).forEach(catId => {
+                openCartCategories[catId] = true;
             });
 
             cartItems.innerHTML = Object.entries(groupedByCategory).map(([catId, catData]) => `
                 <div class="cart-category">
                     <div class="cart-category-header" onclick="toggleCartCategory(${catId})">
                         <span>${catData.name}</span>
+                        <span style="font-size: 14px; color: #aaa; margin-left: 8px;">${catData.totalPrice} ₽</span>
                         <span class="cart-category-arrow" id="cart-arrow-${catId}" style="transform: ${openCartCategories[catId] ? 'rotate(180deg)' : 'rotate(0deg)'}">▼</span>
                     </div>
                     <div class="cart-category-content" id="cart-content-${catId}" style="display: ${openCartCategories[catId] ? 'block' : 'none'};">
@@ -2385,6 +2523,13 @@
                     </div>
                 </div>
             `).join('');
+
+            // Считаем общую итоговую сумму
+            const grandTotal = Object.values(groupedByCategory).reduce((sum, catData) => sum + catData.totalPrice, 0);
+            const cartTotalElement = document.getElementById('cartTotal');
+            if (cartTotalElement) {
+                cartTotalElement.textContent = `Итого: ${grandTotal} ₽`;
+            }
         }
 
         function toggleCartCategory(categoryId) {
