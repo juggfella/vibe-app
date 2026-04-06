@@ -2677,8 +2677,31 @@
             const items = Object.values(cart);
             if (items.length === 0) return;
 
+            // Получаем данные пользователя из Telegram WebApp
+            const user = tg.initDataUnsafe?.user;
+            const username = user?.username ? `@${user.username}` : null;
+            const firstName = user?.first_name || '';
+            const lastName = user?.last_name || '';
+            const userId = user?.id || '';
+
             // Формируем красивое сообщение с ценами
             let message = '<b>🛒 Новый заказ:</b>\n\n';
+
+            // Добавляем информацию о заказчике
+            if (username || firstName) {
+                message += '<b>👤 Заказчик:</b>\n';
+                if (username) {
+                    message += `Username: ${username}\n`;
+                }
+                if (firstName || lastName) {
+                    message += `Имя: ${firstName} ${lastName}\n`.trim() + '\n';
+                }
+                if (userId) {
+                    message += `ID: ${userId}\n`;
+                }
+                message += '\n';
+            }
+
             let totalPrice = 0;
 
             items.forEach(item => {
