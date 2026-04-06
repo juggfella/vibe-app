@@ -2649,10 +2649,12 @@
         }
 
         function sendToTelegram(orderText) {
-            const url = `${window.location.origin}/api/send-order`;
+            // Используем относительный путь для избежания CORS проблем
+            const url = '/api/send-order';
 
             console.log('=== Starting order send ===');
             console.log('URL:', url);
+            console.log('Full URL:', window.location.origin + url);
             console.log('Order text:', orderText);
             console.log('Platform:', tg.platform);
             console.log('Origin:', window.location.origin);
