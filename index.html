@@ -113,7 +113,7 @@
             overflow: visible;
             opacity: 0;
             animation: fadeIn 0.3s ease forwards;
-            padding: 20px;
+            padding: 16px;
             transition: background 0.15s ease-in, border-color 0.15s ease-in, box-shadow 0.4s ease-out;
         }
 
@@ -201,50 +201,43 @@
         .category-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.25s ease-out, padding 0.25s ease-out, margin-top 0s 0.25s;
+            transition: max-height 0.2s ease-out;
             margin-top: 0;
             padding: 0;
             display: grid;
             gap: 12px;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
         }
 
         .category.active .category-content {
             max-height: 3000px;
-            margin-top: 16px;
+            margin-top: 12px;
             padding: 8px 0;
-            transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin-top 0s;
+            transition: max-height 0.25s ease-out;
         }
 
         .catalog {
             display: grid;
             gap: 12px;
-            padding: 0 20px;
+            padding: 0 12px;
         }
 
         .card {
             background: #1a1a1a;
             border-radius: 16px;
-            padding: 20px;
+            padding: 16px;
             display: flex;
-            gap: 20px;
+            gap: 16px;
             cursor: pointer;
-            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, transform 0.2s ease;
+            transition: none;
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
         }
 
         .card:hover {
             border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 4px 15px rgba(255, 255, 255, 0.15), 0 0 20px rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 12px rgba(255, 255, 255, 0.12);
             background: #1f1f1f;
-            z-index: 10;
-            position: relative;
-            transform: translateZ(0) translateY(-2px);
         }
 
         .card:active {
