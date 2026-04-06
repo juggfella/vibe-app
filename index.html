@@ -1495,13 +1495,14 @@
         function handleSwipe(element, closeFunction, hasScrollableContent = false) {
             let startY = 0;
             let startScrollTop = 0;
-            let didScroll = false;
+            let isScrolling = false;
+            let scrollTimeout = null;
 
             const modalCard = element.querySelector('.modal-card');
 
             element.addEventListener('touchstart', (e) => {
                 startY = e.touches[0].clientY;
-                didScroll = false;
+                isScrolling = false;
 
                 if (hasScrollableContent && modalCard) {
                     startScrollTop = modalCard.scrollTop;
@@ -1509,23 +1510,33 @@
             }, { passive: true });
 
             modalCard?.addEventListener('scroll', () => {
-                // Если произошел скролл во время касания, отмечаем это
-                didScroll = true;
+                // Отмечаем что идет скролл
+                isScrolling = true;
+
+                // Сбрасываем таймер
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
+
+                // Через 150мс после последнего события scroll считаем что скролл закончился
+                scrollTimeout = setTimeout(() => {
+                    isScrolling = false;
+                }, 150);
             }, { passive: true });
 
             element.addEventListener('touchend', (e) => {
                 const endY = e.changedTouches[0].clientY;
                 const swipeDistance = endY - startY;
 
-                // Закрываем только если:
-                // 1. Не было скролла во время касания
-                // 2. Начали в самом верху (или нет прокручиваемого контента)
-                // 3. Свайп вниз больше 80px
-                const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
+                // Небольшая задержка чтобы дождаться начала инерционного скролла
+                setTimeout(() => {
+                    const atTop = !hasScrollableContent || (modalCard && startScrollTop === 0);
 
-                if (!didScroll && atTop && swipeDistance > 80) {
-                    closeFunction();
-                }
+                    // Закрываем только если не идет скролл, начали в верху и свайп вниз больше 80px
+                    if (!isScrolling && atTop && swipeDistance > 80) {
+                        closeFunction();
+                    }
+                }, 50);
             }, { passive: true });
         }
 
