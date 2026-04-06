@@ -372,7 +372,7 @@
             pointer-events: none;
             transition: opacity 0.3s ease;
             display: flex;
-            padding: 40px 20px 20px 20px;
+            padding: 0;
             overflow-y: auto;
         }
 
@@ -385,13 +385,15 @@
             background: #1a1a1a;
             border-radius: 20px;
             max-width: 400px;
-            width: 100%;
+            width: calc(100% - 40px);
             transform: scale(0.8);
             transition: transform 0.3s ease;
             padding: 24px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
-            margin: auto 0;
+            margin: 40px 20px 40px 20px;
+            max-height: calc(100vh - 80px);
+            overflow-y: auto;
         }
 
         .modal.active .modal-card {
