@@ -2639,13 +2639,63 @@
             renderCart();
         }
 
+        function sendToTelegram(orderText) {
+            // Отправляем на наш бэкенд
+            const url = '/api/send-order';
+
+            fetch(url, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    orderText: orderText
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    console.log('Заказ отправлен в телегу!');
+                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+                    // Очищаем корзину после успешной отправки
+                    cart = {};
+                    updateCartBadge();
+                    renderCart();
+                    closeCart();
+                } else {
+                    console.error('Ошибка отправки:', data);
+                    alert('Ошибка отправки заказа. Попробуйте еще раз.');
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка отправки заказа. Попробуйте еще раз.');
+            });
+        }
+
         function checkoutCart() {
             const items = Object.values(cart);
             if (items.length === 0) return;
 
-            const message = items.map(item => `${item.name} x${item.quantity}`).join('\n');
-            const username = 'juggfella';
-            tg.openTelegramLink(`https://t.me/${username}?text=${encodeURIComponent('Заказ:\n' + message)}`);
+            // Формируем красивое сообщение с ценами
+            let message = '<b>🛒 Новый заказ:</b>\n\n';
+            let totalPrice = 0;
+
+            items.forEach(item => {
+                const itemTotal = item.selectedPrice ? item.selectedPrice * item.quantity : 0;
+                totalPrice += itemTotal;
+                const weight = item.selectedWeight ? ` (${item.selectedWeight}г)` : '';
+                message += `${item.name}${weight} x${item.quantity}`;
+                if (itemTotal > 0) {
+                    message += ` — ${itemTotal} ₽`;
+                }
+                message += '\n';
+            });
+
+            message += `\n<b>Итого: ${totalPrice} ₽</b>`;
+
+            // Отправляем в телегу
+            sendToTelegram(message);
         }
 
         handleSwipe(document.getElementById('fullImageModal'), closeFullImage, false); // false = нет прокрутки
