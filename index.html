@@ -236,6 +236,7 @@
             align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.08);
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            margin: 0 -8px;
         }
 
         .card:hover {
@@ -1864,8 +1865,8 @@
 
             categoryElement.classList.toggle('active');
 
-            // Если открываем категорию, скроллим к её заголовку после завершения анимации
             if (isOpening) {
+                // Если открываем категорию, скроллим к её заголовку после завершения анимации
                 setTimeout(() => {
                     // Для последних двух категорий (4 и 5) больший отступ
                     const headerOffset = (categoryId === 4 || categoryId === 5) ? 120 : 20;
@@ -1877,6 +1878,31 @@
                         behavior: 'smooth'
                     });
                 }, 100);
+            } else {
+                // Если закрываем категорию, скроллим к её заголовку медленнее
+                setTimeout(() => {
+                    const elementPosition = categoryElement.getBoundingClientRect().top;
+                    const offsetPosition = elementPosition + window.pageYOffset - 20;
+                    const currentPosition = window.pageYOffset;
+                    const distance = offsetPosition - currentPosition;
+                    const duration = 400;
+                    let start = null;
+
+                    function animation(currentTime) {
+                        if (start === null) start = currentTime;
+                        const timeElapsed = currentTime - start;
+                        const progress = Math.min(timeElapsed / duration, 1);
+                        const ease = progress * (2 - progress); // easeOutQuad
+
+                        window.scrollTo(0, currentPosition + (distance * ease));
+
+                        if (timeElapsed < duration) {
+                            requestAnimationFrame(animation);
+                        }
+                    }
+
+                    requestAnimationFrame(animation);
+                }, 50);
             }
         }
 
