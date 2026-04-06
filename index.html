@@ -864,6 +864,15 @@
 
     <script>
         const tg = window.Telegram.WebApp;
+
+        // Инициализируем и логируем данные
+        console.log('Telegram WebApp initialized:', tg);
+        console.log('Platform:', tg.platform);
+        console.log('Version:', tg.version);
+        console.log('Init data:', tg.initData);
+        console.log('Init data unsafe:', tg.initDataUnsafe);
+
+        tg.ready();
         tg.expand();
         tg.disableVerticalSwipes();
 
@@ -2652,8 +2661,18 @@
                     orderText: orderText
                 })
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    return response.text().then(text => {
+                        console.error('Response error:', text);
+                        throw new Error(`HTTP ${response.status}: ${text}`);
+                    });
+                }
+                return response.json();
+            })
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     console.log('Заказ отправлен в телегу!');
                     alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
@@ -2664,12 +2683,12 @@
                     closeCart();
                 } else {
                     console.error('Ошибка отправки:', data);
-                    alert('Ошибка отправки заказа. Попробуйте еще раз.');
+                    alert(`Ошибка отправки заказа: ${data.error || 'Неизвестная ошибка'}. Попробуйте еще раз.`);
                 }
             })
             .catch(error => {
                 console.error('Ошибка:', error);
-                alert('Ошибка отправки заказа. Попробуйте еще раз.');
+                alert(`Ошибка отправки заказа: ${error.message}. Попробуйте еще раз.`);
             });
         }
 
@@ -2678,11 +2697,18 @@
             if (items.length === 0) return;
 
             // Получаем данные пользователя из Telegram WebApp
+            console.log('Telegram WebApp:', tg);
+            console.log('initDataUnsafe:', tg.initDataUnsafe);
+
             const user = tg.initDataUnsafe?.user;
+            console.log('User data:', user);
+
             const username = user?.username ? `@${user.username}` : null;
             const firstName = user?.first_name || '';
             const lastName = user?.last_name || '';
             const userId = user?.id || '';
+
+            console.log('Parsed data:', { username, firstName, lastName, userId });
 
             // Формируем красивое сообщение с ценами
             let message = '<b>🛒 Новый заказ:</b>\n\n';
