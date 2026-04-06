@@ -2649,15 +2649,41 @@
         }
 
         function sendToTelegram(orderText) {
-            // Используем относительный путь для избежания CORS проблем
-            const url = '/api/send-order';
-
             console.log('=== Starting order send ===');
-            console.log('URL:', url);
-            console.log('Full URL:', window.location.origin + url);
             console.log('Order text:', orderText);
             console.log('Platform:', tg.platform);
-            console.log('Origin:', window.location.origin);
+            console.log('Init data:', tg.initData);
+
+            // Проверяем, запущено ли приложение в Telegram WebApp
+            const isTelegramWebApp = tg.initData && tg.initData.length > 0;
+
+            if (isTelegramWebApp) {
+                console.log('Using Telegram WebApp sendData method');
+
+                // Отправляем данные через Telegram WebApp API
+                // Бот получит эти данные в web_app_data
+                try {
+                    tg.sendData(orderText);
+
+                    // Очищаем корзину
+                    cart = {};
+                    updateCartBadge();
+                    renderCart();
+                    closeCart();
+
+                    console.log('Data sent via Telegram WebApp');
+                } catch (e) {
+                    console.error('Telegram sendData error:', e);
+                    alert('Ошибка отправки через Telegram: ' + e.message);
+                }
+                return;
+            }
+
+            // Для веб-версии (не в Telegram) используем API
+            const url = '/api/send-order';
+
+            console.log('URL:', url);
+            console.log('Full URL:', window.location.origin + url);
 
             // Используем XMLHttpRequest для лучшей совместимости с iOS
             const xhr = new XMLHttpRequest();
