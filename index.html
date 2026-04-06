@@ -2663,7 +2663,13 @@
                 // Отправляем данные через Telegram WebApp API
                 // Бот получит эти данные в web_app_data
                 try {
+                    console.log('Calling tg.sendData with:', orderText.substring(0, 100) + '...');
                     tg.sendData(orderText);
+
+                    console.log('sendData called successfully');
+
+                    // Показываем подтверждение
+                    alert('Заказ отправлен! Ожидайте подтверждения от бота.');
 
                     // Очищаем корзину
                     cart = {};
