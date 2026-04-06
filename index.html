@@ -2652,29 +2652,32 @@
             console.log('=== Sending order ===');
             console.log('Order text length:', orderText.length);
 
-            fetch('/api/send-order', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ orderText: orderText })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
-                    cart = {};
-                    updateCartBadge();
-                    renderCart();
-                    closeCart();
-                } else {
-                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ошибка отправки: ' + error.message);
-            });
+            // Небольшая задержка для iOS
+            setTimeout(() => {
+                fetch('/api/send-order', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ orderText: orderText })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+                        cart = {};
+                        updateCartBadge();
+                        renderCart();
+                        closeCart();
+                    } else {
+                        alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('Ошибка отправки: ' + error.message);
+                });
+            }, 100);
         }
 
         function checkoutCart() {
