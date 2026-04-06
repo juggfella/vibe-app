@@ -201,21 +201,24 @@
         .category-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s 0.3s;
+            transition: max-height 0.25s ease-out, padding 0.25s ease-out, margin-top 0s 0.25s;
             margin-top: 0;
-            padding: 0;
+            margin-left: -20px;
+            margin-right: -20px;
+            padding: 0 20px;
             display: grid;
             gap: 12px;
-            will-change: max-height;
-            transform: translateZ(0);
-            -webkit-transform: translateZ(0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 1000;
+            perspective: 1000;
         }
 
         .category.active .category-content {
             max-height: 5000px;
             margin-top: 16px;
-            padding: 8px 0;
-            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), padding 0.35s cubic-bezier(0.4, 0, 0.2, 1), margin-top 0s;
+            padding: 8px 20px;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out, margin-top 0s;
         }
 
         .catalog {
