@@ -1,4 +1,7 @@
 export default async function handler(req, res) {
+    console.log('Request method:', req.method);
+    console.log('Request headers:', req.headers);
+
     // Разрешаем CORS
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -7,11 +10,13 @@ export default async function handler(req, res) {
 
     // Обрабатываем preflight запрос
     if (req.method === 'OPTIONS') {
+        console.log('Handling OPTIONS preflight request');
         return res.status(200).end();
     }
 
     if (req.method !== 'POST') {
-        return res.status(405).json({ error: 'Method not allowed' });
+        console.error('Invalid method:', req.method);
+        return res.status(405).json({ error: 'Method not allowed', method: req.method });
     }
 
     try {

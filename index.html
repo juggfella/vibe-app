@@ -2651,17 +2651,28 @@
         function sendToTelegram(orderText) {
             const url = `${window.location.origin}/api/send-order`;
 
-            console.log('Sending order to:', url);
+            console.log('=== Starting order send ===');
+            console.log('URL:', url);
             console.log('Order text:', orderText);
             console.log('Platform:', tg.platform);
+            console.log('Origin:', window.location.origin);
 
             // Используем XMLHttpRequest для лучшей совместимости с iOS
             const xhr = new XMLHttpRequest();
+
+            console.log('Opening XHR connection...');
             xhr.open('POST', url, true);
+
+            console.log('Setting headers...');
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.timeout = 30000; // 30 секунд
 
+            xhr.onreadystatechange = function() {
+                console.log('ReadyState changed:', xhr.readyState, 'Status:', xhr.status);
+            };
+
             xhr.onload = function() {
+                console.log('=== XHR onload ===');
                 console.log('Response status:', xhr.status);
                 console.log('Response text:', xhr.responseText);
 
@@ -2693,11 +2704,13 @@
             };
 
             xhr.onerror = function() {
+                console.error('=== XHR onerror ===');
                 console.error('Network error');
                 alert('Ошибка сети. Проверьте интернет-соединение и попробуйте еще раз.');
             };
 
             xhr.ontimeout = function() {
+                console.error('=== XHR ontimeout ===');
                 console.error('Timeout error');
                 alert('Превышено время ожидания. Проверьте интернет-соединение и попробуйте еще раз.');
             };
@@ -2705,7 +2718,9 @@
             try {
                 const payload = JSON.stringify({ orderText: orderText });
                 console.log('Sending payload:', payload);
+                console.log('Payload length:', payload.length);
                 xhr.send(payload);
+                console.log('XHR send called');
             } catch (e) {
                 console.error('Send error:', e);
                 alert('Ошибка отправки запроса: ' + e.message);
