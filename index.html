@@ -1428,21 +1428,29 @@
 
         let touchStartY = 0;
         let touchEndY = 0;
+        let touchStartElement = null;
 
         function handleSwipe(element, closeFunction) {
             element.addEventListener('touchstart', (e) => {
                 touchStartY = e.touches[0].clientY;
+                touchStartElement = e.target;
             }, { passive: false });
 
             element.addEventListener('touchmove', (e) => {
-                e.preventDefault();
+                // Разрешаем прокрутку внутри контента модального окна
+                const scrollableContent = e.target.closest('.modal-card-content, .cart-category-content, #cartItems');
+                if (!scrollableContent) {
+                    e.preventDefault();
+                }
             }, { passive: false });
 
             element.addEventListener('touchend', (e) => {
                 touchEndY = e.changedTouches[0].clientY;
                 const swipeDistance = touchStartY - touchEndY;
 
-                if (Math.abs(swipeDistance) > 50) {
+                // Закрываем только если свайп начался не внутри прокручиваемого контента
+                const scrollableContent = touchStartElement?.closest('.modal-card-content, .cart-category-content, #cartItems');
+                if (!scrollableContent && Math.abs(swipeDistance) > 50) {
                     closeFunction();
                 }
             }, { passive: false });
