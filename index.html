@@ -2650,6 +2650,8 @@
 
         function sendToTelegram(orderText) {
             console.log('=== Sending order ===');
+            console.log('Order text:', orderText);
+            console.log('Order text length:', orderText.length);
 
             fetch('/api/send-order', {
                 method: 'POST',
@@ -2660,6 +2662,7 @@
             })
             .then(response => response.json())
             .then(data => {
+                console.log('Response data:', data);
                 if (data.success) {
                     alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
                     cart = {};
@@ -2667,7 +2670,8 @@
                     renderCart();
                     closeCart();
                 } else {
-                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                    console.error('Error response:', data);
+                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка') + (data.details ? '\n' + data.details : ''));
                 }
             })
             .catch(error => {
