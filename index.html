@@ -796,6 +796,41 @@
     </style>
 </head>
 <body>
+    <!-- Модальное окно регистрации -->
+    <div id="registrationModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <h2 style="margin-bottom: 20px;">Регистрация</h2>
+            <form id="registrationForm" style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Имя</label>
+                    <input type="text" id="firstName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Фамилия</label>
+                    <input type="text" id="lastName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Город доставки</label>
+                    <input type="text" id="city" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Тип покупателя</label>
+                    <select id="userType" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                        <option value="">Выберите тип</option>
+                        <option value="retail">Розница</option>
+                        <option value="wholesale">Опт</option>
+                        <option value="distributor">Дистрибьютор</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Номер телефона</label>
+                    <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__" style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <button type="submit" class="modal-contact-btn" style="margin-top: 10px;">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
     <div class="header">
         <h1>
             <div>Hypreme</div>
@@ -2834,40 +2869,5 @@
         console.log('About to call checkRegistration...');
         checkRegistration();
     </script>
-
-    <!-- Модальное окно регистрации -->
-    <div id="registrationModal" class="modal" style="display: none;">
-        <div class="modal-content" style="max-width: 500px;">
-            <h2 style="margin-bottom: 20px;">Регистрация</h2>
-            <form id="registrationForm" style="display: flex; flex-direction: column; gap: 15px;">
-                <div>
-                    <label style="display: block; margin-bottom: 5px; color: #999;">Имя</label>
-                    <input type="text" id="firstName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 5px; color: #999;">Фамилия</label>
-                    <input type="text" id="lastName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 5px; color: #999;">Город доставки</label>
-                    <input type="text" id="city" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 5px; color: #999;">Тип покупателя</label>
-                    <select id="userType" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
-                        <option value="">Выберите тип</option>
-                        <option value="retail">Розница</option>
-                        <option value="wholesale">Опт</option>
-                        <option value="distributor">Дистрибьютор</option>
-                    </select>
-                </div>
-                <div>
-                    <label style="display: block; margin-bottom: 5px; color: #999;">Номер телефона</label>
-                    <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__" style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
-                </div>
-                <button type="submit" class="modal-contact-btn" style="margin-top: 10px;">Зарегистрироваться</button>
-            </form>
-        </div>
-    </div>
 </body>
 </html>
