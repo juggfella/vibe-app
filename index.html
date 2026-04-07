@@ -2756,17 +2756,26 @@
 
         // Функция проверки регистрации
         async function checkRegistration() {
+            console.log('checkRegistration called');
             const user = tg.initDataUnsafe?.user;
+            console.log('User from Telegram:', user);
+
             if (!user?.id) {
                 console.log('No user data from Telegram');
                 return;
             }
 
+            console.log('User ID:', user.id);
+
             try {
+                console.log('Fetching registration status...');
                 const response = await fetch(`https://hypremeapp.vercel.app/api/register?telegram_id=${user.id}`);
+                console.log('Response received:', response.status);
                 const data = await response.json();
+                console.log('Registration data:', data);
 
                 if (!data.registered) {
+                    console.log('User not registered, showing form');
                     // Показываем форму регистрации
                     document.getElementById('registrationModal').style.display = 'flex';
 
