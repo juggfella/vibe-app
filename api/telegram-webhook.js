@@ -1,6 +1,7 @@
 export default async function handler(req, res) {
-    console.log('Webhook received');
+    console.log('=== Webhook received ===');
     console.log('Method:', req.method);
+    console.log('Headers:', JSON.stringify(req.headers, null, 2));
     console.log('Body:', JSON.stringify(req.body, null, 2));
 
     if (req.method !== 'POST') {
@@ -10,12 +11,16 @@ export default async function handler(req, res) {
     try {
         const update = req.body;
 
+        console.log('Checking for web_app_data...');
+        console.log('Has message?', !!update.message);
+        console.log('Has web_app_data?', !!update.message?.web_app_data);
+
         // Проверяем, есть ли web_app_data
         if (update.message?.web_app_data) {
             const webAppData = update.message.web_app_data;
             const orderText = webAppData.data;
 
-            console.log('Received web_app_data:', orderText);
+            console.log('✅ Received web_app_data:', orderText);
 
             const botToken = process.env.BOT_TOKEN;
             const chatId = process.env.CHAT_ID;
