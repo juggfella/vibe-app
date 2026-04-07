@@ -2652,17 +2652,39 @@
         function sendToTelegram(orderText) {
             console.log('=== Sending order ===');
             console.log('Order text:', orderText);
-            console.log('Order text length:', orderText.length);
 
-            // Используем Telegram WebApp API для отправки данных
-            tg.sendData(orderText);
+            const apiUrl = 'https://vibe-app-eta.vercel.app/api/send-order';
 
-            // Показываем успех и очищаем корзину
-            alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
-            cart = {};
-            updateCartBadge();
-            renderCart();
-            closeCart();
+            fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ orderText: orderText })
+            })
+            .then(response => {
+                console.log('Response status:', response.status);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Response data:', data);
+                if (data.success) {
+                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+                    cart = {};
+                    updateCartBadge();
+                    renderCart();
+                    closeCart();
+                } else {
+                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('Ошибка отправки: ' + error.message);
+            });
         }
 
         // Экранирование HTML для Telegram
