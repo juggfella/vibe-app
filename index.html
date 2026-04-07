@@ -2755,6 +2755,115 @@
         handleSwipe(document.getElementById('cartModal'), closeCart, true); // true = есть прокрутка
 
         renderCatalog();
+
+        // Проверка регистрации при загрузке
+        checkRegistration();
+    </script>
+
+    <!-- Модальное окно регистрации -->
+    <div id="registrationModal" class="modal" style="display: none;">
+        <div class="modal-content" style="max-width: 500px;">
+            <h2 style="margin-bottom: 20px;">Регистрация</h2>
+            <form id="registrationForm" style="display: flex; flex-direction: column; gap: 15px;">
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Имя</label>
+                    <input type="text" id="firstName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Фамилия</label>
+                    <input type="text" id="lastName" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Город доставки</label>
+                    <input type="text" id="city" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Тип покупателя</label>
+                    <select id="userType" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                        <option value="">Выберите тип</option>
+                        <option value="retail">Розница</option>
+                        <option value="wholesale">Опт</option>
+                        <option value="distributor">Дистрибьютор</option>
+                    </select>
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 5px; color: #999;">Номер телефона</label>
+                    <input type="tel" id="phone" required placeholder="+7 (___) ___-__-__" style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px;">
+                </div>
+                <button type="submit" class="modal-contact-btn" style="margin-top: 10px;">Зарегистрироваться</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        async function checkRegistration() {
+            const user = tg.initDataUnsafe?.user;
+            if (!user?.id) {
+                console.log('No user data from Telegram');
+                return;
+            }
+
+            try {
+                const response = await fetch(`https://vibe-app-eta.vercel.app/api/register?telegram_id=${user.id}`);
+                const data = await response.json();
+
+                if (!data.registered) {
+                    // Показываем форму регистрации
+                    document.getElementById('registrationModal').style.display = 'flex';
+
+                    // Предзаполняем данные из Telegram
+                    if (user.first_name) document.getElementById('firstName').value = user.first_name;
+                    if (user.last_name) document.getElementById('lastName').value = user.last_name;
+                } else {
+                    console.log('User already registered:', data.user);
+                    // Можно сохранить данные пользователя для использования (например, для цен)
+                    window.currentUser = data.user;
+                }
+            } catch (error) {
+                console.error('Error checking registration:', error);
+            }
+        }
+
+        document.getElementById('registrationForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const user = tg.initDataUnsafe?.user;
+            if (!user?.id) {
+                alert('Ошибка: не удалось получить данные Telegram');
+                return;
+            }
+
+            const formData = {
+                telegram_id: user.id,
+                username: user.username,
+                first_name: document.getElementById('firstName').value,
+                last_name: document.getElementById('lastName').value,
+                city: document.getElementById('city').value,
+                user_type: document.getElementById('userType').value,
+                phone: document.getElementById('phone').value
+            };
+
+            try {
+                const response = await fetch('https://vibe-app-eta.vercel.app/api/register', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    alert('Регистрация успешна!');
+                    document.getElementById('registrationModal').style.display = 'none';
+                    window.currentUser = data.user;
+                } else {
+                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                }
+            } catch (error) {
+                console.error('Error registering:', error);
+                alert('Ошибка регистрации: ' + error.message);
+            }
+        });
     </script>
 </body>
 </html>
