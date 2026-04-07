@@ -2676,6 +2676,14 @@
             });
         }
 
+        // Экранирование HTML для Telegram
+        function escapeHtml(text) {
+            return String(text)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;');
+        }
+
         function checkoutCart() {
             const items = Object.values(cart);
             if (items.length === 0) return;
@@ -2701,10 +2709,10 @@
             if (username || firstName) {
                 message += '<b>👤 Заказчик:</b>\n';
                 if (username) {
-                    message += `Username: ${username}\n`;
+                    message += `Username: ${escapeHtml(username)}\n`;
                 }
                 if (firstName || lastName) {
-                    message += `Имя: ${firstName} ${lastName}\n`.trim() + '\n';
+                    message += `Имя: ${escapeHtml(firstName)} ${escapeHtml(lastName)}\n`.trim() + '\n';
                 }
                 if (userId) {
                     message += `ID: ${userId}\n`;
@@ -2718,7 +2726,7 @@
                 const itemTotal = item.selectedPrice ? item.selectedPrice * item.quantity : 0;
                 totalPrice += itemTotal;
                 const weight = item.selectedWeight ? ` (${item.selectedWeight}г)` : '';
-                message += `${item.name}${weight} x${item.quantity}`;
+                message += `${escapeHtml(item.name)}${weight} x${item.quantity}`;
                 if (itemTotal > 0) {
                     message += ` — ${itemTotal} ₽`;
                 }
