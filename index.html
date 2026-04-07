@@ -2654,40 +2654,15 @@
             console.log('Order text:', orderText);
             console.log('Order text length:', orderText.length);
 
-            const apiUrl = 'https://vibe-app-eta.vercel.app/api/send-order';
-            console.log('API URL:', apiUrl);
+            // Используем Telegram WebApp API для отправки данных
+            tg.sendData(orderText);
 
-            fetch(apiUrl, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({ orderText: orderText })
-            })
-            .then(response => {
-                console.log('Response status:', response.status);
-                console.log('Response headers:', response.headers);
-                return response.text();
-            })
-            .then(text => {
-                console.log('Response text:', text);
-                const data = JSON.parse(text);
-                console.log('Response data:', data);
-                if (data.success) {
-                    alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
-                    cart = {};
-                    updateCartBadge();
-                    renderCart();
-                    closeCart();
-                } else {
-                    console.error('Error response:', data);
-                    alert('Ошибка: ' + (data.error || 'Неизвестная ошибка') + (data.details ? '\n' + data.details : ''));
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                alert('Ошибка отправки: ' + error.message);
-            });
+            // Показываем успех и очищаем корзину
+            alert('Заказ отправлен! Мы свяжемся с вами в ближайшее время.');
+            cart = {};
+            updateCartBadge();
+            renderCart();
+            closeCart();
         }
 
         // Экранирование HTML для Telegram
