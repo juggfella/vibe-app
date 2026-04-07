@@ -2654,7 +2654,10 @@
             console.log('Order text:', orderText);
             console.log('Order text length:', orderText.length);
 
-            fetch('/api/send-order', {
+            const apiUrl = 'https://vibe-app-eta.vercel.app/api/send-order';
+            console.log('API URL:', apiUrl);
+
+            fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
