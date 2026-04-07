@@ -2812,7 +2812,12 @@
                 if (!data.registered) {
                     console.log('User not registered, showing form');
                     // Показываем форму регистрации
-                    document.getElementById('registrationModal').style.display = 'flex';
+                    const modal = document.getElementById('registrationModal');
+                    modal.style.display = 'flex';
+                    setTimeout(() => {
+                        modal.style.opacity = '1';
+                        modal.style.pointerEvents = 'auto';
+                    }, 10);
 
                     // Предзаполняем данные из Telegram
                     if (user.first_name) document.getElementById('firstName').value = user.first_name;
