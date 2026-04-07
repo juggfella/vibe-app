@@ -1,4 +1,4 @@
-import { sql } from '@vercel/postgres';
+import { neon } from '@neondatabase/serverless';
 
 export default async function handler(req, res) {
     // CORS
@@ -9,6 +9,8 @@ export default async function handler(req, res) {
     if (req.method === 'OPTIONS') {
         return res.status(200).end();
     }
+
+    const sql = neon(process.env.DATABASE_URL);
 
     if (req.method === 'GET') {
         // Проверка, зарегистрирован ли пользователь
@@ -23,10 +25,10 @@ export default async function handler(req, res) {
                 SELECT * FROM users WHERE telegram_id = ${telegram_id}
             `;
 
-            if (result.rows.length > 0) {
+            if (result.length > 0) {
                 return res.status(200).json({
                     registered: true,
-                    user: result.rows[0]
+                    user: result[0]
                 });
             } else {
                 return res.status(200).json({ registered: false });
@@ -60,7 +62,7 @@ export default async function handler(req, res) {
                 SELECT id FROM users WHERE telegram_id = ${telegram_id}
             `;
 
-            if (existing.rows.length > 0) {
+            if (existing.length > 0) {
                 return res.status(400).json({ error: 'User already registered' });
             }
 
@@ -73,7 +75,7 @@ export default async function handler(req, res) {
 
             return res.status(201).json({
                 success: true,
-                user: result.rows[0]
+                user: result[0]
             });
         } catch (error) {
             console.error('Database error:', error);
