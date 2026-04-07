@@ -2664,8 +2664,14 @@
                 },
                 body: JSON.stringify({ orderText: orderText })
             })
-            .then(response => response.json())
-            .then(data => {
+            .then(response => {
+                console.log('Response status:', response.status);
+                console.log('Response headers:', response.headers);
+                return response.text();
+            })
+            .then(text => {
+                console.log('Response text:', text);
+                const data = JSON.parse(text);
                 console.log('Response data:', data);
                 if (data.success) {
                     alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
