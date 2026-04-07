@@ -2706,17 +2706,17 @@
 
             console.log('Parsed data:', { username, firstName, lastName, userId });
 
-            // Формируем красивое сообщение с ценами
-            let message = '<b>🛒 Новый заказ:</b>\n\n';
+            // Формируем сообщение без HTML
+            let message = '🛒 НОВЫЙ ЗАКАЗ\n\n';
 
             // Добавляем информацию о заказчике
             if (username || firstName) {
-                message += '<b>👤 Заказчик:</b>\n';
+                message += '👤 Заказчик:\n';
                 if (username) {
-                    message += `Username: ${escapeHtml(username)}\n`;
+                    message += `Username: ${username}\n`;
                 }
                 if (firstName || lastName) {
-                    message += `Имя: ${escapeHtml(firstName)} ${escapeHtml(lastName)}\n`.trim() + '\n';
+                    message += `Имя: ${firstName} ${lastName}\n`.trim() + '\n';
                 }
                 if (userId) {
                     message += `ID: ${userId}\n`;
@@ -2730,14 +2730,14 @@
                 const itemTotal = item.selectedPrice ? item.selectedPrice * item.quantity : 0;
                 totalPrice += itemTotal;
                 const weight = item.selectedWeight ? ` (${item.selectedWeight}г)` : '';
-                message += `${escapeHtml(item.name)}${weight} x${item.quantity}`;
+                message += `${item.name}${weight} x${item.quantity}`;
                 if (itemTotal > 0) {
                     message += ` — ${itemTotal} ₽`;
                 }
                 message += '\n';
             });
 
-            message += `\n<b>Итого: ${totalPrice} ₽</b>`;
+            message += `\nИТОГО: ${totalPrice} ₽`;
 
             // Отправляем заказ
             sendToTelegram(message);
