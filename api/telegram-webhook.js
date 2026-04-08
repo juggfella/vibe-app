@@ -82,7 +82,19 @@ export default async function handler(req, res) {
                 });
             }
 
-            if (fromChatId === managerChatId && command === '/list') {
+            if (fromChatId === managerChatId && command === '/menu') {
+                await tgApi(botToken, 'sendMessage', {
+                    chat_id: managerChatId,
+                    text: '📋 Панель менеджера',
+                    reply_markup: {
+                        keyboard: [[{ text: '📋 Список клиентов' }]],
+                        resize_keyboard: true,
+                        persistent: true
+                    }
+                });
+            }
+
+            if (fromChatId === managerChatId && (command === '/list' || msg.text.trim() === '📋 Список клиентов')) {
                 const users = await sql`SELECT * FROM users ORDER BY created_at DESC`;
 
                 if (users.length === 0) {
