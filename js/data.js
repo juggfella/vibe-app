@@ -787,7 +787,10 @@ const categories = [
                 description: "Нежный аромат сливочного пломбира переплетается с сочностью арбуза и сладостью дыни, создавая мягкий и свежий микс",
                 username: "user301",
                 image: "images/mixline/mix-1.webp",
-                imagePosition: "center 40%"
+                imagePosition: "center 40%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 302,
@@ -795,7 +798,10 @@ const categories = [
                 description: "Сочная груша, свежий вкус кактуса и оригинальный коктейль Маргарита создают интересный и необычный микс вкусов",
                 username: "user302",
                 image: "images/mixline/mix-2.webp",
-                imagePosition: "center 40%"
+                imagePosition: "center 40%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 303,
@@ -803,7 +809,10 @@ const categories = [
                 description: "Классический сладкий микс: манго, маракуйя, личи. ",
                 username: "user303",
                 image: "images/mixline/mix-3.webp",
-                imagePosition: "center 40%"
+                imagePosition: "center 40%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 304,
@@ -811,7 +820,10 @@ const categories = [
                 description: "Вкус, отдаленно напоминающий «Мажитель». Сладкие фрукты собавлением молока и небольшой холодинкой мякоти арбуза.",
                 username: "user304",
                 image: "images/mixline/mix-4.webp",
-                imagePosition: "center 40%"
+                imagePosition: "center 40%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 305,
@@ -819,7 +831,10 @@ const categories = [
                 description: "Сладкое тропическое сочетание с ведущим манго, идеальное в качестве премикса и ненавязчивое в соло",
                 username: "user305",
                 image: "images/mixline/mix-5.webp",
-                imagePosition: "center 40%"
+                imagePosition: "center 40%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 306,
@@ -827,7 +842,10 @@ const categories = [
                 description: "Сбалансированный вкус чая с медом и нежными деликатными нотами дыни и персика. Сладкий.",
                 username: "user306",
                 image: "images/mixline/mix-6.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 307,
@@ -835,7 +853,10 @@ const categories = [
                 description: "Малина, сливки, кокосовое молоко",
                 username: "user307",
                 image: "images/mixline/mix-7.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 308,
@@ -843,7 +864,10 @@ const categories = [
                 description: "Напиточный микс на основе колы с кислинкой ананаса и сластинкой смородины.",
                 username: "user308",
                 image: "images/mixline/mix-8.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 309,
@@ -851,7 +875,10 @@ const categories = [
                 description: "Яблоко, тархун, фейхоа",
                 username: "user309",
                 image: "images/mixline/mix-9.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 310,
@@ -859,7 +886,10 @@ const categories = [
                 description: "Сочетание сладкого мармелада с нежным ягодным муссом дарит взрыв вкуса: сладость встречается с лёгкой кислинкой, создавая мягкий и запоминающийся микс",
                 username: "user310",
                 image: "images/mixline/mix-10.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 311,
@@ -867,7 +897,10 @@ const categories = [
                 description: "Кола, апельсин, кашмир.",
                 username: "user311",
                 image: "images/mixline/mix-11.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 312,
@@ -875,7 +908,10 @@ const categories = [
                 description: "Газировка, цитрусы, ананас",
                 username: "user312",
                 image: "images/mixline/mix-12.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 313,
@@ -883,7 +919,10 @@ const categories = [
                 description: "Микс с ароматом банана, сливок и клубники",
                 username: "user313",
                 image: "images/mixline/mix-13.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 314,
@@ -891,7 +930,10 @@ const categories = [
                 description: "Яркая кислинка вишни сочетается с сочной малиной и терпким крыжовником, создавая насыщенный и освежающий микс с глубоким ароматом",
                 username: "user314",
                 image: "images/mixline/mix-14.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
             {
                 id: 315,
@@ -899,7 +941,10 @@ const categories = [
                 description: "Сладкие дачные ягоды с травянистой нотой, поддержанной зеленым виноградом и сладкой мятой.",
                 username: "user315",
                 image: "images/mixline/mix-15.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 150 }
+                ]
             },
         ]
     },
@@ -915,7 +960,12 @@ const categories = [
                 description: "Безароматический бленд крепостью выше-средней.",
                 username: "user405",
                 image: "images/specialline/special-1.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 40, price: 240 },
+                { grams: 100, price: 590 },
+                { grams: 200, price: 1040 }
+                ]
             },
             {
                 id: 402,
@@ -923,7 +973,12 @@ const categories = [
                 description: "Крепкая безаромка с нотками чернослива.",
                 username: "user406",
                 image: "images/specialline/special-2.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 40, price: 240 },
+                { grams: 100, price: 590 },
+                { grams: 200, price: 1040 }
+                ]
             },
             {
                 id: 403,
@@ -931,7 +986,12 @@ const categories = [
                 description: "Дескрипторы: терпкие болотные травы, землистые коренья и древесная кора, дополненные густым ароматом печного дыма и влажной почвы.",
                 username: "user407",
                 image: "images/specialline/special-3.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 40, price: 240 },
+                { grams: 100, price: 590 },
+                { grams: 200, price: 1040 }
+                ]
             },
             {
                 id: 404,
@@ -939,7 +999,12 @@ const categories = [
                 description: "Безароматический бленд средней крепости.",
                 username: "user408",
                 image: "images/specialline/special-4.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 40, price: 240 },
+                { grams: 100, price: 590 },
+                { grams: 200, price: 1040 }
+                ]
             }
         ]
     },
@@ -955,7 +1020,11 @@ const categories = [
                 description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 16-летней выдержки",
                 username: "user401",
                 image: "images/specialalcoline/specialalco-1.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 240 },
+                { grams: 200, price: 1800 }
+                ]
             },
             {
                 id: 502,
@@ -963,7 +1032,11 @@ const categories = [
                 description: "Новый вкус в коллекции special. Холодная ферментация на алкоголе ноты: кубинский ром, дым, пряности, дуб, сладкие специи.",
                 username: "user402",
                 image: "images/specialalcoline/specialalco-2.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 240 },
+                { grams: 200, price: 1800 }
+                ]
             },
             {
                 id: 503,
@@ -971,7 +1044,11 @@ const categories = [
                 description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – шотландском виски 10-летней выдержки.",
                 username: "user403",
                 image: "images/specialalcoline/specialalco-3.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 240 },
+                { grams: 200, price: 1800 }
+                ]
             },
             {
                 id: 504,
@@ -979,7 +1056,11 @@ const categories = [
                 description: "Безароматика, полученная по технологии холодной ферментации табака на алкоголе – японском джине.",
                 username: "user404",
                 image: "images/specialalcoline/specialalco-4.webp",
-                imagePosition: "center 35%"
+                imagePosition: "center 35%",
+                weights: [
+                { grams: 25, price: 240 },
+                { grams: 200, price: 1800 }
+                ]
             }
         ]
     }
