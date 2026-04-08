@@ -30,42 +30,49 @@ export default async function handler(req, res) {
                 const command = text.split('@')[0];
 
                 if (command === '/list') {
-                    const sql = neon(process.env.DATABASE_URL);
-                    const users = await sql`SELECT * FROM users ORDER BY created_at DESC`;
+                    try {
+                        const sql = neon(process.env.DATABASE_URL);
+                        const users = await sql`SELECT * FROM users ORDER BY created_at DESC`;
 
-                    if (users.length === 0) {
+                        if (users.length === 0) {
+                            await tgApi(botToken, 'sendMessage', {
+                                chat_id: managerChatId,
+                                text: 'База пользователей пуста.'
+                            });
+                            return res.status(200).json({ ok: true });
+                        }
+
+                        const statusIcon = { approved: '✅', pending: '⏳', rejected: '❌' };
+                        const typeLabels = {
+                            retail: 'Розничный',
+                            wholesale: 'Оптовый',
+                            distributor: 'Дистрибьютор'
+                        };
+
+                        for (const u of users) {
+                            const fullName = [u.first_name, u.last_name].filter(Boolean).join(' ') || '—';
+                            const icon = statusIcon[u.status] || '❓';
+
+                            await tgApi(botToken, 'sendMessage', {
+                                chat_id: managerChatId,
+                                text:
+                                    `${icon} ${fullName}\n` +
+                                    `📱 ${u.username ? '@' + u.username : '—'}\n` +
+                                    `📞 ${u.phone || '—'}\n` +
+                                    `🏙 ${u.city || '—'}\n` +
+                                    `👤 ${typeLabels[u.user_type] || u.user_type}\n` +
+                                    `🆔 ${u.telegram_id}`,
+                                reply_markup: {
+                                    inline_keyboard: [[
+                                        { text: '🗑 Удалить из базы', callback_data: `delete:${u.telegram_id}` }
+                                    ]]
+                                }
+                            });
+                        }
+                    } catch (err) {
                         await tgApi(botToken, 'sendMessage', {
                             chat_id: managerChatId,
-                            text: 'База пользователей пуста.'
-                        });
-                        return res.status(200).json({ ok: true });
-                    }
-
-                    const statusIcon = { approved: '✅', pending: '⏳', rejected: '❌' };
-                    const typeLabels = {
-                        retail: 'Розничный',
-                        wholesale: 'Оптовый',
-                        distributor: 'Дистрибьютор'
-                    };
-
-                    for (const u of users) {
-                        const fullName = [u.first_name, u.last_name].filter(Boolean).join(' ') || '—';
-                        const icon = statusIcon[u.status] || '❓';
-
-                        await tgApi(botToken, 'sendMessage', {
-                            chat_id: managerChatId,
-                            text:
-                                `${icon} ${fullName}\n` +
-                                `📱 ${u.username ? '@' + u.username : '—'}\n` +
-                                `📞 ${u.phone || '—'}\n` +
-                                `🏙 ${u.city || '—'}\n` +
-                                `👤 ${typeLabels[u.user_type] || u.user_type}\n` +
-                                `🆔 ${u.telegram_id}`,
-                            reply_markup: {
-                                inline_keyboard: [[
-                                    { text: '🗑 Удалить из базы', callback_data: `delete:${u.telegram_id}` }
-                                ]]
-                            }
+                            text: `❌ Ошибка /list: ${err.message}`
                         });
                     }
 
