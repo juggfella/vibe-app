@@ -22,8 +22,14 @@ function sendToTelegram(orderText) {
         console.log('Response data:', data);
         if (data.success) {
             alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
+            const prevCartItems = Object.values(cart);
             cart = {};
             updateCartBadge();
+            prevCartItems.forEach(item => {
+                const weight = item.selectedWeight || null;
+                updateCartControl(item.id, weight);
+                if (weight) selectWeight(item.id, weight);
+            });
             renderCart();
             closeCart();
         } else {
