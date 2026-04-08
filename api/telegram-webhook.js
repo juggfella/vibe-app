@@ -44,15 +44,17 @@ function buildListPage(users, page) {
         deleteRows.push(row);
     }
 
-    // Навигация
+    // Навигация + закрытие
     const navRow = [];
     if (page > 0)               navRow.push({ text: '← Пред.', callback_data: `list:${page - 1}` });
     navRow.push({ text: `${page + 1} / ${totalPages}`, callback_data: 'noop' });
     if (page < totalPages - 1)  navRow.push({ text: 'След. →', callback_data: `list:${page + 1}` });
 
+    const closeRow = [{ text: '✖ Закрыть', callback_data: 'close' }];
+
     return {
         text,
-        reply_markup: { inline_keyboard: [...deleteRows, navRow] }
+        reply_markup: { inline_keyboard: [...deleteRows, navRow, closeRow] }
     };
 }
 
@@ -180,6 +182,13 @@ export default async function handler(req, res) {
                     text: '❌ К сожалению, ваша заявка была отклонена. Если вы считаете это ошибкой — свяжитесь с нами.'
                 });
             }
+            // Закрыть — удаляем сообщение
+            } else if (data === 'close') {
+                await tgApi(botToken, 'deleteMessage', {
+                    chat_id: chatId,
+                    message_id: messageId
+                });
+
             // noop — кнопка текущей страницы, ничего не делаем
         }
 
