@@ -174,7 +174,7 @@ export default async function handler(req, res) {
                 });
                 await tgApi(botToken, 'sendMessage', {
                     chat_id: telegramId,
-                    text: `✅ Ваша заявка одобрена!\n\nВы зарегистрированы как: ${TYPE_LABEL_FULL[userType]}\n\nДобро пожаловать в Hypreme Tobacco! Откройте приложение, чтобы сделать заказ.`
+                    text: `✅ Ваша заявка одобрена!\n\nДобро пожаловать в Hypreme Tobacco! Откройте приложение, чтобы сделать заказ.`
                 });
 
             // Отказ: reject:TELEGRAM_ID
