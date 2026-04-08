@@ -8,7 +8,7 @@ export default async function handler(req, res) {
     try {
         const update = req.body;
         const botToken = process.env.BOT_TOKEN;
-        const managerChatId = String(process.env.MANAGER_CHAT_ID);
+        const managerChatId = String(process.env.MANAGER_CHAT_ID).trim();
 
         // ── Команды менеджера (/list) ─────────────────────────────────────
         if (update.message?.text) {
@@ -17,6 +17,14 @@ export default async function handler(req, res) {
             const text = msg.text.trim();
 
             // Принимаем команды только из беседы менеджера
+            // /debug — временная команда для диагностики (можно удалить после проверки)
+            if (text.split('@')[0] === '/debug') {
+                await tgApi(botToken, 'sendMessage', {
+                    chat_id: fromChatId,
+                    text: `fromChatId: ${fromChatId}\nmanagerChatId: ${managerChatId}\nmatch: ${fromChatId === managerChatId}`
+                });
+            }
+
             if (fromChatId === managerChatId) {
                 // Убираем возможный @botname из команды: /list@hypremetobacco_bot → /list
                 const command = text.split('@')[0];
