@@ -796,3 +796,44 @@
         .cart-category-content[style*="display: block"] {
             max-height: 5000px;
         }
+
+        #pendingScreen {
+            position: fixed;
+            inset: 0;
+            background: #0d0d0d;
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        #pendingContent {
+            text-align: center;
+            max-width: 320px;
+        }
+
+        #pendingIcon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50%       { opacity: 0.6; transform: scale(0.95); }
+        }
+
+        #pendingTitle {
+            font-size: 22px;
+            font-weight: 400;
+            color: #fff;
+            letter-spacing: 0.5px;
+            margin-bottom: 16px;
+        }
+
+        #pendingMessage {
+            font-size: 15px;
+            color: #777;
+            line-height: 1.6;
+        }

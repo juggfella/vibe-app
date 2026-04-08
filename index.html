@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Экран ожидания / отказа -->
+    <div id="pendingScreen" style="display: none;">
+        <div id="pendingContent">
+            <div id="pendingIcon">⏳</div>
+            <div id="pendingTitle">Заявка на рассмотрении</div>
+            <div id="pendingMessage">Подождите, пожалуйста, подтверждение заявки нашим менеджером. Когда ваша заявка будет одобрена, наш бот сообщит вам!</div>
+        </div>
+    </div>
+
     <!-- Модальное окно регистрации -->
     <div id="registrationModal" class="modal" style="display: none;">
         <div class="modal-content">
