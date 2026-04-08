@@ -42,53 +42,60 @@ function checkoutCart() {
     const items = Object.values(cart);
     if (items.length === 0) return;
 
-    // Получаем данные пользователя из Telegram WebApp
-    console.log('Telegram WebApp:', tg);
-    console.log('initDataUnsafe:', tg.initDataUnsafe);
+    const u = window.currentUser;
+    const tgUser = tg.initDataUnsafe?.user;
 
-    const user = tg.initDataUnsafe?.user;
-    console.log('User data:', user);
+    const userTypeLabels = {
+        retail: 'Розничный покупатель',
+        wholesale: 'Оптовый покупатель',
+        distributor: 'Дистрибьютор'
+    };
 
-    const username = user?.username ? `@${user.username}` : null;
-    const firstName = user?.first_name || '';
-    const lastName = user?.last_name || '';
-    const userId = user?.id || '';
-
-    console.log('Parsed data:', { username, firstName, lastName, userId });
-
-    // Формируем сообщение без HTML
     let message = '🛒 НОВЫЙ ЗАКАЗ\n\n';
 
-    // Добавляем информацию о заказчике
-    if (username || firstName) {
-        message += '👤 Заказчик:\n';
-        if (username) {
-            message += `Username: ${username}\n`;
-        }
-        if (firstName || lastName) {
-            message += `Имя: ${firstName} ${lastName}\n`.trim() + '\n';
-        }
-        if (userId) {
-            message += `ID: ${userId}\n`;
-        }
-        message += '\n';
+    // Блок заказчика — данные из БД (регистрация)
+    message += '👤 Заказчик:\n';
+    if (u) {
+        const fullName = [u.first_name, u.last_name].filter(Boolean).join(' ');
+        if (fullName)                 message += `Имя: ${fullName}\n`;
+        if (u.phone)                  message += `Телефон: ${u.phone}\n`;
+        if (u.city)                   message += `Город: ${u.city}\n`;
+        if (u.user_type)              message += `Тип: ${userTypeLabels[u.user_type] || u.user_type}\n`;
+        if (u.username)               message += `Telegram: @${u.username}\n`;
+    } else if (tgUser) {
+        // Фолбэк — только Telegram данные если регистрация не прошла
+        const fullName = [tgUser.first_name, tgUser.last_name].filter(Boolean).join(' ');
+        if (fullName)                 message += `Имя: ${fullName}\n`;
+        if (tgUser.username)          message += `Telegram: @${tgUser.username}\n`;
     }
+    message += '\n';
+
+    // Товары, сгруппированные по линейкам
+    message += '📦 Состав заказа:\n';
+
+    const grouped = {};
+    items.forEach(item => {
+        const category = categories.find(c => c.services.some(s => s.id === item.id));
+        const catName = category ? category.name : 'Прочее';
+        if (!grouped[catName]) grouped[catName] = [];
+        grouped[catName].push(item);
+    });
 
     let totalPrice = 0;
 
-    items.forEach(item => {
-        const itemTotal = item.selectedPrice ? item.selectedPrice * item.quantity : 0;
-        totalPrice += itemTotal;
-        const weight = item.selectedWeight ? ` (${item.selectedWeight}г)` : '';
-        message += `${item.name}${weight} x${item.quantity}`;
-        if (itemTotal > 0) {
-            message += ` — ${itemTotal} ₽`;
-        }
-        message += '\n';
+    Object.entries(grouped).forEach(([catName, catItems]) => {
+        message += `\n— ${catName} —\n`;
+        catItems.forEach(item => {
+            const itemTotal = item.selectedPrice ? item.selectedPrice * item.quantity : 0;
+            totalPrice += itemTotal;
+            const weight = item.selectedWeight ? ` (${item.selectedWeight}г)` : '';
+            message += `${item.name}${weight} x${item.quantity}`;
+            if (itemTotal > 0) message += ` — ${itemTotal} ₽`;
+            message += '\n';
+        });
     });
 
     message += `\nИТОГО: ${totalPrice} ₽`;
 
-    // Отправляем заказ
     sendToTelegram(message);
 }
