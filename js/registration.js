@@ -1,4 +1,14 @@
+// Block body scroll while the registration gate is visible
+document.body.style.overflow = 'hidden';
+
+function hideRegistrationGate() {
+    document.getElementById('registrationModal').style.display = 'none';
+    document.body.style.overflow = '';
+}
+
 function showPendingScreen(rejected = false) {
+    // Hide registration form, show pending/rejected screen instead
+    document.getElementById('registrationModal').style.display = 'none';
     const screen = document.getElementById('pendingScreen');
     if (rejected) {
         document.getElementById('pendingIcon').textContent = '❌';
@@ -7,7 +17,7 @@ function showPendingScreen(rejected = false) {
             'К сожалению, ваша заявка была отклонена. Если вы считаете это ошибкой — свяжитесь с нами.';
     }
     screen.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
+    // body.overflow stays 'hidden'
 }
 
 async function checkRegistration() {
@@ -17,6 +27,8 @@ async function checkRegistration() {
 
     if (!user?.id) {
         console.log('No user data from Telegram');
+        // Not inside Telegram — unlock and let through
+        hideRegistrationGate();
         return;
     }
 
@@ -26,14 +38,8 @@ async function checkRegistration() {
         console.log('Registration data:', data);
 
         if (!data.registered) {
-            // Новый пользователь — показываем форму регистрации
-            const modal = document.getElementById('registrationModal');
-            modal.style.display = 'flex';
-            setTimeout(() => {
-                modal.style.opacity = '1';
-                modal.style.pointerEvents = 'auto';
-            }, 10);
-
+            // New user — registration form is already visible (shown by default)
+            // Wire up form submit
             document.getElementById('registrationForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
 
@@ -57,9 +63,7 @@ async function checkRegistration() {
                     const data = await response.json();
 
                     if (data.success) {
-                        document.getElementById('registrationModal').style.display = 'none';
                         window.currentUser = data.user;
-                        // Заявка отправлена — показываем экран ожидания
                         showPendingScreen();
                     } else {
                         alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
@@ -74,14 +78,18 @@ async function checkRegistration() {
             window.currentUser = data.user;
             const status = data.user.status;
 
-            if (status === 'pending') {
-                showPendingScreen();
+            if (status === 'approved') {
+                hideRegistrationGate(); // unlock the app
             } else if (status === 'rejected') {
                 showPendingScreen(true);
+            } else {
+                // pending
+                showPendingScreen();
             }
-            // status === 'approved' → ничего не делаем, каталог доступен
         }
     } catch (error) {
         console.error('Error checking registration:', error);
+        // On network error, let the user through to avoid being permanently locked out
+        hideRegistrationGate();
     }
 }
