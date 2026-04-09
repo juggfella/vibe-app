@@ -237,7 +237,7 @@ function renderCityList(query) {
            ...CITIES.filter(c => !c.toLowerCase().startsWith(q) && c.toLowerCase().includes(q))]
         : CITIES;
 
-    list.innerHTML = results.slice(0, 50).map(c =>
+    list.innerHTML = results.map(c =>
         `<div onclick="selectCity('${c.replace(/'/g, "\\'")}')" style="padding:14px 4px; border-bottom:1px solid rgba(255,255,255,0.06); color:#ccc; font-size:16px; cursor:pointer;">${c}</div>`
     ).join('');
 }
