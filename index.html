@@ -113,7 +113,7 @@
         <img class="modal-image" id="fullImage" src="" alt="" style="max-width: 90%; max-height: 90%; border-radius: 12px;">
     </div>
     <!-- Полноэкранный поиск города -->
-    <div id="cityPickerOverlay" style="display:none; position:fixed; inset:0; background:#0d0d0d; z-index:9999; flex-direction:column;">
+    <div id="cityPickerOverlay" style="display:none; position:fixed; inset:0; background:#0d0d0d; z-index:9999; flex-direction:column; transform:translateY(100%); transition:transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);">
         <div style="display:flex; align-items:center; gap:12px; padding:16px;">
             <input id="cityPickerSearch" type="text" placeholder="Поиск города..." autocomplete="off" autocorrect="off" style="flex:1; padding:12px; background:#1a1a1a; border:1px solid rgba(255,255,255,0.15); border-radius:8px; color:#fff; font-size:16px; outline:none;">
             <button onclick="closeCityPicker()" style="background:none; border:none; color:#888; font-size:28px; line-height:1; cursor:pointer; padding:0 4px;">✕</button>

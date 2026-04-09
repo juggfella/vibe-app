@@ -164,16 +164,25 @@ function openCityPicker() {
     const overlay = document.getElementById('cityPickerOverlay');
     const search = document.getElementById('cityPickerSearch');
     overlay.style.display = 'flex';
+    // Trigger slide-up
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            overlay.style.transform = 'translateY(0)';
+        });
+    });
     renderCityList('');
-    setTimeout(() => search.focus(), 100);
+    setTimeout(() => search.focus(), 350);
 
     search.oninput = () => renderCityList(search.value.trim());
 }
 
 function closeCityPicker() {
     const overlay = document.getElementById('cityPickerOverlay');
-    overlay.style.display = 'none';
-    document.getElementById('cityPickerSearch').value = '';
+    overlay.style.transform = 'translateY(100%)';
+    setTimeout(() => {
+        overlay.style.display = 'none';
+        document.getElementById('cityPickerSearch').value = '';
+    }, 350);
 }
 
 function renderCityList(query) {
