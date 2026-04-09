@@ -3,14 +3,14 @@ document.body.style.overflow = 'hidden';
 
 function hideRegistrationGate() {
     const modal = document.getElementById('registrationModal');
-    modal.style.transition = 'opacity 0.4s ease';
-    modal.style.opacity = '0';
+    modal.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.6, 1)';
+    modal.style.transform = 'translateY(100%)';
     setTimeout(() => {
         modal.style.display = 'none';
-        modal.style.opacity = '';
+        modal.style.transform = '';
         modal.style.transition = '';
         document.body.style.overflow = '';
-    }, 400);
+    }, 450);
 }
 
 function showApprovedAndHide() {
