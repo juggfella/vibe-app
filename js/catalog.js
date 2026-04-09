@@ -102,7 +102,7 @@ function renderCatalog() {
             const defaultWeight = service.weights ? service.weights[0] : null;
 
             card.innerHTML = `
-                <img id="card-image-${service.id}" src="${defaultWeight ? getWeightImage(service.image, defaultWeight.grams) : service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+                <img id="card-image-${service.id}" src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
                 <div class="card-content" data-service-id="${service.id}">
                     <div class="card-name">${service.name}</div>
                     <div class="card-description">${service.description}</div>
@@ -179,7 +179,7 @@ function showMoreItems(categoryId) {
         const selectedWeight = selectedWeights[service.id] || (defaultWeight ? defaultWeight.grams : null);
 
         card.innerHTML = `
-            <img id="card-image-${service.id}" src="${defaultWeight ? getWeightImage(service.image, defaultWeight.grams) : service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+            <img id="card-image-${service.id}" src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
             <div class="card-content" data-service-id="${service.id}">
                 <div class="card-name">${service.name}</div>
                 <div class="card-description">${service.description}</div>

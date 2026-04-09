@@ -1,4 +1,7 @@
+let modalOpenTime = 0;
+
 function openModal(service) {
+    modalOpenTime = Date.now();
     const modalImage = document.getElementById('modalImage');
     modalImage.src = service.image;
     modalImage.style.objectPosition = service.imagePosition || 'center center';
@@ -89,7 +92,7 @@ function setupModalHandlers(modalElement, hasScroll) {
     };
     const closeButtonHandler = () => closeModal();
     const cardClickHandler = (e) => e.stopPropagation();
-    const imageClickHandler = () => openFullImage();
+    const imageClickHandler = () => { if (Date.now() - modalOpenTime > 500) openFullImage(); };
 
     modalElement.addEventListener('click', closeHandler);
     modalElement.querySelector('.modal-close').addEventListener('click', closeButtonHandler);
