@@ -209,11 +209,6 @@ export default async function handler(req, res) {
                     chat_id: chatId, message_id: messageId,
                     text: query.message.text + '\n\n❌ Заявка отклонена'
                 });
-                await tgApi(botToken, 'sendMessage', {
-                    chat_id: telegramId,
-                    text: '❌ К сожалению, ваша заявка была отклонена. Если вы считаете это ошибкой — свяжитесь с нами.'
-                });
-
             // Закрыть — удаляем сообщение
             } else if (data === 'close') {
                 await tgApi(botToken, 'deleteMessage', {
