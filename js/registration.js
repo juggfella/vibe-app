@@ -49,7 +49,6 @@ async function checkRegistration() {
                     first_name: document.getElementById('firstName').value,
                     last_name: document.getElementById('lastName').value,
                     city: document.getElementById('city').value,
-                    user_type: document.getElementById('userType').value,
                     phone: document.getElementById('phone').value
                 };
 

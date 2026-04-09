@@ -37,12 +37,8 @@ export default async function handler(req, res) {
     if (req.method === 'POST') {
         const { telegram_id, username, first_name, last_name, city, user_type, phone } = req.body;
 
-        if (!telegram_id || !city || !user_type || !phone) {
+        if (!telegram_id || !city || !phone) {
             return res.status(400).json({ error: 'Missing required fields' });
-        }
-
-        if (!['retail', 'wholesale', 'distributor'].includes(user_type)) {
-            return res.status(400).json({ error: 'Invalid user_type' });
         }
 
         try {
@@ -54,7 +50,7 @@ export default async function handler(req, res) {
             const result = await sql`
                 INSERT INTO users (telegram_id, username, first_name, last_name, city, user_type, phone, status)
                 VALUES (${telegram_id}, ${username || null}, ${first_name || null}, ${last_name || null},
-                        ${city}, ${user_type}, ${phone}, 'pending')
+                        ${city}, null, ${phone}, 'pending')
                 RETURNING *
             `;
 
@@ -91,7 +87,6 @@ async function sendApprovalRequest(user) {
         `📱 Telegram: ${user.username ? '@' + user.username : '—'}\n` +
         `📞 Телефон: ${user.phone}\n` +
         `🏙 Город: ${user.city}\n` +
-        `📋 Запрошенный тип: ${typeLabels[user.user_type] || user.user_type}\n\n` +
         `Выберите тип клиента или отклоните заявку:`;
 
     await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
