@@ -22,7 +22,7 @@ function showApprovedAndHide() {
             <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
         </div>
     `;
-    setTimeout(() => hideRegistrationGate(), 1500);
+    setTimeout(() => hideRegistrationGate(), 800);
 }
 
 function showPendingScreen(rejected = false) {
