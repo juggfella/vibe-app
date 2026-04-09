@@ -2,8 +2,6 @@ handleSwipe(document.getElementById('fullImageModal'), closeFullImage, false); /
 handleSwipe(document.getElementById('aboutModal'), closeAbout, false); // false = нет прокрутки, свайп работает
 handleSwipe(document.getElementById('cartModal'), closeCart, true); // true = есть прокрутка
 
-renderCatalog();
-
 
 const phoneInput = document.getElementById('phone');
 if (phoneInput) {

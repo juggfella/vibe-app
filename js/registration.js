@@ -129,6 +129,8 @@ async function checkRegistration() {
             const status = data.user.status;
 
             if (status === 'approved') {
+                await loadPrices(user.id);
+                renderCatalog();
                 showApprovedAndHide();
             } else if (status === 'rejected') {
                 document.getElementById('splashScreen').remove();

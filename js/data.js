@@ -9,6 +9,7 @@ const categories = [
     {
         id: 1,
         name: "Red Line",
+        priceKey: "redline",
         description: "Моновкусы, средняя крепость, для тех, кто знаком с кальяном, но курит не регулярно.",
         image: "images/red-line.webp",
         services: [
@@ -20,9 +21,8 @@ const categories = [
                 image: "images/redline/red-1.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -33,9 +33,8 @@ const categories = [
                 image: "images/redline/red-2.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -46,9 +45,8 @@ const categories = [
                 image: "images/redline/red-3.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -59,9 +57,8 @@ const categories = [
                 image: "images/redline/red-4.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -72,9 +69,8 @@ const categories = [
                 image: "images/redline/red-5.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -85,9 +81,8 @@ const categories = [
                 image: "images/redline/red-6.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -98,9 +93,8 @@ const categories = [
                 image: "images/redline/red-7.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -111,9 +105,8 @@ const categories = [
                 image: "images/redline/red-8.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -124,9 +117,8 @@ const categories = [
                 image: "images/redline/red-9.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -137,9 +129,8 @@ const categories = [
                 image: "images/redline/red-10.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -150,9 +141,8 @@ const categories = [
                 image: "images/redline/red-11.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -163,9 +153,8 @@ const categories = [
                 image: "images/redline/red-12.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -176,9 +165,8 @@ const categories = [
                 image: "images/redline/red-13.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -189,9 +177,8 @@ const categories = [
                 image: "images/redline/red-14.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -202,9 +189,8 @@ const categories = [
                 image: "images/redline/red-15.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -215,9 +201,8 @@ const categories = [
                 image: "images/redline/red-16.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -228,9 +213,8 @@ const categories = [
                 image: "images/redline/red-17.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -241,9 +225,8 @@ const categories = [
                 image: "images/redline/red-18.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -254,9 +237,8 @@ const categories = [
                 image: "images/redline/red-19.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -267,9 +249,8 @@ const categories = [
                 image: "images/redline/red-20.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -280,9 +261,8 @@ const categories = [
                 image: "images/redline/red-21.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -293,9 +273,8 @@ const categories = [
                 image: "images/redline/red-22.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -306,9 +285,8 @@ const categories = [
                 image: "images/redline/red-23.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -319,9 +297,8 @@ const categories = [
                 image: "images/redline/red-24.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -332,9 +309,8 @@ const categories = [
                 image: "images/redline/red-25.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -345,9 +321,8 @@ const categories = [
                 image: "images/redline/red-26.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -358,9 +333,8 @@ const categories = [
                 image: "images/redline/red-27.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -371,8 +345,8 @@ const categories = [
                 image: "images/redline/red-28.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -383,9 +357,8 @@ const categories = [
                 image: "images/redline/red-29.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -396,9 +369,8 @@ const categories = [
                 image: "images/redline/red-30.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -409,9 +381,8 @@ const categories = [
                 image: "images/redline/red-31.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -422,9 +393,8 @@ const categories = [
                 image: "images/redline/red-32.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -435,9 +405,8 @@ const categories = [
                 image: "images/redline/red-33.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -448,9 +417,8 @@ const categories = [
                 image: "images/redline/red-34.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -461,9 +429,8 @@ const categories = [
                 image: "images/redline/red-35.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -474,9 +441,8 @@ const categories = [
                 image: "images/redline/red-36.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -487,9 +453,8 @@ const categories = [
                 image: "images/redline/red-37.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             }
         ]
@@ -497,6 +462,7 @@ const categories = [
     {
         id: 2,
         name: "Black Line",
+        priceKey: "blackline",
         description: "Моновкусы, крепость выше средней, для более опытных курильщиков.",
         image: "images/black-line.webp",
         services: [
@@ -508,9 +474,8 @@ const categories = [
                 image: "images/blackline/black-1.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -521,9 +486,8 @@ const categories = [
                 image: "images/blackline/black-2.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -534,9 +498,8 @@ const categories = [
                 image: "images/blackline/black-3.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -547,9 +510,8 @@ const categories = [
                 image: "images/blackline/black-4.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -560,9 +522,8 @@ const categories = [
                 image: "images/blackline/black-5.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -573,9 +534,8 @@ const categories = [
                 image: "images/blackline/black-6.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -586,9 +546,8 @@ const categories = [
                 image: "images/blackline/black-7.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -599,9 +558,8 @@ const categories = [
                 image: "images/blackline/black-8.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -612,9 +570,8 @@ const categories = [
                 image: "images/blackline/black-9.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -625,9 +582,8 @@ const categories = [
                 image: "images/blackline/black-10.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -638,9 +594,8 @@ const categories = [
                 image: "images/blackline/black-11.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -651,9 +606,8 @@ const categories = [
                 image: "images/blackline/black-12.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -664,9 +618,8 @@ const categories = [
                 image: "images/blackline/black-13.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -677,9 +630,8 @@ const categories = [
                 image: "images/blackline/black-14.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -690,9 +642,8 @@ const categories = [
                 image: "images/blackline/black-15.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -703,9 +654,8 @@ const categories = [
                 image: "images/blackline/black-16.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -716,9 +666,8 @@ const categories = [
                 image: "images/blackline/black-17.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -729,9 +678,8 @@ const categories = [
                 image: "images/blackline/black-18.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -742,9 +690,8 @@ const categories = [
                 image: "images/blackline/black-19.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -755,9 +702,8 @@ const categories = [
                 image: "images/blackline/black-20.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
             {
@@ -768,9 +714,8 @@ const categories = [
                 image: "images/blackline/black-21.webp",
                 imagePosition: "center 35%",
                 weights: [
-                    { grams: 40, price: 240 },
-                    { grams: 100, price: 590 },
-                    { grams: 200, price: 1040 }
+                    { grams: 40 },
+                    { grams: 100 }
                 ]
             },
         ]
@@ -778,6 +723,7 @@ const categories = [
     {
         id: 3,
         name: "Mix Line",
+        priceKey: "mixline",
         description: "Готовые миксы, собранные на основе моновкусов линеек Red и Black, отличный вариант для быстрого, удобного, бюджетного покура.",
         image: "images/mix-line.webp",
         services: [
@@ -789,7 +735,7 @@ const categories = [
                 image: "images/mixline/mix-1.webp",
                 imagePosition: "center 40%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -800,7 +746,7 @@ const categories = [
                 image: "images/mixline/mix-2.webp",
                 imagePosition: "center 40%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -811,7 +757,7 @@ const categories = [
                 image: "images/mixline/mix-3.webp",
                 imagePosition: "center 40%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -822,7 +768,7 @@ const categories = [
                 image: "images/mixline/mix-4.webp",
                 imagePosition: "center 40%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -833,7 +779,7 @@ const categories = [
                 image: "images/mixline/mix-5.webp",
                 imagePosition: "center 40%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -844,7 +790,7 @@ const categories = [
                 image: "images/mixline/mix-6.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -855,7 +801,7 @@ const categories = [
                 image: "images/mixline/mix-7.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -866,7 +812,7 @@ const categories = [
                 image: "images/mixline/mix-8.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -877,7 +823,7 @@ const categories = [
                 image: "images/mixline/mix-9.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -888,7 +834,7 @@ const categories = [
                 image: "images/mixline/mix-10.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -899,7 +845,7 @@ const categories = [
                 image: "images/mixline/mix-11.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -910,7 +856,7 @@ const categories = [
                 image: "images/mixline/mix-12.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -921,7 +867,7 @@ const categories = [
                 image: "images/mixline/mix-13.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -932,7 +878,7 @@ const categories = [
                 image: "images/mixline/mix-14.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
             {
@@ -943,7 +889,7 @@ const categories = [
                 image: "images/mixline/mix-15.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 150 }
+                { grams: 25 }
                 ]
             },
         ]
@@ -951,6 +897,7 @@ const categories = [
     {
         id: 4,
         name: "Special",
+        priceKey: "special",
         description: "Интересная безароматика и бустеры для тех, кто предпочитает что-то аутентичное и особенное.",
         image: "images/special-line.webp",
         services: [
@@ -962,9 +909,8 @@ const categories = [
                 image: "images/specialline/special-1.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 40, price: 240 },
-                { grams: 100, price: 590 },
-                { grams: 200, price: 1040 }
+                { grams: 40 },
+                { grams: 100 }
                 ]
             },
             {
@@ -975,9 +921,8 @@ const categories = [
                 image: "images/specialline/special-2.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 40, price: 240 },
-                { grams: 100, price: 590 },
-                { grams: 200, price: 1040 }
+                { grams: 40 },
+                { grams: 100 }
                 ]
             },
             {
@@ -988,9 +933,8 @@ const categories = [
                 image: "images/specialline/special-3.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 40, price: 240 },
-                { grams: 100, price: 590 },
-                { grams: 200, price: 1040 }
+                { grams: 40 },
+                { grams: 100 }
                 ]
             },
             {
@@ -1001,9 +945,8 @@ const categories = [
                 image: "images/specialline/special-4.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 40, price: 240 },
-                { grams: 100, price: 590 },
-                { grams: 200, price: 1040 }
+                { grams: 40 },
+                { grams: 100 }
                 ]
             }
         ]
@@ -1011,6 +954,7 @@ const categories = [
     {
         id: 5,
         name: "Special Alco",
+        priceKey: "specialalco",
         description: "Алкогольные вкусы",
         image: "images/specialalco-line.webp",
         services: [
@@ -1022,8 +966,8 @@ const categories = [
                 image: "images/specialalcoline/specialalco-1.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 240 },
-                { grams: 200, price: 1800 }
+                { grams: 25 },
+                { grams: 200 }
                 ]
             },
             {
@@ -1034,8 +978,8 @@ const categories = [
                 image: "images/specialalcoline/specialalco-2.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 240 },
-                { grams: 200, price: 1800 }
+                { grams: 25 },
+                { grams: 200 }
                 ]
             },
             {
@@ -1046,8 +990,8 @@ const categories = [
                 image: "images/specialalcoline/specialalco-3.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 240 },
-                { grams: 200, price: 1800 }
+                { grams: 25 },
+                { grams: 200 }
                 ]
             },
             {
@@ -1058,8 +1002,8 @@ const categories = [
                 image: "images/specialalcoline/specialalco-4.webp",
                 imagePosition: "center 35%",
                 weights: [
-                { grams: 25, price: 240 },
-                { grams: 200, price: 1800 }
+                { grams: 25 },
+                { grams: 200 }
                 ]
             }
         ]
