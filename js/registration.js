@@ -1,31 +1,35 @@
-// Block body scroll while the registration gate is visible
+// Scroll заблокирован пока splashScreen видим
 document.body.style.overflow = 'hidden';
+
+function hideSplash() {
+    const splash = document.getElementById('splashScreen');
+    splash.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.6, 1)';
+    splash.style.transform = 'translateY(100%)';
+    document.body.style.overflow = '';
+    setTimeout(() => splash.remove(), 450);
+}
 
 function hideRegistrationGate() {
     const modal = document.getElementById('registrationModal');
     modal.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.6, 1)';
     modal.style.transform = 'translateY(100%)';
-    setTimeout(() => {
-        modal.style.display = 'none';
-        modal.style.transform = '';
-        modal.style.transition = '';
-        document.body.style.overflow = '';
-    }, 450);
+    setTimeout(() => { modal.style.display = 'none'; modal.style.transform = ''; modal.style.transition = ''; }, 450);
 }
 
 function showApprovedAndHide() {
-    const modal = document.getElementById('registrationModal');
-    modal.style.display = 'flex';
-    modal.style.alignItems = 'center';
-    modal.style.justifyContent = 'center';
-    modal.innerHTML = `
+    // Меняем контент сплеша на "Вы авторизованы" и убираем через 1 сек
+    const splash = document.getElementById('splashScreen');
+    splash.style.display = 'flex';
+    splash.style.alignItems = 'center';
+    splash.style.justifyContent = 'center';
+    splash.innerHTML = `
         <div style="text-align:center; padding: 48px 24px;">
             <div style="font-size:56px; margin-bottom:20px;">✅</div>
             <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
             <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
         </div>
     `;
-    setTimeout(() => hideRegistrationGate(), 1000);
+    setTimeout(() => hideSplash(), 1000);
 }
 
 function showPendingScreen(rejected = false) {
@@ -49,8 +53,7 @@ async function checkRegistration() {
 
     if (!user?.id) {
         console.log('No user data from Telegram');
-        // Not inside Telegram — unlock and let through
-        hideRegistrationGate();
+        hideSplash();
         return;
     }
 
@@ -60,7 +63,9 @@ async function checkRegistration() {
         console.log('Registration data:', data);
 
         if (!data.registered) {
-            // Показываем форму только сейчас
+            // Убираем сплеш, показываем форму
+            document.getElementById('splashScreen').remove();
+            document.body.style.overflow = '';
             document.getElementById('registrationModal').style.display = 'flex';
             // Wire up form submit
             document.getElementById('registrationForm').addEventListener('submit', async (e) => {
@@ -112,15 +117,15 @@ async function checkRegistration() {
             if (status === 'approved') {
                 showApprovedAndHide();
             } else if (status === 'rejected') {
+                document.getElementById('splashScreen').remove();
                 showPendingScreen(true);
             } else {
-                // pending
+                document.getElementById('splashScreen').remove();
                 showPendingScreen();
             }
         }
     } catch (error) {
         console.error('Error checking registration:', error);
-        // On network error, let the user through to avoid being permanently locked out
-        hideRegistrationGate();
+        hideSplash();
     }
 }

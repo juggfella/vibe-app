@@ -797,6 +797,13 @@
             max-height: 5000px;
         }
 
+        #splashScreen {
+            position: fixed;
+            inset: 0;
+            background: #0d0d0d;
+            z-index: 2001;
+        }
+
         #registrationModal {
             position: fixed;
             inset: 0;
