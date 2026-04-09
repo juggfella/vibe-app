@@ -4,14 +4,14 @@ async function loadPrices(telegramId) {
     if (!data.prices) throw new Error('No prices returned');
 
     // Инжектируем цены в глобальный массив categories
+    // Граммовки без цены (недоступные для данного тарифа) — фильтруем
     categories.forEach(category => {
         const priceMap = data.prices[category.priceKey];
         if (!priceMap) return;
         category.services.forEach(service => {
-            service.weights = service.weights.map(w => ({
-                grams: w.grams,
-                price: priceMap[w.grams] || 0
-            }));
+            service.weights = service.weights
+                .filter(w => priceMap[w.grams] !== undefined)
+                .map(w => ({ grams: w.grams, price: priceMap[w.grams] }));
         });
     });
 }

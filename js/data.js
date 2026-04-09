@@ -22,7 +22,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -34,7 +35,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -46,7 +48,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -58,7 +61,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -70,7 +74,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -82,7 +87,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -94,7 +100,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -106,7 +113,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -118,7 +126,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -130,7 +139,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -142,7 +152,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -154,7 +165,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -166,7 +178,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -178,7 +191,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -190,7 +204,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -202,7 +217,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -214,7 +230,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -226,7 +243,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -238,7 +256,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -250,7 +269,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -262,7 +282,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -274,7 +295,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -286,7 +308,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -298,7 +321,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -310,7 +334,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -322,7 +347,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -334,7 +360,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -346,7 +373,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -358,7 +386,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -370,7 +399,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -382,7 +412,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -394,7 +425,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -406,7 +438,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -418,7 +451,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -430,7 +464,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -442,7 +477,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -454,7 +490,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             }
         ]
@@ -475,7 +512,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -487,7 +525,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -499,7 +538,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -511,7 +551,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -523,7 +564,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -535,7 +577,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -547,7 +590,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -559,7 +603,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -571,7 +616,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -583,7 +629,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -595,7 +642,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -607,7 +655,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -619,7 +668,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -631,7 +681,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -643,7 +694,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -655,7 +707,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -667,7 +720,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -679,7 +733,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -691,7 +746,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -703,7 +759,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
             {
@@ -715,7 +772,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                     { grams: 40 },
-                    { grams: 100 }
+                    { grams: 100 },
+                    { grams: 200 }
                 ]
             },
         ]
@@ -910,7 +968,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                 { grams: 40 },
-                { grams: 100 }
+                { grams: 100 },
+                { grams: 200 }
                 ]
             },
             {
@@ -922,7 +981,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                 { grams: 40 },
-                { grams: 100 }
+                { grams: 100 },
+                { grams: 200 }
                 ]
             },
             {
@@ -934,7 +994,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                 { grams: 40 },
-                { grams: 100 }
+                { grams: 100 },
+                { grams: 200 }
                 ]
             },
             {
@@ -946,7 +1007,8 @@ const categories = [
                 imagePosition: "center 35%",
                 weights: [
                 { grams: 40 },
-                { grams: 100 }
+                { grams: 100 },
+                { grams: 200 }
                 ]
             }
         ]
