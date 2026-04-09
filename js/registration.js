@@ -15,6 +15,9 @@ function hideRegistrationGate() {
 
 function showApprovedAndHide() {
     const modal = document.getElementById('registrationModal');
+    modal.style.display = 'flex';
+    modal.style.alignItems = 'center';
+    modal.style.justifyContent = 'center';
     modal.innerHTML = `
         <div style="text-align:center; padding: 48px 24px;">
             <div style="font-size:56px; margin-bottom:20px;">✅</div>
