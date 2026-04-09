@@ -2,8 +2,27 @@
 document.body.style.overflow = 'hidden';
 
 function hideRegistrationGate() {
-    document.getElementById('registrationModal').style.display = 'none';
-    document.body.style.overflow = '';
+    const modal = document.getElementById('registrationModal');
+    modal.style.transition = 'opacity 0.4s ease';
+    modal.style.opacity = '0';
+    setTimeout(() => {
+        modal.style.display = 'none';
+        modal.style.opacity = '';
+        modal.style.transition = '';
+        document.body.style.overflow = '';
+    }, 400);
+}
+
+function showApprovedAndHide() {
+    const modal = document.getElementById('registrationModal');
+    modal.innerHTML = `
+        <div style="text-align:center; padding: 48px 24px;">
+            <div style="font-size:56px; margin-bottom:20px;">✅</div>
+            <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
+            <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
+        </div>
+    `;
+    setTimeout(() => hideRegistrationGate(), 1500);
 }
 
 function showPendingScreen(rejected = false) {
@@ -87,7 +106,7 @@ async function checkRegistration() {
             const status = data.user.status;
 
             if (status === 'approved') {
-                hideRegistrationGate(); // unlock the app
+                showApprovedAndHide();
             } else if (status === 'rejected') {
                 showPendingScreen(true);
             } else {
