@@ -3,6 +3,18 @@ function selectWeight(serviceId, weight) {
 
     // Обновляем UI выбора граммовки
     const service = categories.flatMap(c => c.services).find(s => s.id === serviceId);
+
+    // Меняем фото карточки на изображение конкретной граммовки
+    if (service) {
+        const cardImg = document.getElementById(`card-image-${serviceId}`);
+        if (cardImg) {
+            const packImage = getWeightImage(service.image, weight);
+            const img = new Image();
+            img.onload = () => { cardImg.src = packImage; };
+            img.onerror = () => { cardImg.src = service.image; };
+            img.src = packImage;
+        }
+    }
     const weightButtons = document.querySelectorAll(`[data-service-id="${serviceId}"] .weight-option`);
 
     weightButtons.forEach(btn => {

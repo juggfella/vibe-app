@@ -1,3 +1,13 @@
+function getWeightImage(baseImage, grams) {
+    const lastSlash = baseImage.lastIndexOf('/');
+    const dir = baseImage.substring(0, lastSlash);
+    const file = baseImage.substring(lastSlash + 1);
+    const dotIdx = file.lastIndexOf('.');
+    const baseName = file.substring(0, dotIdx);
+    const ext = file.substring(dotIdx);
+    return `${dir}/packs/${baseName}-${grams}${ext}`;
+}
+
 function toggleCategory(categoryId) {
     const categoryElement = document.getElementById(`category-${categoryId}`);
     const isOpening = !categoryElement.classList.contains('active');
@@ -92,7 +102,7 @@ function renderCatalog() {
             const defaultWeight = service.weights ? service.weights[0] : null;
 
             card.innerHTML = `
-                <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+                <img id="card-image-${service.id}" src="${defaultWeight ? getWeightImage(service.image, defaultWeight.grams) : service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
                 <div class="card-content" data-service-id="${service.id}">
                     <div class="card-name">${service.name}</div>
                     <div class="card-description">${service.description}</div>
@@ -169,7 +179,7 @@ function showMoreItems(categoryId) {
         const selectedWeight = selectedWeights[service.id] || (defaultWeight ? defaultWeight.grams : null);
 
         card.innerHTML = `
-            <img src="${service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
+            <img id="card-image-${service.id}" src="${defaultWeight ? getWeightImage(service.image, defaultWeight.grams) : service.image}" class="card-image" alt="${service.name}" style="object-position: ${service.imagePosition || 'center center'}">
             <div class="card-content" data-service-id="${service.id}">
                 <div class="card-name">${service.name}</div>
                 <div class="card-description">${service.description}</div>
