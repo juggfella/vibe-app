@@ -40,6 +40,7 @@ function showApprovedAndHide() {
 
     setTimeout(() => {
         if (spinner) spinner.remove();
+        splash.classList.add('show-rounded');
         content.style.opacity = '1';
         setTimeout(() => hideSplash(), 1000);
     }, 250);
