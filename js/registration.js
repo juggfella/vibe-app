@@ -3,10 +3,10 @@ document.body.style.overflow = 'hidden';
 
 function hideSplash() {
     const splash = document.getElementById('splashScreen');
-    splash.style.transition = 'transform 0.45s cubic-bezier(0.4, 0, 0.6, 1)';
+    splash.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
     splash.style.transform = 'translateY(100%)';
     document.body.style.overflow = '';
-    setTimeout(() => splash.remove(), 450);
+    setTimeout(() => splash.remove(), 600);
 }
 
 function hideRegistrationGate() {

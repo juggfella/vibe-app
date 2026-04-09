@@ -805,6 +805,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 0 0 24px 24px;
         }
 
         .splash-spinner {
