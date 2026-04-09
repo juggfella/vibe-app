@@ -20,427 +20,7 @@ const categories = [
                 username: "user1",
                 image: "images/redline/red-1.webp",
                 imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 102,
-                name: "Банан в шоколаде",
-                description: "Десертный банан с бархатистой сладостью, политый сиропом из темного шоколада для приятного контраста во вкусе.",
-                username: "user2",
-                image: "images/redline/red-2.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 103,
-                name: "Персиковый чай",
-                description: "Прохладительный напиток на основе черного чая с добавлением кусочков свежего персика.",
-                username: "user3",
-                image: "images/redline/red-3.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 104,
-                name: "Кола",
-                description: "Сбалансированный в меру сладкий вкус колы, знакомый тебе по мармеладкам Haribo.",
-                username: "user4",
-                image: "images/redline/red-4.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 105,
-                name: "Малина",
-                description: "Просто хорошая малина, которую мы постарались сделать максимально похожей на натуральную.",
-                username: "user5",
-                image: "images/redline/red-5.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 106,
-                name: "Манго шейк",
-                description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
-                username: "user6",
-                image: "images/redline/red-6.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 107,
-                name: "Индийский перец",
-                description: "Многогранный пряный вкус с нотами ванили и четырех видов специй.",
-                username: "user7",
-                image: "images/redline/red-7.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 108,
-                name: "Ледяное яблоко",
-                description: "Отсылка к «двойному яблоку», кисло-холодящие освежающие ноты зеленых яблок.",
-                username: "user8",
-                image: "images/redline/red-8.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 109,
-                name: "Мороженное",
-                description: "Вкус мороженого.",
-                username: "user9",
-                image: "images/redline/red-9.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 110,
-                name: "Суперперец",
-                description: "Special for JohnCalliano",
-                username: "user10",
-                image: "images/redline/red-10.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 111,
-                name: "Зефир с орехами",
-                description: "Выраженные сливочные ноты воздушного зефира, дополненные ароматом фундука.",
-                username: "user11",
-                image: "images/redline/red-11.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 112,
-                name: "Коктейль Маргарита",
-                description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
-                username: "user12",
-                image: "images/redline/red-12.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 113,
-                name: "Киви",
-                description: "Насыщенный вкус натурального киви с будоражащей рецепторы кислинкой на выдохе.",
-                username: "user13",
-                image: "images/redline/red-13.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 114,
-                name: "Клубника",
-                description: "Сладкий и завораживающий вкус спелой ягоды, созревшей под нежным июньским солнышком. Влюбляет в себя с первых затяжек.",
-                username: "user14",
-                image: "images/redline/red-14.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 115,
-                name: "Голубика",
-                description: "Аромат натуральной голубики со всей полнотой ягодного вкуса на вдохе и выдохе.",
-                username: "user15",
-                image: "images/redline/red-15.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 116,
-                name: "Ягодный микс",
-                description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
-                username: "user16",
-                image: "images/redline/red-16.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 117,
-                name: "Тархун",
-                description: "Тот самый лимонад со вкусом сладкого эстрагона – травянисто, освежающе.",
-                username: "user17",
-                image: "images/redline/red-17.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 118,
-                name: "Оливка",
-                description: "Самый необычный вкус - консервированная оливка, с изумительным подкопченым послевкусием. Для гурманов.",
-                username: "user18",
-                image: "images/redline/red-18.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 119,
-                name: "Чай с молоком",
-                description: "Классический черный чай с молоком",
-                username: "user19",
-                image: "images/redline/red-19.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 120,
-                name: "Лед",
-                description: "Идеальный бустер для любителей миксов с выраженным охлаждающим эффектом.",
-                username: "user20",
-                image: "images/redline/red-20.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 121,
-                name: "Гранатовый чай",
-                description: "Крепкий зеленый чай с кусочками терпкого граната, выразительный и яркий вкус.",
-                username: "user21",
-                image: "images/redline/red-21.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 122,
-                name: "Арбуз",
-                description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
-                username: "user22",
-                image: "images/redline/red-22.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 123,
-                name: "Персик",
-                description: "Сладкий и слегка терпкий микс двух не похожих друг на друга сортов персика",
-                username: "user23",
-                image: "images/redline/red-23.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 124,
-                name: "Зеленый виноград",
-                description: "Молодой зеленый виноград с легким оттенком тростниковой мяты.",
-                username: "user24",
-                image: "images/redline/red-24.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 125,
-                name: "Цветочный мед",
-                description: "Свежий густой сладкий мед, только что собранный с цветущих весенних лугов.",
-                username: "user25",
-                image: "images/redline/red-25.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 126,
-                name: "Мята",
-                description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
-                username: "user26",
-                image: "images/redline/red-26.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 127,
-                name: "Дачная смородина",
-                description: "Роскошный аромат зеленых листьев смородинного куста и спелой налитой ягоды.",
-                username: "user27",
-                image: "images/redline/red-27.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 128,
-                name: "Пряный чай",
-                description: "Крепкий черный чай с ассорти из турецких пряностей, необычный и притягательный вкус.",
-                username: "user28",
-                image: "images/redline/red-28.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 129,
-                name: "Дыня с корицей",
-                description: "Сладкая спелая дыня и пряные обволакивающие ноты корицы на выдохе – превосходный дуэт.",
-                username: "user29",
-                image: "images/redline/red-29.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 130,
-                name: "Ягодный джем",
-                description: "Очень вкусный ягодный десерт из ассорти лесных и садовых ягод.",
-                username: "user30",
-                image: "images/redline/red-30.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 131,
-                name: "Домашний пирог",
-                description: "Сладкая сдобная выпечка со сливочным ароматом, напоминающим начинку из сгущенки.",
-                username: "user31",
-                image: "images/redline/red-31.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 132,
-                name: "Груша",
-                description: "Вкус натуральной сладкой груши.",
-                username: "user32",
-                image: "images/redline/red-32.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
-            },
-            {
-                id: 133,
-                name: "Фруктовый микс",
-                description: "Нестандартное тропическое сочетание с ведущими нотами спелого ананаса, послевкусием кокосовой мякоти и свежего абрикосового желе.",
-                username: "user33",
-                image: "images/redline/red-33.webp",
-                imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
             },
             {
                 id: 134,
@@ -449,24 +29,43 @@ const categories = [
                 username: "user34",
                 image: "images/redline/red-34.webp",
                 imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
             },
             {
-                id: 135,
-                name: "Фейхоа",
-                description: "Яркий фейхоа с характерными сладко-травянистым тропическим вкусом",
-                username: "user35",
-                image: "images/redline/red-35.webp",
+                id: 122,
+                name: "Арбуз",
+                description: "Летний освежающий вкус арбуза без корочки, больше напоминает арбузный сок.",
+                username: "user22",
+                image: "images/redline/red-22.webp",
                 imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 102,
+                name: "Банан в шоколаде",
+                description: "Десертный банан с бархатистой сладостью, политый сиропом из темного шоколада для приятного контраста во вкусе.",
+                username: "user2",
+                image: "images/redline/red-2.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 115,
+                name: "Голубика",
+                description: "Аромат натуральной голубики со всей полнотой ягодного вкуса на вдохе и выдохе.",
+                username: "user15",
+                image: "images/redline/red-15.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 121,
+                name: "Гранатовый чай",
+                description: "Крепкий зеленый чай с кусочками терпкого граната, выразительный и яркий вкус.",
+                username: "user21",
+                image: "images/redline/red-21.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
             },
             {
                 id: 136,
@@ -475,11 +74,142 @@ const categories = [
                 username: "user36",
                 image: "images/redline/red-36.webp",
                 imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 127,
+                name: "Дачная смородина",
+                description: "Роскошный аромат зеленых листьев смородинного куста и спелой налитой ягоды.",
+                username: "user27",
+                image: "images/redline/red-27.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 131,
+                name: "Домашний пирог",
+                description: "Сладкая сдобная выпечка со сливочным ароматом, напоминающим начинку из сгущенки.",
+                username: "user31",
+                image: "images/redline/red-31.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 129,
+                name: "Дыня с корицей",
+                description: "Сладкая спелая дыня и пряные обволакивающие ноты корицы на выдохе – превосходный дуэт.",
+                username: "user29",
+                image: "images/redline/red-29.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 124,
+                name: "Зеленый виноград",
+                description: "Молодой зеленый виноград с легким оттенком тростниковой мяты.",
+                username: "user24",
+                image: "images/redline/red-24.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 111,
+                name: "Зефир с орехами",
+                description: "Выраженные сливочные ноты воздушного зефира, дополненные ароматом фундука.",
+                username: "user11",
+                image: "images/redline/red-11.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 107,
+                name: "Индийский перец",
+                description: "Многогранный пряный вкус с нотами ванили и четырех видов специй.",
+                username: "user7",
+                image: "images/redline/red-7.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 113,
+                name: "Киви",
+                description: "Насыщенный вкус натурального киви с будоражащей рецепторы кислинкой на выдохе.",
+                username: "user13",
+                image: "images/redline/red-13.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 114,
+                name: "Клубника",
+                description: "Сладкий и завораживающий вкус спелой ягоды, созревшей под нежным июньским солнышком. Влюбляет в себя с первых затяжек.",
+                username: "user14",
+                image: "images/redline/red-14.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 112,
+                name: "Коктейль Маргарита",
+                description: "Лаймово-алкогольный вкус коктейля Маргарита, употребляйте в соло или используйте для коктейльных миксов с цитрусами.",
+                username: "user12",
+                image: "images/redline/red-12.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 104,
+                name: "Кола",
+                description: "Сбалансированный в меру сладкий вкус колы, знакомый тебе по мармеладкам Haribo.",
+                username: "user4",
+                image: "images/redline/red-4.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 120,
+                name: "Лёд",
+                description: "Идеальный бустер для любителей миксов с выраженным охлаждающим эффектом.",
+                username: "user20",
+                image: "images/redline/red-20.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 108,
+                name: "Ледяное яблоко",
+                description: "Отсылка к «двойному яблоку», кисло-холодящие освежающие ноты зеленых яблок.",
+                username: "user8",
+                image: "images/redline/red-8.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 138,
+                name: "Личи",
+                description: "Сочный и нежный вкус личи — экзотическая тропическая ягода со сладко-цветочным ароматом и лёгкой кислинкой.",
+                username: "user38",
+                image: "images/redline/личи.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 105,
+                name: "Малина",
+                description: "Просто хорошая малина, которую мы постарались сделать максимально похожей на натуральную.",
+                username: "user5",
+                image: "images/redline/red-5.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 106,
+                name: "Манго шейк",
+                description: "Нежный коктейль из взбитых сливок и пюре желтого манго.",
+                username: "user6",
+                image: "images/redline/red-6.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
             },
             {
                 id: 137,
@@ -488,11 +218,115 @@ const categories = [
                 username: "user37",
                 image: "images/redline/red-37.webp",
                 imagePosition: "center 35%",
-                weights: [
-                    { grams: 40 },
-                    { grams: 100 },
-                    { grams: 200 }
-                ]
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 126,
+                name: "Мята",
+                description: "Свежий мятный аромат на балансе между тростниковой и перечной мятой.",
+                username: "user26",
+                image: "images/redline/red-26.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 118,
+                name: "Оливка",
+                description: "Самый необычный вкус - консервированная оливка, с изумительным подкопченым послевкусием. Для гурманов.",
+                username: "user18",
+                image: "images/redline/red-18.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 123,
+                name: "Персик",
+                description: "Сладкий и слегка терпкий микс двух не похожих друг на друга сортов персика",
+                username: "user23",
+                image: "images/redline/red-23.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 103,
+                name: "Персиковый чай",
+                description: "Прохладительный напиток на основе черного чая с добавлением кусочков свежего персика.",
+                username: "user3",
+                image: "images/redline/red-3.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 128,
+                name: "Пряный чай",
+                description: "Крепкий черный чай с ассорти из турецких пряностей, необычный и притягательный вкус.",
+                username: "user28",
+                image: "images/redline/red-28.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 117,
+                name: "Тархун",
+                description: "Тот самый лимонад со вкусом сладкого эстрагона – травянисто, освежающе.",
+                username: "user17",
+                image: "images/redline/red-17.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 135,
+                name: "Фейхоа",
+                description: "Яркий фейхоа с характерными сладко-травянистым тропическим вкусом",
+                username: "user35",
+                image: "images/redline/red-35.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 133,
+                name: "Фруктовый микс",
+                description: "Нестандартное тропическое сочетание с ведущими нотами спелого ананаса, послевкусием кокосовой мякоти и свежего абрикосового желе.",
+                username: "user33",
+                image: "images/redline/red-33.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 125,
+                name: "Цветочный мёд",
+                description: "Свежий густой сладкий мед, только что собранный с цветущих весенних лугов.",
+                username: "user25",
+                image: "images/redline/red-25.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 119,
+                name: "Чай с молоком",
+                description: "Классический черный чай с молоком",
+                username: "user19",
+                image: "images/redline/red-19.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 130,
+                name: "Ягодный джем",
+                description: "Очень вкусный ягодный десерт из ассорти лесных и садовых ягод.",
+                username: "user30",
+                image: "images/redline/red-30.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
+            },
+            {
+                id: 116,
+                name: "Ягодный микс",
+                description: "Сладкая клубника, кислая малина и терпкая черная смородина в потрясающем ягодном тандеме.",
+                username: "user16",
+                image: "images/redline/red-16.webp",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40 }, { grams: 100 }, { grams: 200 }]
             }
         ]
     },
