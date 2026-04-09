@@ -14,43 +14,15 @@ function hideRegistrationGate() {
 }
 
 function showApprovedAndHide() {
-    // Убираем полноэкранный баннер сразу
     const modal = document.getElementById('registrationModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-
-    // Маленький тост снизу
-    const toast = document.createElement('div');
-    toast.style.cssText = `
-        position: fixed;
-        bottom: 32px;
-        left: 50%;
-        transform: translateX(-50%) translateY(120px);
-        background: #1a1a1a;
-        border: 1px solid rgba(255,255,255,0.12);
-        border-radius: 16px;
-        padding: 14px 28px;
-        text-align: center;
-        z-index: 3000;
-        transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
-        white-space: nowrap;
-        box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    modal.innerHTML = `
+        <div style="text-align:center; padding: 48px 24px;">
+            <div style="font-size:56px; margin-bottom:20px;">✅</div>
+            <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
+            <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
+        </div>
     `;
-    toast.innerHTML = `
-        <div style="font-size:22px; margin-bottom:4px;">✅</div>
-        <div style="font-size:15px; font-weight:500; color:#fff;">Вы авторизованы</div>
-    `;
-    document.body.appendChild(toast);
-
-    requestAnimationFrame(() => requestAnimationFrame(() => {
-        toast.style.transform = 'translateX(-50%) translateY(0)';
-    }));
-
-    setTimeout(() => {
-        toast.style.transition = 'transform 0.35s cubic-bezier(0.4, 0, 0.6, 1)';
-        toast.style.transform = 'translateX(-50%) translateY(120px)';
-        setTimeout(() => toast.remove(), 350);
-    }, 1000);
+    setTimeout(() => hideRegistrationGate(), 1000);
 }
 
 function showPendingScreen(rejected = false) {
