@@ -158,31 +158,75 @@ function initCityCombobox() {
     const trigger = document.getElementById('cityPickerTrigger');
     if (!trigger) return;
     trigger.addEventListener('click', openCityPicker);
+    initCityPickerSwipe();
 }
 
 function openCityPicker() {
     const overlay = document.getElementById('cityPickerOverlay');
+    const sheet = document.getElementById('cityPickerSheet');
     const search = document.getElementById('cityPickerSearch');
-    overlay.style.display = 'flex';
-    // Trigger slide-up
-    requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-            overlay.style.transform = 'translateY(0)';
-        });
-    });
+
+    overlay.style.display = 'block';
+    sheet.style.display = 'flex';
     renderCityList('');
-    setTimeout(() => search.focus(), 350);
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+        overlay.style.background = 'rgba(0,0,0,0.5)';
+        overlay.style.transition = 'background 0.4s ease';
+        sheet.style.transform = 'translateY(0)';
+    }));
 
     search.oninput = () => renderCityList(search.value.trim());
 }
 
 function closeCityPicker() {
     const overlay = document.getElementById('cityPickerOverlay');
-    overlay.style.transform = 'translateY(100%)';
+    const sheet = document.getElementById('cityPickerSheet');
+
+    sheet.style.transition = 'transform 0.35s cubic-bezier(0.32,0.72,0,1)';
+    sheet.style.transform = 'translateY(100%)';
+    overlay.style.background = 'rgba(0,0,0,0)';
+
     setTimeout(() => {
+        sheet.style.display = 'none';
         overlay.style.display = 'none';
+        overlay.style.transition = '';
         document.getElementById('cityPickerSearch').value = '';
+        renderCityList('');
     }, 350);
+}
+
+function initCityPickerSwipe() {
+    const handle = document.getElementById('cityPickerHandle');
+    const sheet = document.getElementById('cityPickerSheet');
+    let startY = 0, currentY = 0, dragging = false;
+
+    handle.addEventListener('touchstart', e => {
+        startY = e.touches[0].clientY;
+        currentY = 0;
+        dragging = true;
+        sheet.style.transition = 'none';
+    }, { passive: true });
+
+    handle.addEventListener('touchmove', e => {
+        if (!dragging) return;
+        const delta = e.touches[0].clientY - startY;
+        if (delta > 0) {
+            currentY = delta;
+            sheet.style.transform = `translateY(${delta}px)`;
+        }
+    }, { passive: true });
+
+    handle.addEventListener('touchend', () => {
+        if (!dragging) return;
+        dragging = false;
+        if (currentY > 80) {
+            closeCityPicker();
+        } else {
+            sheet.style.transition = 'transform 0.3s cubic-bezier(0.32,0.72,0,1)';
+            sheet.style.transform = 'translateY(0)';
+        }
+    }, { passive: true });
 }
 
 function renderCityList(query) {
