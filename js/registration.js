@@ -57,7 +57,8 @@ async function checkRegistration() {
         console.log('Registration data:', data);
 
         if (!data.registered) {
-            // New user — registration form is already visible (shown by default)
+            // Показываем форму только сейчас
+            document.getElementById('registrationModal').style.display = 'flex';
             // Wire up form submit
             document.getElementById('registrationForm').addEventListener('submit', async (e) => {
                 e.preventDefault();

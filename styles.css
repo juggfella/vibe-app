@@ -803,7 +803,7 @@
             background: #0d0d0d;
             z-index: 2000;
             overflow-y: auto;
-            display: flex;
+            display: none;
             align-items: flex-start;
             justify-content: center;
             padding: 40px 20px;
