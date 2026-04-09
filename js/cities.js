@@ -229,13 +229,21 @@ function initCityPickerSwipe() {
     }, { passive: true });
 }
 
+const TOP_CITIES = [
+    "Москва","Санкт-Петербург","Новосибирск","Екатеринбург","Казань",
+    "Нижний Новгород","Челябинск","Самара","Омск","Ростов-на-Дону",
+    "Уфа","Красноярск","Воронеж","Пермь","Волгоград","Краснодар",
+    "Саратов","Тюмень","Тольятти","Ижевск","Барнаул","Иркутск",
+    "Ульяновск","Хабаровск","Ярославль"
+];
+
 function renderCityList(query) {
     const list = document.getElementById('cityPickerList');
     const q = query.toLowerCase();
     const results = q
         ? [...CITIES.filter(c => c.toLowerCase().startsWith(q)),
            ...CITIES.filter(c => !c.toLowerCase().startsWith(q) && c.toLowerCase().includes(q))]
-        : CITIES;
+        : TOP_CITIES;
 
     list.innerHTML = results.map(c =>
         `<div onclick="selectCity('${c.replace(/'/g, "\\'")}')" style="padding:14px 4px; border-bottom:1px solid rgba(255,255,255,0.06); color:#ccc; font-size:16px; cursor:pointer;">${c}</div>`
