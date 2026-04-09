@@ -79,7 +79,7 @@ export default async function handler(req, res) {
                 const firstName = msg.from?.first_name || 'друг';
                 await tgApi(botToken, 'sendMessage', {
                     chat_id: fromChatId,
-                    text: `Привет, ${firstName}! 👋\n\nДобро пожаловать в Hypreme Tobacco.\n\nЗдесь вы можете ознакомиться с нашим каталогом и оформить заказ.\n\nНажмите кнопку ниже, чтобы открыть приложение 👇`,
+                    text: `Привет, ${firstName}! 👋\n\nДобро пожаловать в Hypreme Tobacco.\n\nНажмите кнопку ниже, чтобы открыть приложение 👇`,
                     reply_markup: {
                         inline_keyboard: [[{
                             text: '🛍 Открыть каталог',
