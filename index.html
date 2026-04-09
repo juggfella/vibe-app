@@ -35,7 +35,11 @@
                 </div>
                 <div>
                     <label style="display: block; margin-bottom: 5px; color: #999; font-size: 14px;">Город доставки</label>
-                    <input type="text" id="city" required style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px; box-sizing: border-box;">
+                    <input type="hidden" id="city" required>
+                    <div id="cityComboboxWrapper" class="city-combobox">
+                        <input type="text" class="city-input" placeholder="Начните вводить город..." autocomplete="off" autocorrect="off" spellcheck="false">
+                        <div class="city-dropdown"></div>
+                    </div>
                 </div>
                 <div>
                     <label style="display: block; margin-bottom: 5px; color: #999; font-size: 14px;">Номер телефона</label>
@@ -112,6 +116,7 @@
         <img class="modal-image" id="fullImage" src="" alt="" style="max-width: 90%; max-height: 90%; border-radius: 12px;">
     </div>
     <!-- Порядок загрузки важен: зависимости идут первыми -->
+    <script src="js/cities.js"></script>
     <script src="js/telegram.js"></script>
     <script src="js/data.js"></script>
     <script src="js/state.js"></script>
