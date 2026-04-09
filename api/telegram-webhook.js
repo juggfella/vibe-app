@@ -213,15 +213,14 @@ export default async function handler(req, res) {
                     chat_id: telegramId,
                     text: '❌ К сожалению, ваша заявка была отклонена. Если вы считаете это ошибкой — свяжитесь с нами.'
                 });
-            }
+
             // Закрыть — удаляем сообщение
             } else if (data === 'close') {
                 await tgApi(botToken, 'deleteMessage', {
                     chat_id: chatId,
                     message_id: messageId
                 });
-
-            // noop — кнопка текущей страницы, ничего не делаем
+            }
         }
 
         // ── web_app_data (отправка заказов через кнопку в боте) ──────────
