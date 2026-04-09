@@ -152,71 +152,11 @@ const RUSSIAN_CITIES = [
     "Джанкой","Саки","Алушта","Судак","Белогорск","Красноперекопск"
 ];
 
-// Дедупликация
+// Дедупликация и сортировка
 const CITIES = [...new Set(RUSSIAN_CITIES)].sort((a, b) => a.localeCompare(b, 'ru'));
 
 function initCityCombobox() {
-    const wrapper = document.getElementById('cityComboboxWrapper');
-    if (!wrapper) return;
-
-    const input = wrapper.querySelector('.city-input');
-    const dropdown = wrapper.querySelector('.city-dropdown');
-    let selectedCity = '';
-
-    function openDropdown(items) {
-        dropdown.innerHTML = items.map(c =>
-            `<div class="city-option" data-value="${c}">${c}</div>`
-        ).join('');
-        dropdown.classList.add('open');
-    }
-
-    function closeDropdown() {
-        dropdown.classList.remove('open');
-    }
-
-    function selectCity(city) {
-        selectedCity = city;
-        input.value = city;
-        document.getElementById('city').value = city;
-        closeDropdown();
-    }
-
-    function suggest(q) {
-        if (!q) { closeDropdown(); return; }
-        const low = q.toLowerCase();
-        const starts = CITIES.filter(c => c.toLowerCase().startsWith(low));
-        const contains = CITIES.filter(c => !c.toLowerCase().startsWith(low) && c.toLowerCase().includes(low));
-        const results = [...starts, ...contains].slice(0, 8);
-        if (results.length) openDropdown(results);
-        else closeDropdown();
-    }
-
-    input.addEventListener('input', e => {
-        selectedCity = '';
-        document.getElementById('city').value = '';
-        suggest(e.target.value.trim());
-    });
-
-    // Touch and click on options
-    dropdown.addEventListener('touchstart', e => {
-        const opt = e.target.closest('.city-option');
-        if (opt) { e.preventDefault(); selectCity(opt.dataset.value); }
-    }, { passive: false });
-
-    dropdown.addEventListener('mousedown', e => {
-        const opt = e.target.closest('.city-option');
-        if (opt) { e.preventDefault(); selectCity(opt.dataset.value); }
-    });
-
-    input.addEventListener('blur', () => {
-        // Small delay so tap on option fires first
-        setTimeout(() => {
-            if (!selectedCity) {
-                const exact = CITIES.find(c => c.toLowerCase() === input.value.trim().toLowerCase());
-                if (exact) selectCity(exact);
-                else document.getElementById('city').value = '';
-            }
-            closeDropdown();
-        }, 200);
-    });
+    const datalist = document.getElementById('citiesDatalist');
+    if (!datalist) return;
+    datalist.innerHTML = CITIES.map(c => `<option value="${c}">`).join('');
 }

@@ -89,13 +89,6 @@ async function checkRegistration() {
                 const btn = e.target.querySelector('button[type="submit"]');
                 if (btn.disabled) return;
 
-                if (!document.getElementById('city').value) {
-                    document.querySelector('.city-input').focus();
-                    document.querySelector('.city-input').style.borderColor = 'rgba(255,80,80,0.6)';
-                    setTimeout(() => { document.querySelector('.city-input').style.borderColor = ''; }, 2000);
-                    return;
-                }
-
                 btn.disabled = true;
                 btn.textContent = 'Отправка...';
 

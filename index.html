@@ -35,11 +35,8 @@
                 </div>
                 <div>
                     <label style="display: block; margin-bottom: 5px; color: #999; font-size: 14px;">Город доставки</label>
-                    <input type="hidden" id="city" required>
-                    <div id="cityComboboxWrapper" class="city-combobox">
-                        <input type="text" class="city-input" placeholder="Начните вводить город..." autocomplete="off" autocorrect="off" spellcheck="false">
-                        <div class="city-dropdown"></div>
-                    </div>
+                    <input type="text" id="city" required placeholder="Начните вводить город..." list="citiesDatalist" autocomplete="off" style="width: 100%; padding: 12px; background: #1a1a1a; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; color: white; font-size: 16px; box-sizing: border-box;">
+                    <datalist id="citiesDatalist"></datalist>
                 </div>
                 <div>
                     <label style="display: block; margin-bottom: 5px; color: #999; font-size: 14px;">Номер телефона</label>
