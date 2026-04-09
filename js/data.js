@@ -745,7 +745,7 @@ const categories = [
                 name: "Черника, Голубика, Смородина",
                 description: "",
                 username: "user312",
-                image: "images/mixline/mix-12.webp",
+                image: "images/mixline/mix-12.png",
                 imagePosition: "center 35%",
                 weights: [
                 { grams: 25 }
@@ -877,6 +877,105 @@ const categories = [
                 { grams: 25 },
                 { grams: 200 }
                 ]
+            }
+        ]
+    },
+    {
+        id: 6,
+        name: "Double",
+        priceKey: "double",
+        description: "Идеальный выбор для тех, кто любит разнообразие и ценит удобство. В каждой пачке — два отдельных пакетика с разными вкусами из существующих линеек. Ты берёшь одну упаковку, а получаешь сразу два полноценных аромата, которые можно курить по отдельности или сочетать между собой. Это отличный способ попробовать новые вкусы и экспериментировать с миксами.",
+        image: "images/double-line.png",
+        services: [
+            {
+                id: 601,
+                name: "Малина / Ягодный микс",
+                description: "",
+                username: "user601",
+                image: "images/doubleline/double-1.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 602,
+                name: "Маргарита / Кола",
+                description: "",
+                username: "user602",
+                image: "images/doubleline/double-2.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 603,
+                name: "Фруктовый микс / Ананас",
+                description: "",
+                username: "user603",
+                image: "images/doubleline/double-3.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 604,
+                name: "Киви / Персик",
+                description: "",
+                username: "user604",
+                image: "images/doubleline/double-4.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 605,
+                name: "Маргарита / Малиновая гранита",
+                description: "",
+                username: "user605",
+                image: "images/doubleline/double-5.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 606,
+                name: "Ягодный микс / Голубика",
+                description: "",
+                username: "user606",
+                image: "images/doubleline/double-6.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 607,
+                name: "Клубничный лимонад / Дынный чизкейк",
+                description: "",
+                username: "user607",
+                image: "images/doubleline/double-7.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 608,
+                name: "Груша / Лимонные конфеты",
+                description: "",
+                username: "user608",
+                image: "images/doubleline/double-8.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 609,
+                name: "Апельсин / Кислая маракуйя",
+                description: "",
+                username: "user609",
+                image: "images/doubleline/double-9.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
+            },
+            {
+                id: 610,
+                name: "Манго шейк / Лимонное суфле",
+                description: "",
+                username: "user610",
+                image: "images/doubleline/double-10.png",
+                imagePosition: "center 35%",
+                weights: [{ grams: 40, label: "2х20" }]
             }
         ]
     }
