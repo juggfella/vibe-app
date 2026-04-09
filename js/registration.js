@@ -43,6 +43,11 @@ async function checkRegistration() {
             document.getElementById('registrationForm').addEventListener('submit', async (e) => {
                 e.preventDefault();
 
+                const btn = e.target.querySelector('button[type="submit"]');
+                if (btn.disabled) return;
+                btn.disabled = true;
+                btn.textContent = 'Отправка...';
+
                 const formData = {
                     telegram_id: user.id,
                     username: user.username,
@@ -66,10 +71,14 @@ async function checkRegistration() {
                         showPendingScreen();
                     } else {
                         alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
+                        btn.disabled = false;
+                        btn.textContent = 'Зарегистрироваться';
                     }
                 } catch (error) {
                     console.error('Error registering:', error);
                     alert('Ошибка регистрации: ' + error.message);
+                    btn.disabled = false;
+                    btn.textContent = 'Зарегистрироваться';
                 }
             });
 

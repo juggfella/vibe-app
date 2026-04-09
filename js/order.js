@@ -3,6 +3,12 @@ function sendToTelegram(orderText) {
     console.log('Order text:', orderText);
 
     const apiUrl = 'https://hypremeapp.vercel.app/api/send-order';
+    const btn = document.getElementById('cartCheckoutBtn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Отправка...'; }
+
+    const resetBtn = () => {
+        if (btn) { btn.disabled = false; btn.textContent = 'Оформить заказ'; }
+    };
 
     fetch(apiUrl, {
         method: 'POST',
@@ -21,6 +27,7 @@ function sendToTelegram(orderText) {
     .then(data => {
         console.log('Response data:', data);
         if (data.success) {
+            resetBtn();
             alert('Заказ успешно отправлен! Мы свяжемся с вами в ближайшее время.');
             const prevCartItems = Object.values(cart);
             cart = {};
@@ -33,10 +40,12 @@ function sendToTelegram(orderText) {
             renderCart();
             closeCart();
         } else {
+            resetBtn();
             alert('Ошибка: ' + (data.error || 'Неизвестная ошибка'));
         }
     })
     .catch(error => {
+        resetBtn();
         console.error('Error:', error);
         alert('Ошибка отправки: ' + error.message);
     });
