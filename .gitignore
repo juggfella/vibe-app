@@ -3,3 +3,6 @@
 .vercel
 .claude
 node_modules/
+
+.vercel
+.env*.local
