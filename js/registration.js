@@ -3,6 +3,7 @@ document.body.style.overflow = 'hidden';
 
 function hideSplash() {
     const splash = document.getElementById('splashScreen');
+    splash.style.borderRadius = '32px 32px 0 0';
     splash.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
     splash.style.transform = 'translateY(100%)';
     document.body.style.overflow = '';
@@ -40,7 +41,6 @@ function showApprovedAndHide() {
 
     setTimeout(() => {
         if (spinner) spinner.remove();
-        splash.classList.add('show-rounded');
         content.style.opacity = '1';
         setTimeout(() => hideSplash(), 1000);
     }, 250);
