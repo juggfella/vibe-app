@@ -22,14 +22,19 @@ function showApprovedAndHide() {
     splash.style.display = 'flex';
     splash.style.alignItems = 'center';
     splash.style.justifyContent = 'center';
-    splash.innerHTML = `
-        <div style="text-align:center; padding: 48px 24px;">
-            <div style="font-size:56px; margin-bottom:20px;">✅</div>
-            <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
-            <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
-        </div>
-    `;
-    setTimeout(() => hideSplash(), 1000);
+    splash.style.transition = 'opacity 0.3s ease';
+    splash.style.opacity = '0';
+    setTimeout(() => {
+        splash.innerHTML = `
+            <div style="text-align:center; padding: 48px 24px;">
+                <div style="font-size:56px; margin-bottom:20px;">✅</div>
+                <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
+                <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
+            </div>
+        `;
+        splash.style.opacity = '1';
+        setTimeout(() => hideSplash(), 1000);
+    }, 300);
 }
 
 function showPendingScreen(rejected = false) {
