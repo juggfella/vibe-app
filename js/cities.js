@@ -245,7 +245,8 @@ function renderCityList(query) {
            ...CITIES.filter(c => !c.toLowerCase().startsWith(q) && c.toLowerCase().includes(q))]
         : TOP_CITIES;
 
-    list.innerHTML = results.map(c =>
+    const header = q ? '' : '<div style="font-size:12px; color:#555; text-transform:uppercase; letter-spacing:0.8px; padding:4px 4px 10px;">Самые крупные города</div>';
+    list.innerHTML = header + results.map(c =>
         `<div onclick="selectCity('${c.replace(/'/g, "\\'")}')" style="padding:14px 4px; border-bottom:1px solid rgba(255,255,255,0.06); color:#ccc; font-size:16px; cursor:pointer;">${c}</div>`
     ).join('');
 }
