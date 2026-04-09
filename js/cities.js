@@ -152,11 +152,47 @@ const RUSSIAN_CITIES = [
     "Джанкой","Саки","Алушта","Судак","Белогорск","Красноперекопск"
 ];
 
-// Дедупликация и сортировка
 const CITIES = [...new Set(RUSSIAN_CITIES)].sort((a, b) => a.localeCompare(b, 'ru'));
 
 function initCityCombobox() {
-    const datalist = document.getElementById('citiesDatalist');
-    if (!datalist) return;
-    datalist.innerHTML = CITIES.map(c => `<option value="${c}">`).join('');
+    const trigger = document.getElementById('cityPickerTrigger');
+    if (!trigger) return;
+    trigger.addEventListener('click', openCityPicker);
+}
+
+function openCityPicker() {
+    const overlay = document.getElementById('cityPickerOverlay');
+    const search = document.getElementById('cityPickerSearch');
+    overlay.style.display = 'flex';
+    renderCityList('');
+    setTimeout(() => search.focus(), 100);
+
+    search.oninput = () => renderCityList(search.value.trim());
+}
+
+function closeCityPicker() {
+    const overlay = document.getElementById('cityPickerOverlay');
+    overlay.style.display = 'none';
+    document.getElementById('cityPickerSearch').value = '';
+}
+
+function renderCityList(query) {
+    const list = document.getElementById('cityPickerList');
+    const q = query.toLowerCase();
+    const results = q
+        ? [...CITIES.filter(c => c.toLowerCase().startsWith(q)),
+           ...CITIES.filter(c => !c.toLowerCase().startsWith(q) && c.toLowerCase().includes(q))]
+        : CITIES;
+
+    list.innerHTML = results.slice(0, 50).map(c =>
+        `<div onclick="selectCity('${c.replace(/'/g, "\\'")}')" style="padding:14px 4px; border-bottom:1px solid rgba(255,255,255,0.06); color:#ccc; font-size:16px; cursor:pointer;">${c}</div>`
+    ).join('');
+}
+
+function selectCity(city) {
+    document.getElementById('city').value = city;
+    const trigger = document.getElementById('cityPickerTrigger');
+    trigger.textContent = city;
+    trigger.style.color = '#fff';
+    closeCityPicker();
 }
