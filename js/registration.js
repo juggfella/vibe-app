@@ -22,19 +22,27 @@ function showApprovedAndHide() {
     splash.style.display = 'flex';
     splash.style.alignItems = 'center';
     splash.style.justifyContent = 'center';
-    splash.style.transition = 'opacity 0.3s ease';
-    splash.style.opacity = '0';
+    // Фейдим только спиннер, фон остаётся непрозрачным
+    const spinner = splash.querySelector('.splash-spinner');
+    if (spinner) {
+        spinner.style.transition = 'opacity 0.25s ease';
+        spinner.style.opacity = '0';
+    }
+
+    const content = document.createElement('div');
+    content.style.cssText = 'text-align:center; padding: 48px 24px; opacity:0; transition: opacity 0.25s ease; position:absolute;';
+    content.innerHTML = `
+        <div style="font-size:56px; margin-bottom:20px;">✅</div>
+        <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
+        <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
+    `;
+    splash.appendChild(content);
+
     setTimeout(() => {
-        splash.innerHTML = `
-            <div style="text-align:center; padding: 48px 24px;">
-                <div style="font-size:56px; margin-bottom:20px;">✅</div>
-                <div style="font-size:20px; font-weight:500; color:#fff; margin-bottom:10px;">Вы авторизованы</div>
-                <div style="font-size:14px; color:#666;">Добро пожаловать в Hypreme Tobacco</div>
-            </div>
-        `;
-        splash.style.opacity = '1';
+        if (spinner) spinner.remove();
+        content.style.opacity = '1';
         setTimeout(() => hideSplash(), 1000);
-    }, 300);
+    }, 250);
 }
 
 function showPendingScreen(rejected = false) {
