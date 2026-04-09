@@ -188,7 +188,13 @@ export default async function handler(req, res) {
                 });
                 await tgApi(botToken, 'sendMessage', {
                     chat_id: telegramId,
-                    text: `✅ Ваша заявка одобрена!\n\nДобро пожаловать в Hypreme Tobacco! Откройте приложение, чтобы сделать заказ.`
+                    text: `✅ Ваша заявка одобрена!\n\nДобро пожаловать в Hypreme Tobacco! Откройте приложение, чтобы сделать заказ.`,
+                    reply_markup: {
+                        inline_keyboard: [[{
+                            text: '🛍 Открыть каталог',
+                            web_app: { url: 'https://hypremeapp.vercel.app' }
+                        }]]
+                    }
                 });
 
             // Отказ: reject:TELEGRAM_ID
