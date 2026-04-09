@@ -800,7 +800,7 @@
         #splashScreen {
             position: fixed;
             inset: 0;
-            background: #0d0d0d;
+            background: #1c1c1c;
             z-index: 2001;
             display: flex;
             align-items: center;
